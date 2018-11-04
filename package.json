@@ -1,0 +1,10 @@
+{
+  "name": "climax",
+  "description": "Build cross platform CLI apps with NodeJS.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
