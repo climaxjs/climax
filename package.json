@@ -8,6 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "flow-bin": "^0.85.0",
     "jest": "^23.6.0"
   }
 }
