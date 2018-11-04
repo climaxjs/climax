@@ -1,6 +1,6 @@
 {
   "name": "climax",
-  "description": "Build cross platform CLI apps with NodeJS.",
+  "description": "Build cross-platform CLI apps with NodeJS.",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
