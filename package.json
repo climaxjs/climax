@@ -21,6 +21,7 @@
     "jest": "^23.6.0"
   },
   "scripts": {
+    "build": "babel lib/ -d build/",
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "cross-env eslint 'lib/**'",
     "test:unit": "jest",
