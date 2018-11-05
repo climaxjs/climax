@@ -25,7 +25,7 @@
     "rimraf": "^2.6.2"
   },
   "scripts": {
-    "build": "babel lib/ -d build/",
+    "build": "rimraf build && babel lib/ -d build/",
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "cross-env eslint 'lib/**'",
     "test:type": "flow",
