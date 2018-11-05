@@ -24,6 +24,7 @@
     "build": "babel lib/ -d build/",
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "cross-env eslint 'lib/**'",
+    "test:type": "flow",
     "test:unit": "jest",
     "test:watch": "jest --watch"
   }
