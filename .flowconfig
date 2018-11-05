@@ -1,0 +1,13 @@
+[ignore]
+<PROJECT_ROOT>/build/.*
+.*\.spec\.js
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]
