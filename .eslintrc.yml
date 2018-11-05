@@ -17,6 +17,7 @@ rules:
   # https://github.com/babel/babel-eslint#setup
   strict: 0
   # https://eslint.org/docs/rules/
+  quotes: [error, single, {allowTemplateLiterals: true}]
   semi: [error, never]
 
   # https://github.com/jest-community/eslint-plugin-jest#rules
