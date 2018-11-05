@@ -17,7 +17,7 @@
     "jest": "^23.6.0"
   },
   "scripts": {
-    "test": "jest",
+    "test": "npm run test:lint && npm run test:unit",
     "test:lint": "cross-env eslint 'lib/**'",
     "test:unit": "jest",
     "test:watch": "jest --watch"
