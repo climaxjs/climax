@@ -9,5 +9,6 @@
       }
     ],
     "@babel/preset-flow"
-  ]
+  ],
+  "retainLines": true
 }
