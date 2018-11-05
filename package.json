@@ -21,7 +21,8 @@
     "flow-bin": "^0.85.0",
     "flow-coverage-report": "^0.6.0",
     "jest": "^23.6.0",
-    "prettier-eslint": "^8.8.2"
+    "prettier-eslint": "^8.8.2",
+    "rimraf": "^2.6.2"
   },
   "scripts": {
     "build": "babel lib/ -d build/",
