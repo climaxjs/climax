@@ -10,7 +10,9 @@ You can think Climax as the "Electron for CLI applications". And in fact it does
 - :arrows_counterclockwise: **Out-of-the-box Auto-Updates:** We don't make assumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code. React can also render on the server using Node and power mobile apps using [React Native](https://facebook.github.io/react-native/).<br>
 - :page_facing_up: **Conventions:** We provide a set of conventions regarding your CLI architecture in order to remove the pain of looking around for some.
 
-<p style="text-align: center">![Work in progress](doc/res/work-in-progress.png | width=360)</p>
+<p style="text-align: center"><img src="doc/res/work-in-progress.png" style="width: 160px"></p>
+
+> **This is a work in progress !**
 
 ## Getting started
 
