@@ -3,7 +3,7 @@
 <!-- TODO Ask @vertexclique to release the "climax" name on npm ? -->
 <!-- [![npm version](https://img.shields.io/npm/v/climax.svg?style=flat-square)](https://www.npmjs.com/package/climax) -->
 
-Climax is the "Electron for CLI applications", and even more than that:
+You can think Climax as the "Electron for CLI applications". And in fact it does even a bit more than that:
 
 :white_square_button: **CLI-based Development:** Exactly as serious frameworks do, we provide a CLI allowing you to generate (almost) everything. Fun fact: this CLI utilize Climax itself. We eat our own :hamburger:s.<br>
 :computer: **Easy Cross-Platform Building:** Build encapsulated components that manage their own state, then compose them to make complex UIs. Since component logic is written in JavaScript instead of templates, you can easily pass rich data through your app and keep state out of the DOM.<br>
