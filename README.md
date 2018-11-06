@@ -10,9 +10,16 @@ You can think Climax as the "Electron for CLI applications". And in fact it does
 - :arrows_counterclockwise: **Out-of-the-box Auto-Updates:** We don't make assumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code. React can also render on the server using Node and power mobile apps using [React Native](https://facebook.github.io/react-native/).<br>
 - :page_facing_up: **Conventions:** We provide a set of conventions regarding your CLI architecture in order to remove the pain of looking around for some.
 
-![Work in progress](doc/res/work-in-progress.png | width=180)
+## Roadmap
 
-> **This is a work in progress !**
+![Work in progress](doc/res/work-in-progress-225.png)
+
+- [x] Initial Climax project config
+- [ ] Basic Program with commands and options (improved [Commander](https://github.com/tj/commander.js)-style)
+- [ ] Cross-Platform Build (using [npx](https://github.com/zkat/npx))
+- [ ] Initial Climax CLI project config
+- [ ] Climax CLI scaffold generation
+- [ ] Auto-Release integration (via [Travis CI](https://travis-ci.org))
 
 ## Getting started
 
