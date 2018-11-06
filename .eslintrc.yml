@@ -13,29 +13,32 @@ plugins:
 parserOptions:
   ecmaVersion: 2018
 
+# https://eslint.org/docs/rules
 rules:
+  # We disable the ESLint check for LF EOLs and enforec it via .gitattributes
+  # https://github.com/filerjs/filer/issues/403#issuecomment-422503251
+  linebreak-style: 0
+  quotes: [error, single, { allowTemplateLiterals: true }]
+  semi: [error, never]
   # https://github.com/babel/babel-eslint#setup
   strict: 0
-  # https://eslint.org/docs/rules/
-  quotes: [error, single, {allowTemplateLiterals: true}]
-  semi: [error, never]
 
   # https://github.com/jest-community/eslint-plugin-jest#rules
-  'jest/consistent-test-it': error
-  'jest/expect-expect': error
-  'jest/no-alias-methods': error
-  'jest/no-disabled-tests': error
-  'jest/no-focused-tests': error
-  'jest/no-identical-title': error
-  'jest/no-jest-import': error
-  'jest/no-test-callback': error
-  'jest/no-test-prefixes': error
-  'jest/no-test-return-statement': error
-  'jest/prefer-strict-equal': error
-  'jest/prefer-to-be-null': error
-  'jest/prefer-to-be-undefined': error
-  'jest/prefer-to-contain': error
-  'jest/prefer-to-have-length': error
-  'jest/require-tothrow-message': error
-  'jest/valid-describe': error
-  'jest/valid-expect': error
+  "jest/consistent-test-it": error
+  "jest/expect-expect": error
+  "jest/no-alias-methods": error
+  "jest/no-disabled-tests": error
+  "jest/no-focused-tests": error
+  "jest/no-identical-title": error
+  "jest/no-jest-import": error
+  "jest/no-test-callback": error
+  "jest/no-test-prefixes": error
+  "jest/no-test-return-statement": error
+  "jest/prefer-strict-equal": error
+  "jest/prefer-to-be-null": error
+  "jest/prefer-to-be-undefined": error
+  "jest/prefer-to-contain": error
+  "jest/prefer-to-have-length": error
+  "jest/require-tothrow-message": error
+  "jest/valid-describe": error
+  "jest/valid-expect": error
