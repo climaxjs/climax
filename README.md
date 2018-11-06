@@ -5,8 +5,8 @@
 
 You can think Climax as the "Electron for CLI applications". And in fact it does even a bit more than that:
 
-- :white_square_button: **CLI-based Development:** Exactly as serious frameworks do, we provide a CLI allowing you to generate (almost) everything. Fun fact: this CLI utilize Climax itself. We eat our own :hamburger:s.<br>
-- :computer: **Easy Cross-Platform Building:** ...<br>
+- :white*square_button: **CLI-based Development:** We provide a CLI allowing you to generate (almost) everything. Fun fact: this CLI utilize Climax itself. We eat our own :hamburger:\_s* !<br>
+- :computer: **Out-of-the-box Cross-Platform Build & Release:** Immediatly generate distribuable cross-platform builds with just a little bit of config.<br>
 - :arrows_counterclockwise: **Out-of-the-box Auto-Updates:** ...<br>
 - :page_facing_up: **Conventions:** We provide a set of conventions regarding your CLI architecture in order to remove the pain of looking around for some.
 
