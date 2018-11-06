@@ -5,9 +5,9 @@
 
 You can think Climax as the "Electron for CLI applications". And in fact it does even a bit more than that:
 
-- **CLI-based Development:** We provide a CLI allowing you to generate (almost) everything. Fun fact: this CLI utilize Climax itself. We eat our own :hamburger:_s_ !<br>
-- **Out-of-the-box Cross-Platform Build & Release:** Immediatly generate distribuable cross-platform builds with just a little bit of config.<br>
-- **Out-of-the-box Auto-Updates:** ...<br>
+- **CLI-based Development:** We provide a CLI allowing you to generate (almost) everything. Fun fact: the Climax CLI utilizes Climax. We do eat our own :hamburger:.<br>
+- **Cross-Platform Build & Release:** Generate distribuable cross-platform builds in a matter of minutes with just a little bit of config.<br>
+- **Auto-Updates:** Adding auto-update capabilities to your CLI clients had never been that easy: it is already implemented to work with your CI. And it is obviously fully secured from the start.<br>
 - **Conventions:** We provide a set of conventions regarding your CLI architecture in order to remove the pain of looking around for some.
 
 ## Roadmap
