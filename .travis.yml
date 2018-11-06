@@ -5,7 +5,7 @@ os:
   - osx
   - windows
 
-cache:
-  yarn: true
-  directories:
-    - node_modules
+# cache:
+#   yarn: true
+#   directories:
+#     - node_modules
