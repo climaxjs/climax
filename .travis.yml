@@ -15,4 +15,4 @@ cache:
 
 script:
   - yarn test
-  - yarn run test:coverage
+  - bash scripts/ci/test_coverage.sh
