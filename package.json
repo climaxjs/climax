@@ -28,7 +28,6 @@
   "scripts": {
     "build": "rimraf build && babel lib/ -d build/",
     "test": "npm run test:lint && npm run test:type && npm run test:unit",
-    "test:coverage": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
     "test:lint": "cross-env eslint 'lib/**'",
     "test:type": "flow",
     "test:unit": "jest",
