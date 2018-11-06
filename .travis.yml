@@ -15,4 +15,7 @@ cache:
 
 script:
   - yarn test
-  - bash scripts/ci/test_coverage.sh
+  - |
+    if ["$TRAVIS_OS_NAME" == "linux" ]; then
+      bash scripts/ci/test_coverage.sh
+    fi
