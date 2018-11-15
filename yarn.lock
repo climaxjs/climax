@@ -4835,6 +4835,11 @@ rimraf@~2.2.6:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
 
+rorre@^1.0.0-beta.3:
+  version "1.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/rorre/-/rorre-1.0.0-beta.3.tgz#fd17f334b63537f3b53632ce459f34b16ea01436"
+  integrity sha512-VDsTYNM/ho5dXHFLbmSnWqScRKH4UjgyGLATe+1okPf/LmLUAQQFEbki3tQ/43twDCgJygfWELl/vw6F74lhow==
+
 rsvp@^3.3.3:
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.6.2.tgz#2e96491599a96cde1b515d5674a8f7a91452926a"
