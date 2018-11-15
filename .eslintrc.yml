@@ -15,13 +15,22 @@ parserOptions:
 
 # https://eslint.org/docs/rules
 rules:
-  # We disable the ESLint check for LF EOLs and enforec it via .gitattributes
+  default-case: 0
+  # We disable the ESLint check for LF EOLs and enforce it via .gitattributes
   # https://github.com/filerjs/filer/issues/403#issuecomment-422503251
   linebreak-style: 0
+  # Because it collides with Flow props' type definitions
+  lines-between-class-members: 0
+  # Because it collides with Flow "munge_underscores" option
+  no-underscore-dangle: 0
   quotes: [error, single, { allowTemplateLiterals: true }]
   semi: [error, never]
   # https://github.com/babel/babel-eslint#setup
   strict: 0
+
+  # Disable the dev dependencies check
+  # https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+  "import/no-extraneous-dependencies": 0
 
   # https://github.com/jest-community/eslint-plugin-jest#rules
   "jest/consistent-test-it": error
