@@ -21,7 +21,7 @@ You can think Climax as the "Electron for CLI applications". And in fact it does
 - [x] Initial Climax project config
 - [x] Initial Climax project CI
 - [ ] Basic Program with commands and options (improved [Commander](https://github.com/tj/commander.js)-style)
-- [ ] Cross-Platform Build (using [npx](https://github.com/zkat/npx))
+- [ ] Cross-Platform Build (via [nexe](https://github.com/nexe/nexe))
 - [ ] Initial Climax CLI project config
 - [ ] Climax CLI scaffold generation
 - [ ] First Auto-Release integration (via [Travis CI](https://travis-ci.org))
