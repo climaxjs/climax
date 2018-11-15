@@ -9,5 +9,6 @@
 [lints]
 
 [options]
+munge_underscores=true
 
 [strict]
