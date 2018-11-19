@@ -1,7 +1,5 @@
-/* eslint-disable implicit-arrow-linebreak, max-len */
-
-import program from './Program'
 import errors from '../errors'
+import program from './Program'
 
 describe(`Program`, () => {
   describe(`#description`, () => {

@@ -9,11 +9,11 @@ import errors from '../errors'
 import validateSemVer from '../utils/validateSemVer'
 
 class Program {
-  _description: string
-  _name: string
-  _version: string
+  private _description: string
+  private _name: string
+  private _version: string
 
-  description(description?: string): string | Program {
+  public description(description?: string): string | Program {
     if (typeof description === 'undefined') {
       switch (true) {
         case this._description === undefined:
@@ -36,7 +36,7 @@ class Program {
     return this
   }
 
-  name(name?: string): string | Program {
+  public name(name?: string): string | Program {
     if (typeof name === 'undefined') {
       switch (true) {
         case this._name === undefined:
@@ -59,7 +59,7 @@ class Program {
     return this
   }
 
-  version(version?: string): string | Program {
+  public version(version?: string): string | Program {
     if (typeof version === 'undefined') {
       switch (true) {
         case this._version === undefined:

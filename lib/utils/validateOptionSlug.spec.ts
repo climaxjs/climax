@@ -1,5 +1,3 @@
-/* eslint-disable implicit-arrow-linebreak, max-len */
-
 import validateOptionSlug from './validateOptionSlug'
 
 const INVALID_SLUGS = [
