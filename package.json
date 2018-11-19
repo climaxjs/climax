@@ -36,7 +36,6 @@
     "build": "rimraf build && babel lib/ -d build/",
     "test": "npm run test:lint && npm run test:type && npm run test:unit",
     "test:lint": "tslint -p tsconfig.json",
-    "test:type": "flow",
     "test:unit": "jest",
     "test:watch": "jest --watch"
   }
