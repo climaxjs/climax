@@ -33,7 +33,7 @@
     "typescript": "^3.1.6"
   },
   "scripts": {
-    "build": "rimraf build && babel lib/ -d build/",
+    "build": "rimraf build && tsc",
     "test": "npm run test:lint && npm run test:type && npm run test:unit",
     "test:lint": "tslint -p tsconfig.json",
     "test:unit": "jest",
