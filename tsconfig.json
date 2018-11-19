@@ -1,17 +1,20 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
+    "declaration": true,
+    "declarationDir": "build",
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": false,
     "forceConsistentCasingInFileNames": true,
-    "lib": [
-      "es7"
-    ],
+    "lib": ["es7"],
     "module": "commonjs",
-    "noEmit": true,
+    "moduleResolution": "node",
     "noImplicitAny": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "outDir": "build",
+    "removeComments": false,
     "rootDir": "lib",
     "sourceMap": true,
     "strictNullChecks": true,
