@@ -12,7 +12,7 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "outDir": "build",
-    "rootDir": "src",
+    "rootDir": "lib",
     "sourceMap": true,
     "strictNullChecks": true,
     "target": "es6"
