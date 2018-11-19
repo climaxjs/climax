@@ -4,6 +4,12 @@
     "arrow-parens": [false],
     "no-implicit-dependencies": [false],
     "quotemark": [true, "single"],
-    "semicolon": [true, "never"]
+    "semicolon": [true, "never"],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore"
+    ]
   }
 }
