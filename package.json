@@ -17,7 +17,6 @@
     "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
     "eslint": "^5.9.0",
-    "flow-bin": "^0.86.0",
     "jest": "^23.6.0",
     "prettier-eslint": "^8.8.2",
     "ramda": "^0.26.0",
