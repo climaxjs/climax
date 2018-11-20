@@ -10,10 +10,10 @@ import rorre from 'rorre'
 export default rorre.declare({
   ERR_OPTION_DESCRIPTION_VALIDATION_LENGTH: `The option description can't be empty.`,
   ERR_OPTION_DESCRIPTION_VALIDATION_TYPE: `The option description is mandatory and must be a string.`,
+  ERR_OPTION_FILTER_VALIDATION_TYPE: `The option filter must be a function.`,
   ERR_OPTION_SLUG_VALIDATION_FORMAT: `The option slug format is wrong.`,
   ERR_OPTION_SLUG_VALIDATION_LENGTH: `The option slug can't be empty.`,
   ERR_OPTION_SLUG_VALIDATION_TYPE: `The option slug is mandatory and must be a string.`,
-  ERR_OPTION_VALIDATOR_VALIDATION_TYPE: `The option validator must be a function.`,
 
   ERR_PROGRAM_DESCRIPTION_UNDEFINED: `The program description has not been set.`,
   ERR_PROGRAM_DESCRIPTION_VALIDATION_LENGTH: `The program description can't be empty.`,
