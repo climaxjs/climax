@@ -7,8 +7,6 @@
  * - forbid uppercase letters
  *
  * @see https://semver.org
- *
- * @flow
  */
 
 export default function validateSemVer(version: string): boolean {

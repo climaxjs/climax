@@ -4,8 +4,6 @@
  * @example
  * "-f, --foo"
  * "-F, --foo-bar"
- *
- * @flow
  */
 
 export default function validateOptionSlug(slug: string): boolean {
