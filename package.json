@@ -21,7 +21,6 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jest": "^22.0.0",
     "eslint-plugin-node": "^8.0.0",
-    "eslint-plugin-promise": "^4.0.1",
     "flow-bin": "^0.86.0",
     "flow-coverage-report": "^0.6.0",
     "jest": "^23.6.0",
