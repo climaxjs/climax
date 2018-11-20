@@ -5,10 +5,13 @@
 
 import errors from '../errors'
 import validateSemVer from '../utils/validateSemVer'
+import Option from './Option'
+import { OptionFilter } from './Option.d'
 
 class Program {
   private _description: string
   private _name: string
+  private _options: Option[] = []
   private _version: string
 
   public description(description?: string): string | Program {
@@ -81,6 +84,10 @@ class Program {
     this._version = version
 
     return this
+  }
+
+  public option(slug: string, description: string, filter?: OptionFilter) {
+    this._options.push(new Option(slug, description, filter))
   }
 }
 
