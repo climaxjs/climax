@@ -1,12 +1,8 @@
-/**
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
+/// <reference path="./types.ts" />
 
 import errors from '../errors'
 import validateSemVer from '../utils/validateSemVer'
 import Option from './Option'
-import { OptionFilter } from './Option.d'
 
 class Program {
   private _description: string
@@ -86,7 +82,11 @@ class Program {
     return this
   }
 
-  public option(slug: string, description: string, filter?: OptionFilter) {
+  public option(
+    slug: string,
+    description: string,
+    filter?: Program.OptionFilter,
+  ) {
     this._options.push(new Option(slug, description, filter))
   }
 }

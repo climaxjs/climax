@@ -4,14 +4,18 @@
 
 import errors from '../errors'
 import validateOptionSlug from '../utils/validateOptionSlug'
-import { OptionFilter } from './Option.d'
+/// <reference path="./type.ts" />
 
 export default class Option {
   public description: string
   public slug: string
-  public filter?: OptionFilter
+  public filter?: Program.OptionFilter
 
-  constructor(slug: string, description: string, filter?: OptionFilter) {
+  constructor(
+    slug: string,
+    description: string,
+    filter?: Program.OptionFilter,
+  ) {
     switch (true) {
       case typeof slug !== 'string':
         throw errors.error.ERR_OPTION_SLUG_VALIDATION_TYPE

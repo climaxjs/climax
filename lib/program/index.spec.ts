@@ -1,5 +1,5 @@
+import program from '.'
 import errors from '../errors'
-import program from './Program'
 
 describe(`Program`, () => {
   describe(`#description`, () => {
