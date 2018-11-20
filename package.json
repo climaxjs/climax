@@ -16,7 +16,6 @@
     "babel-jest": "^23.6.0",
     "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
-    "eslint": "^5.9.0",
     "jest": "^23.6.0",
     "ramda": "^0.26.0",
     "rimraf": "^2.6.2",
