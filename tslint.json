@@ -1,8 +1,6 @@
 {
-  "extends": "tslint:latest",
+  "extends": "tslint-config-airbnb",
   "rules": {
-    "arrow-parens": [false],
-    "no-implicit-dependencies": [false],
     "quotemark": [true, "single"],
     "semicolon": [true, "never"],
     "variable-name": [
