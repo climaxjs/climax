@@ -6,7 +6,6 @@
   "private": true,
   "devDependencies": {
     "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.6",
     "@types/jest": "^23.3.9",
     "@types/ramda": "^0.25.42",
     "coveralls": "^3.0.2",
