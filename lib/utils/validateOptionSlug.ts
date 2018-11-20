@@ -5,7 +5,7 @@
  * "-f, --foo"
  * "-F, --foo-bar"
  *
- * TODO Allow shorthand OR longhand slug alone.
+ * TODO Allow longhand <slug> alone.
  */
 
 export default function validateOptionSlug(slug: string): boolean {
