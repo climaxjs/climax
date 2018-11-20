@@ -91,4 +91,5 @@ class Program {
   }
 }
 
-export default new Program()
+const program = new Program()
+export default program
