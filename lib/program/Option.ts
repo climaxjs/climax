@@ -30,7 +30,7 @@ export default class Option {
         throw errors.error.ERR_OPTION_DESCRIPTION_VALIDATION_LENGTH
 
       case typeof filter !== 'undefined' && typeof filter !== 'function':
-        throw errors.error.ERR_OPTION_VALIDATOR_VALIDATION_TYPE
+        throw errors.error.ERR_OPTION_FILTER_VALIDATION_TYPE
     }
 
     this.description = description
