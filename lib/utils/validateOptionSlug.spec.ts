@@ -1,6 +1,9 @@
 import validateOptionSlug from './validateOptionSlug'
 
 const INVALID_SLUGS = [
+  '',
+  '-',
+  '--',
   '-f',
   '--foo',
   '-f --foo-',
