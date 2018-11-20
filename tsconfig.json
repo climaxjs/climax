@@ -21,9 +21,9 @@
     "target": "es6"
   },
   "exclude": [
-    "**/*.spec.ts",
-    "build",
-    "dist",
-    "node_modules"
+    "./build",
+    "./dist",
+    "./lib/**/*.spec.ts",
+    "./node_modules"
   ]
 }
