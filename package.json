@@ -12,7 +12,6 @@
     "@types/jest": "^23.3.9",
     "@types/ramda": "^0.25.42",
     "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
     "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
     "jest": "^23.6.0",
