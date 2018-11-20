@@ -7,7 +7,7 @@ describe(`Program`, () => {
       expect(() => program.description()).toThrow(errors.dictionary.ERR_PROGRAM_DESCRIPTION_UNDEFINED))
 
     it(`should fail with a wrong type`, () =>
-      expect(() => program.description(123)).toThrow(errors.dictionary.ERR_PROGRAM_DESCRIPTION_VALIDATION_TYPE))
+      expect(() => program.description(123 as any)).toThrow(errors.dictionary.ERR_PROGRAM_DESCRIPTION_VALIDATION_TYPE))
     it(`should fail with an empty string`, () =>
       expect(() => program.description('')).toThrow(errors.dictionary.ERR_PROGRAM_DESCRIPTION_VALIDATION_LENGTH))
 
@@ -20,7 +20,7 @@ describe(`Program`, () => {
       expect(() => program.name()).toThrow(errors.dictionary.ERR_PROGRAM_NAME_UNDEFINED))
 
     it(`should fail with a wrong type`, () =>
-      expect(() => program.name(123)).toThrow(errors.dictionary.ERR_PROGRAM_NAME_VALIDATION_TYPE))
+      expect(() => program.name(123 as any)).toThrow(errors.dictionary.ERR_PROGRAM_NAME_VALIDATION_TYPE))
     it(`should fail with an empty string`, () =>
       expect(() => program.name('')).toThrow(errors.dictionary.ERR_PROGRAM_NAME_VALIDATION_LENGTH))
 
@@ -33,7 +33,7 @@ describe(`Program`, () => {
       expect(() => program.version()).toThrow(errors.dictionary.ERR_PROGRAM_VERSION_UNDEFINED))
 
     it(`should fail with a wrong type`, () =>
-      expect(() => program.version(123)).toThrow(errors.dictionary.ERR_PROGRAM_VERSION_VALIDATION_TYPE))
+      expect(() => program.version(123 as any)).toThrow(errors.dictionary.ERR_PROGRAM_VERSION_VALIDATION_TYPE))
     it(`should fail with an empty string`, () =>
       expect(() => program.version('')).toThrow(errors.dictionary.ERR_PROGRAM_VERSION_VALIDATION_SEMVER))
     it(`should fail with a valid version starting with a "v"`, () =>
