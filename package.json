@@ -6,6 +6,7 @@
   "private": true,
   "devDependencies": {
     "@types/jest": "^23.3.9",
+    "@types/node": "^10.12.9",
     "@types/ramda": "^0.25.42",
     "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
