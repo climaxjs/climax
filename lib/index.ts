@@ -3,6 +3,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import program from './program/Program'
+import is from './filter-factory/is'
+import program from './program'
 
-export { program }
+export {
+  is,
+  program,
+}
