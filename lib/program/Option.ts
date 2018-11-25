@@ -9,12 +9,12 @@ import validateOptionSlug from '../utils/validateOptionSlug'
 export default class Option {
   public description: string
   public slug: string
-  public filter?: Program.OptionFilter
+  public filter?: Program.OptionFilter<Program.OptionFilterOutput>
 
   constructor(
     slug: string,
     description: string,
-    filter?: Program.OptionFilter,
+    filter?: Program.OptionFilter<Program.OptionFilterOutput>,
   ) {
     switch (true) {
       case typeof slug !== 'string':
