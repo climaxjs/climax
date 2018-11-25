@@ -9,12 +9,12 @@ os:
   # - windows
 
 cache:
-  yarn: true
+  npm: true
   directories:
     - node_modules
 
 script:
-  - yarn test
+  - npm test
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       bash scripts/ci/test_coverage.sh
