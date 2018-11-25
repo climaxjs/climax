@@ -8,6 +8,8 @@
 import rorre from 'rorre'
 
 export default rorre.declare({
+  ERR_FILTERS_IS_CONFLICT_MANDATORY_BOOLEAN: `The option description can't be empty.`,
+
   ERR_OPTION_DESCRIPTION_VALIDATION_LENGTH: `The option description can't be empty.`,
   ERR_OPTION_DESCRIPTION_VALIDATION_TYPE: `The option description is mandatory and must be a string.`,
   ERR_OPTION_FILTER_VALIDATION_TYPE: `The option filter must be a function.`,
