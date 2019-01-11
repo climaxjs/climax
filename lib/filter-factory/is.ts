@@ -1,30 +1,40 @@
 /// <reference path="../program/types.ts" />
 /// <reference path="./type.ts" />
 
-import chalk from 'chalk'
+// import chalk from 'chalk'
 // tslint:disable-next-line:import-name
-import R from 'ramda'
+import * as R from 'ramda'
 
-import errors from '../errors'
+// import errors from '../errors'
+
+const enum TYPE {
+  BOOLEAN = 1,
+  NUMBER = 2,
+  STRING = 3,
+}
 
 abstract class Is implements Filter.Is {
   public isMandatory: boolean
-  public type: Filter.TYPE
+  public type: number
   public validators: Filter.IsValidator[] = []
 
-  protected validate() {
+  constructor(context?: Is) {
+    if (context === undefined) return
 
+    this.isMandatory = context.isMandatory
+    this.type = context.type
+    this.validators = [...context.validators]
   }
 
-  protected next<T extends Filter.IsProp, U extends Filter.Is>(prop: T, value: Is[T], child: U): U {
-    this[prop] = value
-    child.isMandatory = this.isMandatory
-    child.type = this.type
+  public validate(value: any): boolean {
+    for (let i = 0; i < this.validators.length; i += 1) {
+      if (!this.validators[i].test(value)) return false
+    }
 
-    return child
+    return true
   }
 
-  protected makeCaster<T extends boolean>(): Program.OptionFilter<boolean>
+  /*protected makeCaster<T extends boolean>(): Program.OptionFilter<boolean>
   protected makeCaster<T extends string>(): Program.OptionFilter<string>
   protected makeCaster<T extends number>(): Program.OptionFilter<number>
   protected makeCaster(): Program.OptionFilter<Program.OptionFilterOutput> {
@@ -55,50 +65,57 @@ abstract class Is implements Filter.Is {
           return String(data.value)
       }
     }
-  }
+  }*/
 }
 
 class IsObligation extends Is {
   get aMandatory(): IsType {
-    return this.next('isMandatory', true, new IsType())
+    this.isMandatory = true
+
+    return new IsType(this)
   }
 
   get anOptional(): IsType {
-    return this.next('isMandatory', false, new IsType())
+    this.isMandatory = false
+
+    return new IsType(this)
   }
 }
 
 class IsType extends Is {
-  get boolean(): Program.OptionFilter<boolean> {
-    return this.makeCaster<boolean>()
+  get boolean(): IsBoolean {
+    this.type = TYPE.BOOLEAN
+
+    return new IsBoolean(this)
   }
 
-  get integer(): Filter.IsFilter<IsNumber> {
-    this
+  get float(): IsNumber {
+    this.type = TYPE.NUMBER
 
-    return {
-      context: this.next('type', Filter.TYPE.NUMBER, new IsNumber()),
-      filter: this.makeCaster<number>(),
-    }
+    return new IsNumber(this)
   }
 
-  get number(): Filter.IsFilter<IsNumber> {
-    return {
-      context: this.next('type', Filter.TYPE.NUMBER, new IsNumber()),
-      filter: this.makeCaster<number>(),
-    }
+  get integer(): IsNumber {
+    this.type = TYPE.NUMBER
+    this.validators.push({
+      errorMessage: `.`,
+      test: R.curry(value => value === Math.round(value)),
+    })
+
+    return new IsNumber(this)
   }
 
-  get string(): Filter.IsFilter<Is> {
-    return {
-      context: this.next('type', Filter.TYPE.STRING, new IsType()),
-      filter: this.makeCaster<string>(),
-    }
+  get string(): IsString {
+    this.type = TYPE.STRING
+
+    return new IsString(this)
   }
 }
 
+class IsBoolean extends Is {}
+
 class IsNumber extends Is {
-  public between(min: number, max: number, included: boolean = true) {
+  public between(min: number, max: number, included: boolean = false) {
     this.validators.push(included
       ? {
         errorMessage: `must be between ${min} and ${max} (both included).`,
@@ -113,42 +130,26 @@ class IsNumber extends Is {
     return this
   }
 
-  public greaterThan(min: number) {
+  public greaterThan(min: number, included: boolean = false) {
     this.validators.push({
       errorMessage: `must be greater than ${min}.`,
-      test: R.gt(R.__, min),
+      test: included ? R.gte(R.__, min) : R.gt(R.__, min),
     })
 
     return this
   }
 
-  public greaterThanOrEqualTo(min: number) {
-    this.validators.push({
-      errorMessage: `must be greater than or equal to ${min}.`,
-      test: R.gte(R.__, min),
-    })
-
-    return this
-  }
-
-  public lessThan(max: number) {
+  public lessThan(max: number, included: boolean = false) {
     this.validators.push({
       errorMessage: `must be less than ${max}.`,
-      test: R.lt(R.__, max),
-    })
-
-    return this
-  }
-
-  public lessThanOrEqualTo(max: number) {
-    this.validators.push({
-      errorMessage: `must be less than or equal to ${max}.`,
-      test: R.lte(R.__, max),
+      test: included ? R.lte(R.__, max) : R.lt(R.__, max),
     })
 
     return this
   }
 }
+
+class IsString extends Is {}
 
 /**
  * Program command option filter factory.

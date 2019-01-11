@@ -9,7 +9,8 @@ namespace Filter {
 
   export interface Is {
     isMandatory: boolean
-    type: TYPE
+    type: number
+    validators: IsValidator[]
   }
 
   export type IsProp = keyof Is
