@@ -12,7 +12,8 @@ export default rorre.declare({
 
   ERR_OPTION_DESCRIPTION_VALIDATION_LENGTH: `The option description can't be empty.`,
   ERR_OPTION_DESCRIPTION_VALIDATION_TYPE: `The option description is mandatory and must be a string.`,
-  ERR_OPTION_FILTER_VALIDATION_TYPE: `The option filter must be a function.`,
+  ERR_OPTION_FILTER_CUSTOM_VALIDATION_TYPE: `If you want to use a custom option filter, this filter must be a function.`,
+  ERR_OPTION_FILTER_INTERNAL_VALIDATION_TYPE: `The option filter is not usable as is. Specify, at least, both the obligation and type.`,
   ERR_OPTION_SLUG_VALIDATION_FORMAT: `The option slug format is wrong.`,
   ERR_OPTION_SLUG_VALIDATION_LENGTH: `The option slug can't be empty.`,
   ERR_OPTION_SLUG_VALIDATION_TYPE: `The option slug is mandatory and must be a string.`,
