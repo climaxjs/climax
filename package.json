@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "devDependencies": {
     "@types/jest": "^23.3.12",
     "@types/node": "^10.12.18",
@@ -22,6 +24,7 @@
   },
   "scripts": {
     "build": "rimraf build && tsc",
+    "build:dist": "rimraf dist && tsc -p ./tsconfig.dist.json",
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "tslint -p tsconfig.json",
     "test:unit": "jest",
