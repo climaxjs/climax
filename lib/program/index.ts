@@ -85,7 +85,7 @@ class Program {
   public option(
     slug: string,
     description: string,
-    filter?: Program.OptionFilter<Program.OptionFilterOutput>,
+    filter?: Filter.Is | Program.OptionFilter<Program.OptionFilterOutput>,
   ) {
     this._options.push(new Option(slug, description, filter))
   }
