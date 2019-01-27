@@ -1,5 +1,5 @@
 /// <reference path="../program/types.ts" />
-/// <reference path="./type.ts" />
+/// <reference path="./types.ts" />
 
 // import chalk from 'chalk'
 // tslint:disable-next-line:import-name

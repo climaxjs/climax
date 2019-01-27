@@ -1,4 +1,4 @@
-/// <reference path="../filter-factory/type.ts">
+/// <reference path="../filter-factory/types.ts">
 
 namespace Program {
   export type OptionFilter<T extends OptionFilterOutput> = Filter.IsUsable | OptionFilterCustom<T>
