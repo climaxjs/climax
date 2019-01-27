@@ -112,9 +112,9 @@ class IsType extends Is {
   }
 }
 
-class IsBoolean extends Is {}
+class IsBoolean extends Is implements Filter.IsBoolean {}
 
-class IsNumber extends Is {
+class IsNumber extends Is implements Filter.IsNumber {
   public between(min: number, max: number, included: boolean = false) {
     this.validators.push(included
       ? {
@@ -149,7 +149,7 @@ class IsNumber extends Is {
   }
 }
 
-class IsString extends Is {}
+class IsString extends Is implements Filter.IsString {}
 
 /**
  * Program command option filter factory.
