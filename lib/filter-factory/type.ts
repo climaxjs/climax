@@ -1,3 +1,5 @@
+// tslint:disable
+
 /// <reference path="../program/types.ts" />
 
 namespace Filter {
@@ -7,22 +9,33 @@ namespace Filter {
     STRING = 3,
   }
 
+  export type IsValidator = {
+    errorMessage: string
+    test: (...params: any[]) => boolean
+  }
+
   export interface Is {
     isMandatory: boolean
     type: number
     validators: IsValidator[]
   }
-
-  export type IsProp = keyof Is
-
-  export type IsFilter<T extends Is> = {
-    context: T
-    // tslint:disable-next-line:trailing-comma
-    filter: Program.OptionFilter<Program.OptionFilterOutput>
+  export interface IsObligation extends Is {
+    aMandatory(): IsType
+    anOptional(): IsType
   }
-  export type IsValidator = {
-    errorMessage: string
-    // tslint:disable-next-line:trailing-comma
-    test: (...params: any[]) => boolean
+  export interface IsType extends Is {
+    boolean(): IsBoolean
+    float(): IsNumber
+    number(): IsNumber
+    string(): IsString
   }
+  export interface IsBoolean extends Is {}
+  export interface IsNumber extends Is {
+    between(min: number, max: number, included: boolean): IsNumber
+    greaterThan(min: number, included: boolean): IsNumber
+    lessThan(max: number, included: boolean): IsNumber
+  }
+  export interface IsString extends Is {}
+
+  export type IsUsable = IsBoolean | IsNumber | IsString
 }
