@@ -35,7 +35,7 @@ export default class Command implements T.Command {
     slug: string,
     description: string,
     filter?: OptionT.OptionFilter,
-  ) {
+  ): Command {
     this._options.push(new Option(slug, description, filter))
 
     return this
