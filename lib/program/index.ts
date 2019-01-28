@@ -1,9 +1,15 @@
 // tslint:disable-next-line:import-name
+import R from 'ramda'
+
+// tslint:disable-next-line:import-name
 import Command from '../command'
 import errors from '../errors'
 import validateSemVer from '../utils/validateSemVer'
 
-class Program extends Command {
+import * as T from './types'
+
+class Program extends Command implements T.Program {
+  private _commands: any = {}
   private _name: string
   private _version: string
 
@@ -54,6 +60,21 @@ class Program extends Command {
     this._version = version
 
     return this
+  }
+
+  public command(slug: string): Command {
+    console.log(process.env)
+    switch (true) {
+      case typeof slug !== 'string':
+        throw errors.error.ERR_PROGRAM_VERSION_VALIDATION_TYPE
+
+      case slug.length === 0:
+        throw errors.error.ERR_PROGRAM_VERSION_VALIDATION_V
+    }
+
+    this._commands = R.assoc(slug, new Command(), this._commands)
+
+    return R.prop(slug, this._commands)
   }
 }
 
