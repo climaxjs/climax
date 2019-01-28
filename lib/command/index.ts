@@ -12,7 +12,7 @@ export default class Command implements T.Command {
     if (typeof description === 'undefined') {
       switch (true) {
         case this._description === undefined:
-          throw errors.error.ERR_PROGRAM_DESCRIPTION_UNDEFINED
+          throw errors.error.ERR_COMMAND_DESCRIPTION_UNDEFINED
       }
 
       return this._description
@@ -20,10 +20,10 @@ export default class Command implements T.Command {
 
     switch (true) {
       case typeof description !== 'string':
-        throw errors.error.ERR_PROGRAM_DESCRIPTION_VALIDATION_TYPE
+        throw errors.error.ERR_COMMAND_DESCRIPTION_VALIDATION_TYPE
 
       case description.length === 0:
-        throw errors.error.ERR_PROGRAM_DESCRIPTION_VALIDATION_LENGTH
+        throw errors.error.ERR_COMMAND_DESCRIPTION_VALIDATION_LENGTH
     }
 
     this._description = description
