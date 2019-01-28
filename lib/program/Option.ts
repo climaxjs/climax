@@ -17,8 +17,6 @@ export default class Option {
     description: string,
     filter?: Filter.Is | Program.OptionFilter<Program.OptionFilterOutput>,
   ) {
-    console.log(typeof filter)
-    if (filter !== undefined && typeof filter === 'object') console.log(filter.constructor.name)
     switch (true) {
       case typeof slug !== 'string':
         throw errors.error.ERR_OPTION_SLUG_VALIDATION_TYPE
