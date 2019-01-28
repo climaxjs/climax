@@ -5,8 +5,8 @@ import * as T from './types'
 import * as OptionT from '../option/types'
 
 export default class Command implements T.Command {
-  private _description: string
-  private _options: Option[] = []
+  protected _description: string
+  protected _options: Option[] = []
 
   public description(description?: string): string | Command {
     if (typeof description === 'undefined') {
