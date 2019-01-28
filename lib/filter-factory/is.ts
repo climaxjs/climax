@@ -1,4 +1,4 @@
-/// <reference path="../program/types.ts" />
+/// <reference path="../command/types.ts" />
 /// <reference path="./types.ts" />
 
 // import chalk from 'chalk'

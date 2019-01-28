@@ -1,37 +1,11 @@
-/// <reference path="./types.ts" />
-
+// tslint:disable-next-line:import-name
+import Command from '../command'
 import errors from '../errors'
 import validateSemVer from '../utils/validateSemVer'
-import Option from './Option'
 
-class Program {
-  private _description: string
+class Program extends Command {
   private _name: string
-  private _options: Option[] = []
   private _version: string
-
-  public description(description?: string): string | Program {
-    if (typeof description === 'undefined') {
-      switch (true) {
-        case this._description === undefined:
-          throw errors.error.ERR_PROGRAM_DESCRIPTION_UNDEFINED
-      }
-
-      return this._description
-    }
-
-    switch (true) {
-      case typeof description !== 'string':
-        throw errors.error.ERR_PROGRAM_DESCRIPTION_VALIDATION_TYPE
-
-      case description.length === 0:
-        throw errors.error.ERR_PROGRAM_DESCRIPTION_VALIDATION_LENGTH
-    }
-
-    this._description = description
-
-    return this
-  }
 
   public name(name?: string): string | Program {
     if (typeof name === 'undefined') {
@@ -80,14 +54,6 @@ class Program {
     this._version = version
 
     return this
-  }
-
-  public option(
-    slug: string,
-    description: string,
-    filter?: Filter.Is | Program.OptionFilter<Program.OptionFilterOutput>,
-  ) {
-    this._options.push(new Option(slug, description, filter))
   }
 }
 

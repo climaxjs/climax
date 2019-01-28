@@ -2,19 +2,6 @@ import program from '.'
 import errors from '../errors'
 
 describe(`Program`, () => {
-  describe(`#description`, () => {
-    it(`should fail to be gotten with an unset description`, () =>
-      expect(() => program.description()).toThrow(errors.dictionary.ERR_PROGRAM_DESCRIPTION_UNDEFINED))
-
-    it(`should fail with a wrong type`, () =>
-      expect(() => program.description(123 as any)).toThrow(errors.dictionary.ERR_PROGRAM_DESCRIPTION_VALIDATION_TYPE))
-    it(`should fail with an empty string`, () =>
-      expect(() => program.description('')).toThrow(errors.dictionary.ERR_PROGRAM_DESCRIPTION_VALIDATION_LENGTH))
-
-    it(`should pass with a valid description`, () => expect(() => program.description('test')).not.toThrow())
-    it(`should have set the valid description`, () => expect(program.description()).toStrictEqual('test'))
-  })
-
   describe(`#name`, () => {
     it(`should fail to be gotten with an unset version`, () =>
       expect(() => program.name()).toThrow(errors.dictionary.ERR_PROGRAM_NAME_UNDEFINED))
