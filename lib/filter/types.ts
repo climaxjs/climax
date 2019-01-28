@@ -4,32 +4,32 @@ export enum TYPE {
   STRING = 3,
 }
 
-export type IsValidator = {
+export type FilterValidator = {
   errorMessage: string
   test: (...params: any[]) => boolean
 }
 
-export interface Is {
+export interface Filter {
   isMandatory: boolean
   type: number
-  validators: IsValidator[]
+  validators: FilterValidator[]
 }
-export interface IsObligation extends Is {
-  aMandatory(): IsType
-  anOptional(): IsType
+export interface IsObligation extends Filter {
+  aMandatory: IsType
+  anOptional: IsType
 }
-export interface IsType extends Is {
-  boolean(): IsBoolean
-  float(): IsNumber
-  number(): IsNumber
-  string(): IsString
+export interface IsType extends Filter {
+  boolean: IsBoolean
+  float: IsNumber
+  integer: IsNumber
+  string: IsString
 }
-export interface IsBoolean extends Is {}
-export interface IsNumber extends Is {
+export interface IsBoolean extends Filter {}
+export interface IsNumber extends Filter {
   between(min: number, max: number, included: boolean): IsNumber
   greaterThan(min: number, included: boolean): IsNumber
   lessThan(max: number, included: boolean): IsNumber
 }
-export interface IsString extends Is {}
+export interface IsString extends Filter {}
 
 export type IsUsable = IsBoolean | IsNumber | IsString

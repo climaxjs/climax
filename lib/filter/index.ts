@@ -1,17 +1,14 @@
-// import chalk from 'chalk'
 // tslint:disable-next-line:import-name
 import * as R from 'ramda'
 
-// import errors from '../errors'
-
 import * as T from './types'
 
-abstract class Is implements T.Is {
+abstract class Filter implements T.Filter {
   public isMandatory: boolean
   public type: T.TYPE
-  public validators: T.IsValidator[] = []
+  public validators: T.FilterValidator[] = []
 
-  constructor(context?: Is) {
+  constructor(context?: Filter) {
     if (context === undefined) return
 
     this.isMandatory = context.isMandatory
@@ -26,42 +23,9 @@ abstract class Is implements T.Is {
 
     return true
   }
-
-  /*protected makeCaster<T extends boolean>(): Program.OptionFilter<boolean>
-  protected makeCaster<T extends string>(): Program.OptionFilter<string>
-  protected makeCaster<T extends number>(): Program.OptionFilter<number>
-  protected makeCaster(): Program.OptionFilter<Program.OptionFilterOutput> {
-    switch (true) {
-      case this.isMandatory && this.type === Filter.TYPE.BOOLEAN:
-        throw errors.error.ERR_FILTERS_IS_CONFLICT_MANDATORY_BOOLEAN
-    }
-
-    return (data: Program.OptionFilterData): Program.OptionFilterOutput => {
-      const pre = `  ${chalk.red('›')}   `
-      const start = `${pre}Error: `
-      const end = `\n${pre}Run "${data.command} --help" (or -h) to get help.`
-
-      switch (true) {
-        case this.isMandatory && data.value === undefined:
-          console.error(`${start}--${data.slug} is mandatory.${end}`)
-          process.exit(0)
-      }
-
-      switch (true) {
-        case this.type === Filter.TYPE.BOOLEAN:
-          return data.hasOwnProperty('value')
-
-        case this.type === Filter.TYPE.NUMBER:
-          return Number(data.value)
-
-        default:
-          return String(data.value)
-      }
-    }
-  }*/
 }
 
-class IsObligation extends Is {
+class IsObligation extends Filter implements T.IsObligation {
   get aMandatory(): IsType {
     this.isMandatory = true
 
@@ -75,7 +39,7 @@ class IsObligation extends Is {
   }
 }
 
-class IsType extends Is {
+class IsType extends Filter implements T.IsType {
   get boolean(): IsBoolean {
     this.type = T.TYPE.BOOLEAN
 
@@ -105,9 +69,9 @@ class IsType extends Is {
   }
 }
 
-class IsBoolean extends Is implements T.IsBoolean {}
+class IsBoolean extends Filter implements T.IsBoolean {}
 
-class IsNumber extends Is implements T.IsNumber {
+class IsNumber extends Filter implements T.IsNumber {
   public between(min: number, max: number, included: boolean = false) {
     this.validators.push(included
       ? {
@@ -142,11 +106,10 @@ class IsNumber extends Is implements T.IsNumber {
   }
 }
 
-class IsString extends Is implements T.IsString {}
+class IsString extends Filter implements T.IsString {}
 
 /**
  * Program command option filter factory.
  */
 const is = new IsObligation()
-
 export default is

@@ -2,7 +2,6 @@ import errors from '../errors'
 import Option from '../option/Option'
 
 import * as T from './types'
-import * as FilterT from '../filter/types'
 import * as OptionT from '../option/types'
 
 export default class Command implements T.Command {
@@ -35,7 +34,7 @@ export default class Command implements T.Command {
   public option(
     slug: string,
     description: string,
-    filter?: FilterT.Is | OptionT.OptionFilter<OptionT.OptionFilterOutput>,
+    filter?: OptionT.OptionFilter,
   ) {
     this._options.push(new Option(slug, description, filter))
 
