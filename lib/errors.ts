@@ -8,6 +8,10 @@
 import rorre from 'rorre'
 
 export default rorre.declare({
+  ERR_COMMAND_DESCRIPTION_UNDEFINED: `The command description has not been set.`,
+  ERR_COMMAND_DESCRIPTION_VALIDATION_LENGTH: `The command description can't be empty.`,
+  ERR_COMMAND_DESCRIPTION_VALIDATION_TYPE: `The command description can't be empty.`,
+
   ERR_FILTERS_IS_CONFLICT_MANDATORY_BOOLEAN: `The option description can't be empty.`,
 
   ERR_OPTION_DESCRIPTION_VALIDATION_LENGTH: `The option description can't be empty.`,
