@@ -22,6 +22,8 @@ export default rorre.declare({
   ERR_OPTION_SLUG_VALIDATION_LENGTH: `The option slug can't be empty.`,
   ERR_OPTION_SLUG_VALIDATION_TYPE: `The option slug is mandatory and must be a string.`,
 
+  ERR_PROGRAM_ARGS_VALIDATION_LENGTH: `Something went wrong during the arguments validation (length < 2).`,
+  ERR_PROGRAM_ARGS_VALIDATION_TYPE: `Something went wrong during the arguments validation (not an array).`,
   ERR_PROGRAM_DESCRIPTION_UNDEFINED: `The program description has not been set.`,
   ERR_PROGRAM_DESCRIPTION_VALIDATION_LENGTH: `The program description can't be empty.`,
   ERR_PROGRAM_DESCRIPTION_VALIDATION_TYPE: `The program description can't be empty.`,
