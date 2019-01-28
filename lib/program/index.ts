@@ -12,6 +12,9 @@ class Program extends Command implements T.Program {
   private _name: string
   private _version: string
 
+/**
+ * Customize the program name, replacing the package.json name.
+ */
   public name(name?: string): string | Program {
     if (typeof name === 'undefined') {
       switch (true) {
@@ -35,6 +38,9 @@ class Program extends Command implements T.Program {
     return this
   }
 
+  /**
+   * Customize the program version, replacing the package.json description.
+   */
   public version(version?: string): string | Program {
     if (typeof version === 'undefined') {
       switch (true) {
@@ -61,6 +67,9 @@ class Program extends Command implements T.Program {
     return this
   }
 
+  /**
+   * Add a new command.
+   */
   public command(slug: string): CommandT.Command {
     switch (true) {
       case typeof slug !== 'string':
@@ -73,6 +82,25 @@ class Program extends Command implements T.Program {
     this._commands = R.assoc(slug, new Command(), this._commands)
 
     return R.prop(slug, this._commands)
+  }
+
+  /**
+   * Initiate the program once all the commands and options has been set.
+   */
+  public run(): void {
+    this.validateCommands()
+  }
+
+  /**
+   * Validate program and commands required properties.
+   */
+  private validateCommands(): void {
+    this.description()
+    this.name()
+
+    for (const command in this._commands) {
+      this._commands[command].description()
+    }
   }
 }
 
