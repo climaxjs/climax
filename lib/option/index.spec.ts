@@ -1,6 +1,6 @@
-import { is } from '../..'
+import Option from '.'
+import { is } from '../../dist'
 import errors from '../errors'
-import Option from './Option'
 
 const _ = undefined as any
 
