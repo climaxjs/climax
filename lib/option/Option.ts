@@ -6,17 +6,17 @@ import errors from '../errors'
 import validateOptionSlug from '../utils/validateOptionSlug'
 
 import * as T from './types'
-import * as Filter from '../filter/types'
+import * as FilterT from '../filter/types'
 
 export default class Option {
   public description: string
   public slug: string
-  public filter?: Filter.Is | T.OptionFilter<T.OptionFilterOutput>
+  public filter?: FilterT.Is | T.OptionFilter<T.OptionFilterOutput>
 
   constructor(
     slug: string,
     description: string,
-    filter?: Filter.Is | T.OptionFilter<T.OptionFilterOutput>,
+    filter?: FilterT.Is | T.OptionFilter<T.OptionFilterOutput>,
   ) {
     switch (true) {
       case typeof slug !== 'string':

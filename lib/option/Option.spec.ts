@@ -1,5 +1,5 @@
-import { is } from '..'
-import errors from '../errors'
+import { is } from '../..'
+import errors from '../../errors'
 import Option from './Option'
 
 const _ = undefined as any
