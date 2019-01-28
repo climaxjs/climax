@@ -7,21 +7,38 @@
 
 import * as R from 'ramda'
 
-export type RawArgs = [string | null, { [option: string]: string | null } | {}]
+export type RawArgs = [
+  string | null,
+  { [option: string]: string | true } | {},
+  string[]
+]
+
+const filterOptions = R.filter<string>(R.startsWith('-'))
+const filterValues = R.filter<string>(R.complement(R.startsWith('-')))
+const maybeRemoveCommand = (command: string | null) =>
+  command !== null ? R.drop(1) : R.identity
+const pairizeOption = R.ifElse(
+  R.test(/.+=/),
+  R.split('='),
+  arg => R.pair(arg, true),
+)
+const pairizeOptions = R.reduce<string, [string, string | true][]>(
+  (acc, arg) => R.append(R.pipe(removeDashes, pairizeOption)(arg), acc),
+  [],
+)
+const removeDashes = R.replace(/^-{1,2}/, '')
 
 export default function parseArgs(args: string[]): RawArgs {
-  if (args.length === 0) return [null, {}]
+  if (args.length === 0) return [null, {}, []]
+
   const command = args[0].startsWith('-') ? null : args[0]
-
+  const argsWithoutCommand = maybeRemoveCommand(command)(args)
   const options = R.pipe(
-    R.reduce<string, any[]>(
-      (acc, arg) => R.startsWith('-', arg)
-        ? R.append(R.pair(R.replace(/^-{1,2}/, '', arg), null), acc)
-        : R.update(acc.length - 1, [acc[acc.length - 1][0], arg], acc),
-      [],
-    ),
+    filterOptions,
+    pairizeOptions,
     R.fromPairs,
-  )(args.slice(Number(command !== null), args.length))
+  )(argsWithoutCommand)
+  const values = filterValues(argsWithoutCommand)
 
-  return [command, options]
+  return [command, options, values]
 }
