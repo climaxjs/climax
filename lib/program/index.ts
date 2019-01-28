@@ -3,7 +3,7 @@ import * as R from 'ramda'
 import Command from '../command'
 import Option from '../option'
 import errors from '../errors'
-import validateSemVer from '../utils/validateSemVer'
+import * as utils from '../utils'
 
 import * as T from './types'
 import * as CommandT from '../command/types'
@@ -97,7 +97,7 @@ class Program implements T.Program {
       case version.length !== 0 && version[0].toLocaleLowerCase() === 'v':
         throw errors.error.ERR_PROGRAM_VERSION_VALIDATION_V
 
-      case !validateSemVer(version):
+      case !utils.validateSemVer(version):
         throw errors.error.ERR_PROGRAM_VERSION_VALIDATION_SEMVER
     }
 
@@ -139,7 +139,7 @@ class Program implements T.Program {
   /**
    * Initiate the program once all the commands and options has been set.
    */
-  public run(): void {
+  public init(): void {
     this.validateCommandsProps()
   }
 
