@@ -6,6 +6,7 @@
     ]
   },
   "rules": {
+    "import-name": [false],
     "quotemark": [true, "single"],
     "semicolon": [true, "never"],
     "variable-name": [
