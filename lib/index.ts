@@ -1,12 +1,7 @@
-/**
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-import is from './filter-factory/is'
+import filter from './filter'
 import program from './program'
 
 export {
-  is,
+  filter as is,
   program,
 }

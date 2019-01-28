@@ -1,22 +1,15 @@
-/// <reference path="../command/types.ts" />
-/// <reference path="./types.ts" />
-
 // import chalk from 'chalk'
 // tslint:disable-next-line:import-name
 import * as R from 'ramda'
 
 // import errors from '../errors'
 
-const enum TYPE {
-  BOOLEAN = 1,
-  NUMBER = 2,
-  STRING = 3,
-}
+import * as T from './types'
 
-abstract class Is implements Filter.Is {
+abstract class Is implements T.Is {
   public isMandatory: boolean
-  public type: number
-  public validators: Filter.IsValidator[] = []
+  public type: T.TYPE
+  public validators: T.IsValidator[] = []
 
   constructor(context?: Is) {
     if (context === undefined) return
@@ -84,19 +77,19 @@ class IsObligation extends Is {
 
 class IsType extends Is {
   get boolean(): IsBoolean {
-    this.type = TYPE.BOOLEAN
+    this.type = T.TYPE.BOOLEAN
 
     return new IsBoolean(this)
   }
 
   get float(): IsNumber {
-    this.type = TYPE.NUMBER
+    this.type = T.TYPE.NUMBER
 
     return new IsNumber(this)
   }
 
   get integer(): IsNumber {
-    this.type = TYPE.NUMBER
+    this.type = T.TYPE.NUMBER
     this.validators.push({
       errorMessage: `.`,
       test: R.curry(value => value === Math.round(value)),
@@ -106,15 +99,15 @@ class IsType extends Is {
   }
 
   get string(): IsString {
-    this.type = TYPE.STRING
+    this.type = T.TYPE.STRING
 
     return new IsString(this)
   }
 }
 
-class IsBoolean extends Is implements Filter.IsBoolean {}
+class IsBoolean extends Is implements T.IsBoolean {}
 
-class IsNumber extends Is implements Filter.IsNumber {
+class IsNumber extends Is implements T.IsNumber {
   public between(min: number, max: number, included: boolean = false) {
     this.validators.push(included
       ? {
@@ -149,7 +142,7 @@ class IsNumber extends Is implements Filter.IsNumber {
   }
 }
 
-class IsString extends Is implements Filter.IsString {}
+class IsString extends Is implements T.IsString {}
 
 /**
  * Program command option filter factory.

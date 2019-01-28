@@ -1,9 +1,10 @@
-/// <reference path="./types.ts" />
-
 import errors from '../errors'
 import Option from './Option'
 
-export default class Command {
+import * as T from './types'
+import * as Filter from '../filter/types'
+
+export default class Command implements T.Command {
   private _description: string
   private _options: Option[] = []
 
@@ -33,8 +34,10 @@ export default class Command {
   public option(
     slug: string,
     description: string,
-    filter?: Filter.Is | Program.OptionFilter<Program.OptionFilterOutput>,
+    filter?: Filter.Is | T.OptionFilter<T.OptionFilterOutput>,
   ) {
     this._options.push(new Option(slug, description, filter))
+
+    return this
   }
 }

@@ -1,4 +1,4 @@
-import is from './is'
+import is from '.'
 
 describe(`filter-factory/is`, () => {
   describe(`#aMandatory`, () => {
