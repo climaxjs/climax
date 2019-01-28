@@ -6,9 +6,12 @@ export type ProgramCommands = {
 }
 
 export interface Program {
-  command(slug: string): Command.Command
   description(slug: string): string | Program
   name(name?: string): string | Program
-  option(slug: string, description: string, filter?: Option.OptionFilter): Program
   version(version?: string): string | Program
+
+  command(slug: string): Command.Command
+  option(slug: string, description: string, filter?: Option.OptionFilter): Program
+
+  init(): void
 }
