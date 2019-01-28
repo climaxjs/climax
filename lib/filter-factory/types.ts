@@ -1,7 +1,5 @@
 // tslint:disable
 
-/// <reference path="../program/types.ts" />
-
 namespace Filter {
   export enum TYPE {
     BOOLEAN = 1,
