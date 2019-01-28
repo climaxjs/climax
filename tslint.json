@@ -1,5 +1,10 @@
 {
   "extends": "tslint-config-airbnb",
+  "linterOptions": {
+    "exclude": [
+      "./lib/**/types.ts"
+    ]
+  },
   "rules": {
     "quotemark": [true, "single"],
     "semicolon": [true, "never"],
