@@ -6,8 +6,11 @@ import * as OptionT from '../option/types'
 
 export default class Command implements T.Command {
   protected _description: string
-  protected _options: Option[] = []
+  protected _options: OptionT.Option[] = []
 
+  /**
+   * Getter/Setter for the command description.
+   */
   public description(description?: string): string | Command {
     if (typeof description === 'undefined') {
       switch (true) {
@@ -31,6 +34,9 @@ export default class Command implements T.Command {
     return this
   }
 
+  /**
+   * Declare a new command option.
+   */
   public option(
     slug: string,
     description: string,
