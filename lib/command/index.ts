@@ -1,5 +1,5 @@
 import errors from '../errors'
-import Option from '../option/Option'
+import Option from '../option'
 
 import * as T from './types'
 import * as OptionT from '../option/types'
