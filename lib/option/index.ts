@@ -10,13 +10,9 @@ import * as T from './types'
 export default class Option {
   public description: string
   public slug: string
-  public filter?: T.OptionFilter
+  public filter?: T.Filter
 
-  constructor(
-    slug: string,
-    description: string,
-    filter?: T.OptionFilter,
-  ) {
+  constructor(slug: string, description: string, filter?: T.Filter) {
     switch (true) {
       case typeof slug !== 'string':
         throw errors.error.ERR_OPTION_SLUG_VALIDATION_TYPE
