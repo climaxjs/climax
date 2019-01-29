@@ -1,3 +1,4 @@
+import log from '@inspired-beings/log'
 import * as R from 'ramda'
 
 import Command from '../command'
@@ -95,6 +96,31 @@ class Program extends Command implements T.Program {
    */
   public init(): void {
     this.validateCommandsProps()
+
+    // Check for any inconsistent structure for the process arguments
+    switch (true) {
+      case !Array.isArray(process.argv):
+        throw errors.error.ERR_PROGRAM_ARGS_VALIDATION_TYPE
+
+      case process.argv.length < 2:
+        throw errors.error.ERR_PROGRAM_ARGS_VALIDATION_LENGTH
+    }
+
+    const args = process.argv.length > 2
+      ? process.argv.slice(2, process.argv.length)
+      : []
+
+    // Solve the raw arguments (raw = not typed yet)
+    const [command/*, _options, _values*/] = utils.parseArgs(args)
+
+    switch (true) {
+      case command !== null && !R.has(command, this._commands):
+        log.err(`The command %s doesn't exists.`, command as string)
+        process.exit()
+    }
+
+    // Calls
+    (command === null ? this : this._commands[command]).run()
   }
 
   /**
