@@ -109,4 +109,11 @@ export default class Command implements T.Command {
 
     return this
   }
+
+  /**
+   * Run the action callback passing it the command options and values.
+   */
+  public run(): void {
+    this._action({ options: {}, values: {} })
+  }
 }
