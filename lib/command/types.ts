@@ -6,6 +6,7 @@ export interface Command {
 
   action(callback: CommandAction): Command | Program.Program
   option(slug: string, description: string, filter?: Option.OptionFilter): Command | Program.Program
+  value(helpName: string, description: string): Command | Program.Program
 }
 
 export type CommandAction = (args: CommandActionArgs) => void | Promise<void>
