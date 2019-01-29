@@ -15,7 +15,7 @@ export default class Command implements T.Command {
   /**
    * Getter/Setter for the command (or program) description.
    */
-  public description(description?: string): string | Command {
+  public description(description?: string): string | this {
     if (typeof description === 'undefined') {
       switch (true) {
         case this._description === undefined:
@@ -41,7 +41,7 @@ export default class Command implements T.Command {
   /**
    * Declare the callback to run for this command (or program).
    */
-  public action(callback: T.CommandAction): Command {
+  public action(callback: T.CommandAction): this {
     switch (true) {
       case typeof callback !== 'function':
         throw errors.error.ERR_COMMAND_ACTION_VALIDATION_TYPE
@@ -62,8 +62,8 @@ export default class Command implements T.Command {
   public option(
     slug: string,
     description: string,
-    filter?: OptionT.OptionFilter,
-  ): Command {
+    filter?: OptionT.Filter,
+  ): this {
     switch (true) {
       case typeof slug !== 'string':
         throw errors.error.ERR_COMMAND_OPTION_SLUG_VALIDATION_TYPE
@@ -90,8 +90,8 @@ export default class Command implements T.Command {
    * The <name> parameter MUST be in camelCase and will be used as a placeholder
    * for the help description of this command (or program).
    */
-  public value(name: string, description: string): Command {
-    this._values.push(new Value(name, description))
+  public value(name: string, desc: string): this {
+    this._values.push(new Value(name, desc))
 
     switch (true) {
       case typeof name !== 'string':
