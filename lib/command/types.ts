@@ -1,12 +1,11 @@
 import * as Option from '../option/types'
-import * as Program from '../program/types'
 
 export interface Command {
-  description(value?: string): string | Command | Program.Program
+  description(value?: string): string | this
 
-  action(callback: CommandAction): Command | Program.Program
-  option(slug: string, description: string, filter?: Option.OptionFilter): Command | Program.Program
-  value(name: string, description: string): Command | Program.Program
+  action(callback: CommandAction): this
+  option(slug: string, description: string, filter?: Option.Filter): this
+  value(name: string, description: string): this
 }
 
 export type CommandAction = (args: CommandActionArgs) => void | Promise<void>
