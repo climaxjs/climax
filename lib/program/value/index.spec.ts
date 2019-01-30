@@ -1,5 +1,5 @@
 import Value from '.'
-import errors from '../errors'
+import errors from '../../errors'
 
 const _ = undefined as any
 

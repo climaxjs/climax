@@ -2,9 +2,8 @@
  * TODO Validate <slug> uniqueness.
  */
 
-import errors from '../errors'
-import { throwF } from '../utils'
-import validateOptionSlug from '../utils/validateOptionSlug'
+import errors from '../../errors'
+import { throwF, validateOptionSlug } from '../../utils'
 
 import * as T from './types'
 

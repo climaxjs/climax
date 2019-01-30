@@ -1,5 +1,5 @@
-import errors from '../errors'
-import { throwF } from '../utils'
+import errors from '../../errors'
+import { throwF } from '../../utils'
 
 import * as T from './types'
 

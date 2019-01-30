@@ -1,6 +1,6 @@
-import errors from '../errors'
+import errors from '../../errors'
+import { throwWith } from '../../utils'
 import Option from '../option'
-import { throwWith } from '../utils'
 import Value from '../value'
 
 import * as T from './types'

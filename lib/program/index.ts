@@ -1,12 +1,12 @@
 import log from '@inspired-beings/log'
 import * as R from 'ramda'
 
-import Command from '../command'
+import Command from './command'
 import errors from '../errors'
 import * as utils from '../utils'
 
 import * as T from './types'
-import * as CommandT from '../command/types'
+import * as CommandT from './command/types'
 
 class Program extends Command implements T.Program {
   private _commands: T.ProgramCommands = {}
