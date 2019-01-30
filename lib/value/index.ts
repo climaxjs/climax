@@ -3,6 +3,9 @@ import { throwF } from '../utils'
 
 import * as T from './types'
 
+/**
+ * TODO Validate the name format.
+ */
 export default class Value implements T.Value {
   constructor(
     public readonly name: string,
