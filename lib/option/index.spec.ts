@@ -3,7 +3,6 @@ import { is } from '..'
 import errors from '../errors'
 
 const _ = undefined as any
-console.log = jest.fn()
 
 describe(`Option`, () => {
   describe(`#constructor()`, () => {
