@@ -3,6 +3,7 @@
  */
 
 import errors from '../errors'
+import { logT } from '../utils'
 import validateOptionSlug from '../utils/validateOptionSlug'
 
 import * as T from './types'
@@ -13,6 +14,7 @@ export default class Option {
   public filter?: T.Filter
 
   constructor(slug: string, description: string, filter?: T.Filter) {
+    const logM = `Option: ${slug}`
     switch (true) {
       case typeof slug !== 'string':
         throw errors.error.ERR_OPT_SLUG_V_TYP
@@ -21,21 +23,21 @@ export default class Option {
         throw errors.error.ERR_OPT_SLUG_V_LEN
 
       case !validateOptionSlug(slug):
-        throw errors.error.ERR_OPT_SLUG_V_FMT
+        logT(logM, errors.error.ERR_OPT_SLUG_V_FMT)
 
       case typeof description !== 'string':
-        throw errors.error.ERR_OPT_DESC_V_TYP
+        logT(logM, errors.error.ERR_OPT_DESC_V_TYP)
 
       case description.length === 0:
-        throw errors.error.ERR_OPT_DESC_V_LEN
+        logT(logM, errors.error.ERR_OPT_DESC_V_LEN)
 
       case filter !== undefined:
         switch (true) {
           case this.isUnusableInternalFilter(filter):
-            throw errors.error.ERR_OPT_FILT_V_TYP
+            logT(logM, errors.error.ERR_OPT_FILT_V_TYP)
 
           case !this.isInternalFilter(filter) && typeof filter !== 'function':
-            throw errors.error.ERR_OPT_FILT_V_TYP_C
+            logT(logM, errors.error.ERR_OPT_FILT_V_TYP_C)
         }
     }
 
