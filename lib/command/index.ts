@@ -12,6 +12,10 @@ export default class Command implements T.Command {
   protected _options: OptionT.Option[] = []
   protected _values: ValueT.Value[] = []
 
+  constructor(
+    private readonly _slug: string,
+  ) {}
+
   /**
    * Getter/Setter for the command (or program) description.
    */

@@ -3,7 +3,7 @@ import errors from '../errors'
 
 describe(`Command`, () => {
   describe(`#description`, () => {
-    const command = new Command()
+    const command = new Command('foo')
 
     it(`should fail to be gotten with an unset description`, () =>
       expect(() => command.description()).toThrow(errors.dictionary.ERR_CMD_DESC_V_UND))

@@ -13,6 +13,12 @@ class Program extends Command implements T.Program {
   private _name: string
   private _version: string
 
+  constructor() {
+    // Since Program is also a Command, we arbitrary assign an underscore as its
+    // command slug in order to better customize error messages.
+    super('_')
+  }
+
   /**
    * Get/Set the program name.
    *
@@ -86,7 +92,7 @@ class Program extends Command implements T.Program {
         throw errors.error.ERR_PRG_VERS_V_V
     }
 
-    this._commands = R.assoc(slug, new Command(), this._commands)
+    this._commands = R.assoc(slug, new Command(slug), this._commands)
 
     return R.prop(slug, this._commands)
   }
