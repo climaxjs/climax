@@ -23,7 +23,7 @@ class Program extends Command implements T.Program {
     if (typeof name === 'undefined') {
       switch (true) {
         case this._name === undefined:
-          throw errors.error.ERR_PROGRAM_NAME_UNDEFINED
+          throw errors.error.ERR_PRG_NAME_V_UND
       }
 
       return this._name
@@ -31,10 +31,10 @@ class Program extends Command implements T.Program {
 
     switch (true) {
       case typeof name !== 'string':
-        throw errors.error.ERR_PROGRAM_NAME_VALIDATION_TYPE
+        throw errors.error.ERR_PRG_NAME_V_TYP
 
       case name.length === 0:
-        throw errors.error.ERR_PROGRAM_NAME_VALIDATION_LENGTH
+        throw errors.error.ERR_PRG_NAME_V_LEN
     }
 
     this._name = name
@@ -52,7 +52,7 @@ class Program extends Command implements T.Program {
     if (typeof version === 'undefined') {
       switch (true) {
         case this._version === undefined:
-          throw errors.error.ERR_PROGRAM_VERSION_UNDEFINED
+          throw errors.error.ERR_PRG_VERS_V_UND
       }
 
       return this._version
@@ -60,13 +60,13 @@ class Program extends Command implements T.Program {
 
     switch (true) {
       case typeof version !== 'string':
-        throw errors.error.ERR_PROGRAM_VERSION_VALIDATION_TYPE
+        throw errors.error.ERR_PRG_VERS_V_TYP
 
       case version.length !== 0 && version[0].toLocaleLowerCase() === 'v':
-        throw errors.error.ERR_PROGRAM_VERSION_VALIDATION_V
+        throw errors.error.ERR_PRG_VERS_V_V
 
       case !utils.validateSemVer(version):
-        throw errors.error.ERR_PROGRAM_VERSION_VALIDATION_SEMVER
+        throw errors.error.ERR_PRG_VERS_V_SEMVER
     }
 
     this._version = version
@@ -80,10 +80,10 @@ class Program extends Command implements T.Program {
   public command(slug: string): CommandT.Command {
     switch (true) {
       case typeof slug !== 'string':
-        throw errors.error.ERR_PROGRAM_VERSION_VALIDATION_TYPE
+        throw errors.error.ERR_PRG_VERS_V_TYP
 
       case slug.length === 0:
-        throw errors.error.ERR_PROGRAM_VERSION_VALIDATION_V
+        throw errors.error.ERR_PRG_VERS_V_V
     }
 
     this._commands = R.assoc(slug, new Command(), this._commands)
@@ -100,10 +100,10 @@ class Program extends Command implements T.Program {
     // Check for any inconsistent structure for the process arguments
     switch (true) {
       case !Array.isArray(process.argv):
-        throw errors.error.ERR_PROGRAM_ARGS_VALIDATION_TYPE
+        throw errors.error.ERR_PRG_ARGS_V_TYP
 
       case process.argv.length < 2:
-        throw errors.error.ERR_PROGRAM_ARGS_VALIDATION_LENGTH
+        throw errors.error.ERR_PRG_ARGS_V_LEN
     }
 
     const args = process.argv.length > 2

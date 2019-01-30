@@ -19,7 +19,7 @@ export default class Command implements T.Command {
     if (typeof description === 'undefined') {
       switch (true) {
         case this._description === undefined:
-          throw errors.error.ERR_COMMAND_DESCRIPTION_UNDEFINED
+          throw errors.error.ERR_CMD_DESC_V_UND
       }
 
       return this._description
@@ -27,10 +27,10 @@ export default class Command implements T.Command {
 
     switch (true) {
       case typeof description !== 'string':
-        throw errors.error.ERR_COMMAND_DESCRIPTION_VALIDATION_TYPE
+        throw errors.error.ERR_CMD_DESC_V_TYP
 
       case description.length === 0:
-        throw errors.error.ERR_COMMAND_DESCRIPTION_VALIDATION_LENGTH
+        throw errors.error.ERR_CMD_DESC_V_LEN
     }
 
     this._description = description
@@ -44,7 +44,7 @@ export default class Command implements T.Command {
   public action(callback: T.CommandAction): this {
     switch (true) {
       case typeof callback !== 'function':
-        throw errors.error.ERR_COMMAND_ACTION_VALIDATION_TYPE
+        throw errors.error.ERR_CMD_ACTN_V_TYP
     }
 
     this._action = callback
@@ -66,16 +66,16 @@ export default class Command implements T.Command {
   ): this {
     switch (true) {
       case typeof slug !== 'string':
-        throw errors.error.ERR_COMMAND_OPTION_SLUG_VALIDATION_TYPE
+        throw errors.error.ERR_CMD_OPT_SLUG_V_TYP
 
       case slug.length === 0:
-        throw errors.error.ERR_COMMAND_OPTION_SLUG_VALIDATION_LENGTH
+        throw errors.error.ERR_CMD_OPT_SLUG_V_LEN
 
       case typeof description !== 'string':
-        throw errors.error.ERR_COMMAND_OPTION_DESCRIPTION_VALIDATION_TYPE
+        throw errors.error.ERR_OPT_DESC_V_TYP
 
       case description.length === 0:
-        throw errors.error.ERR_COMMAND_OPTION_DESCRIPTION_VALIDATION_LENGTH
+        throw errors.error.ERR_OPT_DESC_V_LEN
     }
 
     this._options.push(new Option(slug, description, filter))
@@ -95,16 +95,16 @@ export default class Command implements T.Command {
 
     switch (true) {
       case typeof name !== 'string':
-        throw errors.error.ERR_COMMAND_VALUE_NAME_VALIDATION_TYPE
+        throw errors.error.ERR_CMD_VLUE_NAME_V_TYP
 
       case name.length === 0:
-        throw errors.error.ERR_COMMAND_VALUE_NAME_VALIDATION_LENGTH
+        throw errors.error.ERR_CMD_VLUE_NAME_V_LEN
 
       case typeof name !== 'string':
-        throw errors.error.ERR_COMMAND_VALUE_DESCRIPTION_VALIDATION_TYPE
+        throw errors.error.ERR_CMD_VLUE_DESC_V_TYP
 
       case name.length === 0:
-        throw errors.error.ERR_COMMAND_VALUE_DESCRIPTION_VALIDATION_LENGTH
+        throw errors.error.ERR_CMD_VLUE_DESC_V_LEN
     }
 
     return this
