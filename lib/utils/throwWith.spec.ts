@@ -12,8 +12,8 @@ const MATCHES: any = [
 ]
 
 test(`should output a % arg`, () =>
-  expect(() => throwWith(new Error(`This error is %%.`)).message).toThrow(`This error is %.`))
+  expect(() => throwWith(new Error(`This error is %%.`))).toThrow(`This error is %.`))
 
 MATCHES.forEach((match: any) =>
   test(`should throw the expected error`, () =>
-    expect(() => throwWith(new Error(match[0]), match[1]).message).toThrow(match[2])))
+    expect(() => throwWith(new Error(match[0]), match[1])).toThrow(match[2])))
