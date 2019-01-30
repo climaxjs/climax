@@ -3,18 +3,17 @@
  */
 
 import errors from '../errors'
-import { logT } from '../utils'
+import { throwF } from '../utils'
 import validateOptionSlug from '../utils/validateOptionSlug'
 
 import * as T from './types'
 
-export default class Option {
-  public description: string
-  public slug: string
-  public filter?: T.Filter
-
-  constructor(slug: string, description: string, filter?: T.Filter) {
-    const logM = `Option: ${slug}`
+export default class Option implements T.Option {
+  constructor(
+    public readonly slug: string,
+    public readonly description: string,
+    public readonly filter?: T.Filter,
+  ) {
     switch (true) {
       case typeof slug !== 'string':
         throw errors.error.ERR_OPT_SLUG_V_TYP
@@ -23,27 +22,23 @@ export default class Option {
         throw errors.error.ERR_OPT_SLUG_V_LEN
 
       case !validateOptionSlug(slug):
-        logT(logM, errors.error.ERR_OPT_SLUG_V_FMT)
+        throwF(errors.error.ERR_OPT_SLUG_V_FMT, slug)
 
       case typeof description !== 'string':
-        logT(logM, errors.error.ERR_OPT_DESC_V_TYP)
+        throwF(errors.error.ERR_OPT_DESC_V_TYP, slug)
 
       case description.length === 0:
-        logT(logM, errors.error.ERR_OPT_DESC_V_LEN)
+        throwF(errors.error.ERR_OPT_DESC_V_LEN, slug)
 
       case filter !== undefined:
         switch (true) {
           case this.isUnusableInternalFilter(filter):
-            logT(logM, errors.error.ERR_OPT_FILT_V_TYP)
+            throwF(errors.error.ERR_OPT_FILT_V_TYP, slug)
 
           case !this.isInternalFilter(filter) && typeof filter !== 'function':
-            logT(logM, errors.error.ERR_OPT_FILT_V_TYP_C)
+            throwF(errors.error.ERR_OPT_FILT_V_TYP_C, slug)
         }
     }
-
-    this.description = description
-    this.slug = slug
-    this.filter = filter
   }
 
   private isInternalFilter(filter: any): boolean {
