@@ -1,5 +1,6 @@
 import errors from '../errors'
 import Option from '../option'
+import { throwWith } from '../utils'
 import Value from '../value'
 
 import * as T from './types'
@@ -12,6 +13,9 @@ export default class Command implements T.Command {
   protected _options: OptionT.Option[] = []
   protected _values: ValueT.Value[] = []
 
+  /**
+   * TODO Validate the slug.
+   */
   constructor(
     private readonly _slug: string,
   ) {}
@@ -68,21 +72,14 @@ export default class Command implements T.Command {
     description: string,
     filter?: OptionT.Filter,
   ): this {
-    switch (true) {
-      case typeof slug !== 'string':
-        throw errors.error.ERR_CMD_OPT_SLUG_V_TYP
-
-      case slug.length === 0:
-        throw errors.error.ERR_CMD_OPT_SLUG_V_LEN
-
-      case typeof description !== 'string':
-        throw errors.error.ERR_OPT_DESC_V_TYP
-
-      case description.length === 0:
-        throw errors.error.ERR_OPT_DESC_V_LEN
+    try {
+      this._options.push(new Option(slug, description, filter))
+    } catch (err) {
+      throwWith(
+        err,
+        this._slug === '_' ? `[Program]` : `[Command: "${this._slug}"]`,
+      )
     }
-
-    this._options.push(new Option(slug, description, filter))
 
     return this
   }
@@ -94,21 +91,14 @@ export default class Command implements T.Command {
    * The <name> parameter MUST be in camelCase and will be used as a placeholder
    * for the help description of this command (or program).
    */
-  public value(name: string, desc: string): this {
-    this._values.push(new Value(name, desc))
-
-    switch (true) {
-      case typeof name !== 'string':
-        throw errors.error.ERR_CMD_VLUE_NAME_V_TYP
-
-      case name.length === 0:
-        throw errors.error.ERR_CMD_VLUE_NAME_V_LEN
-
-      case typeof name !== 'string':
-        throw errors.error.ERR_CMD_VLUE_DESC_V_TYP
-
-      case name.length === 0:
-        throw errors.error.ERR_CMD_VLUE_DESC_V_LEN
+  public value(name: string, description: string): this {
+    try {
+      this._values.push(new Value(name, description))
+    } catch (err) {
+      throwWith(
+        err,
+        this._slug === '_' ? `[Program]` : `[Command: "${this._slug}"]`,
+      )
     }
 
     return this
