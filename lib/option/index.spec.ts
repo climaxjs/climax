@@ -16,14 +16,11 @@ describe(`Option`, () => {
       expect(() => new Option('-f, --foo', 1337 as any)).toThrow(errors.dictionary.ERR_OPTION_DESCRIPTION_VALIDATION_TYPE))
     it(`should fail with an empty string <description>`, () =>
       expect(() => new Option('-f, --foo', '')).toThrow(errors.dictionary.ERR_OPTION_DESCRIPTION_VALIDATION_LENGTH))
-    it(`should fail with a wrong typed internal <filter>`, () => {
+    it(`should fail with an unprocessable internal <filter>`, () => {
       expect(() => new Option('-f, --foo', 'foo', is)).toThrow(errors.dictionary.ERR_OPTION_FILTER_INTERNAL_VALIDATION_TYPE)
       expect(() => new Option('-f, --foo', 'foo', is.aMandatory)).toThrow(errors.dictionary.ERR_OPTION_FILTER_INTERNAL_VALIDATION_TYPE)
     })
     it(`should fail with a wrong typed custom <filter>`, () =>
       expect(() => new Option('-f, --foo', 'foo', 1337 as any)).toThrow(errors.dictionary.ERR_OPTION_FILTER_CUSTOM_VALIDATION_TYPE))
-
-    // it(`should pass with a valid description`, () => expect(() => program.description('test')).not.toThrow())
-    // it(`should have set the valid description`, () => expect(program.description()).toStrictEqual('test'))
   })
 })
