@@ -1,4 +1,4 @@
-import throwWith from './throwWith'
+import throwF from './throwF'
 
 const MATCHES: any = [
   [`This error is %b.`, 0b10,           `This error is 10.`],
@@ -12,8 +12,8 @@ const MATCHES: any = [
 ]
 
 test(`should output a % arg`, () =>
-  expect(() => throwWith(new Error(`This error is %%.`))).toThrow(`This error is %.`))
+  expect(() => throwF(new Error(`This error is %%.`))).toThrow(`This error is %.`))
 
 MATCHES.forEach((match: any) =>
   test(`should throw the expected error`, () =>
-    expect(() => throwWith(new Error(match[0]), match[1])).toThrow(match[2])))
+    expect(() => throwF(new Error(match[0]), match[1])).toThrow(match[2])))
