@@ -129,7 +129,22 @@ _In progress..._
 
 ## Contributing
 
-_In progress..._
+### Getting Started
+
+```
+git clone https://github.com/climax/core.git
+cd core
+npm i
+```
+
+### Running Tests
+
+It is recommanded to work in TDD mode, including continuously run tests while
+writing your code:
+
+```
+npm run test:watch
+```
 
 ### License
 
