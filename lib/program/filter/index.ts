@@ -12,6 +12,7 @@ abstract class Filter implements T.Filter {
   public isMandatory: boolean
   public type: T.TYPE
   public validators: T.Validator[] = []
+  protected _defaultValue: boolean | number | string | null = null
 
   constructor(context?: Filter) {
     if (context === undefined) return
@@ -33,9 +34,9 @@ abstract class Filter implements T.Filter {
 /**
  * Mixin for final filter class methods.
  */
-class IsFinal {
+class IsFinal extends Filter {
   public else(defaultValue: boolean | number | string): void {
-    console.log(defaultValue)
+    this._defaultValue = defaultValue
   }
 }
 
@@ -56,6 +57,7 @@ class IsObligation extends Filter implements T.IsObligation {
 class IsType extends Filter implements T.IsType {
   get boolean(): T.IsBoolean {
     this.type = T.TYPE.BOOLEAN
+    this._defaultValue = false
 
     return new IsBoolean(this)
   }
