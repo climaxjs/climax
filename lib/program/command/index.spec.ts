@@ -36,9 +36,9 @@ describe(`Command`, () => {
       expect(() => command.option('-f, --foo', ''))
         .toThrow(`[Command: "foo"]` + errors.dictionary.ERR_OPT_DESC_V_LEN.replace(/%s/, '-f, --foo')))
     it(`should fail with an unprocessable internal <filter>`, () => {
-      expect(() => command.option('-f, --foo', 'bar', is))
+      expect(() => command.option('-f, --foo', 'bar', is as any))
         .toThrow(`[Command: "foo"]` + errors.dictionary.ERR_OPT_FILT_V_TYP.replace(/%s/, '-f, --foo'))
-      expect(() => command.option('-f, --foo', 'bar', is.aMandatory))
+      expect(() => command.option('-f, --foo', 'bar', is.aMandatory as any))
         .toThrow(`[Command: "foo"]` + errors.dictionary.ERR_OPT_FILT_V_TYP.replace(/%s/, '-f, --foo'))
     })
     it(`should fail with a wrong typed custom <filter>`, () =>
