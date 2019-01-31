@@ -69,10 +69,10 @@ _bin/say.js_
 
 program
   .value('message', 'What do you want to say?', is.aMandatory.string.longerThan(0))
-  .option('-t, --twice', 'Say it twice.', is.anOptional.boolean.greaterThan(0))
-  .action((values, options) => {
-    for (let i = 0; i <= Number(options); i++) {
-      process.stdout.write(values.message)
+  .option('-t, --twice', 'Say it twice.', is.anOptional.boolean)
+  .action(({ options, values }) => {
+    for (let i = 0; i <= Number(options.twice); i++) {
+      console.log(values.message)
     }
   })
 
@@ -80,17 +80,15 @@ program.command('hello')
   .description('Generate a new Climax project.')
   .value('name', 'Whom do you want to say hello to?', is.aMandatory.string.longerThan(0))
   .option('-l, --language', 'In which language?', is.aMandatory.list(['en', 'fr']).else('en'))
-  .action((values, options) => {
+  .action(({ options, values }) => {
     const greeting = options.language === 'en'
       ? `Hello ${values.name}!`
       : `Bonjour ${values.name}!`
 
-    process.stdout.write(greeting)
+    console.log(greeting)
   })
 
-program.init({
-  hasAutoUpdate: true,
-})
+program.init()
 ```
 
 Finally we can link our local "binary" file (not compiled yet since they are
@@ -100,7 +98,7 @@ interprated by NodeJS thanks to the Sha-Bang):
 npm link
 ```
 
-### Let's test it
+### Let's try it
 
 _In progress..._
 
@@ -119,6 +117,8 @@ _In progress..._
 - [ ] [CLI][link-cli]: Binaries scripts generation (Travis + Github)
 - [ ] [CLI][link-cli]: Auto-update config generation (Travis + Github)
 - [ ] [CLI][link-cli]: 2nd alpha release
+- [ ] Help integration
+- [ ] 3rd alpha release
 - [ ] Single prompt
 - [ ] List prompt
 - [ ] 4th alpha release
@@ -135,15 +135,15 @@ _In progress..._
 
 Climax is [MIT licensed](./LICENSE).
 
-[img-coveralls]: https://img.shields.io/coveralls/github/climaxjs/climax.svg?style=flat-square
+[img-coveralls]: https://img.shields.io/coveralls/github/climax/core/master.svg?style=flat-square
 [img-license]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
 [img-npm]: https://img.shields.io/npm/v/climax.svg?style=flat-square
 [img-styleguide]: https://img.shields.io/badge/code_style-airbnb-brightgreen.svg?style=flat-square
-[img-travis]: https://img.shields.io/travis/climaxjs/climax.svg?style=flat-square
-[link-cli]: https://github.com/climaxjs/climax-cli
-[link-coveralls]: https://coveralls.io/github/climaxjs/climax
-[link-license]: https://github.com/climaxjs/climax/blob/master/LICENSE
+[img-travis]: https://img.shields.io/travis/climax/core/master.svg?style=flat-square
+[link-cli]: https://github.com/climax/cli
+[link-coveralls]: https://coveralls.io/github/climax/core
+[link-license]: https://github.com/climax/climax/blob/master/LICENSE
 [link-npm]: https://www.npmjs.com/package/climax
 [link-styleguide]: https://github.com/airbnb/javascript#airbnb-javascript-style-guide-
-[link-travis]: https://travis-ci.org/climaxjs/climax
+[link-travis]: https://travis-ci.org/climax/core
 [link-website]: https://climaxjs.com
