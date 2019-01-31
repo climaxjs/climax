@@ -4,15 +4,15 @@ export enum TYPE {
   STRING = 3,
 }
 
-export type FilterValidator = {
+export type Validator = {
   errorMessage: string
-  test: (...params: any[]) => boolean
+  test: (value: boolean | number | string) => boolean
 }
 
 export interface Filter {
   isMandatory: boolean
   type: number
-  validators: FilterValidator[]
+  validators: Validator[]
 }
 export interface IsObligation extends Filter {
   aMandatory: IsType
