@@ -13,6 +13,8 @@ export interface Filter {
   isMandatory: boolean
   type: number
   validators: Validator[]
+
+  validate(value: any): boolean
 }
 export interface IsObligation extends Filter {
   aMandatory: IsType
@@ -26,10 +28,13 @@ export interface IsType extends Filter {
 }
 export interface IsBoolean extends Filter {}
 export interface IsNumber extends Filter {
-  between(min: number, max: number, included: boolean): IsNumber
-  greaterThan(min: number, included: boolean): IsNumber
-  lessThan(max: number, included: boolean): IsNumber
+  between(min: number, max: number, included?: boolean): IsNumber
+  greaterThan(min: number, included?: boolean): IsNumber
+  lessThan(max: number, included?: boolean): IsNumber
 }
-export interface IsString extends Filter {}
+export interface IsString extends Filter {
+  longerThan(min: number, included?: boolean): IsString
+  shorterThan(max: number, included?: boolean): IsString
+}
 
 export type IsUsable = IsBoolean | IsNumber | IsString

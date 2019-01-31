@@ -29,13 +29,13 @@ abstract class Filter implements T.Filter {
 }
 
 class IsObligation extends Filter implements T.IsObligation {
-  get aMandatory(): IsType {
+  get aMandatory(): T.IsType {
     this.isMandatory = true
 
     return new IsType(this)
   }
 
-  get anOptional(): IsType {
+  get anOptional(): T.IsType {
     this.isMandatory = false
 
     return new IsType(this)
@@ -43,19 +43,19 @@ class IsObligation extends Filter implements T.IsObligation {
 }
 
 class IsType extends Filter implements T.IsType {
-  get boolean(): IsBoolean {
+  get boolean(): T.IsBoolean {
     this.type = T.TYPE.BOOLEAN
 
     return new IsBoolean(this)
   }
 
-  get float(): IsNumber {
+  get float(): T.IsNumber {
     this.type = T.TYPE.NUMBER
 
     return new IsNumber(this)
   }
 
-  get integer(): IsNumber {
+  get integer(): T.IsNumber {
     this.type = T.TYPE.NUMBER
     this.validators.push({
       errorMessage: `.`,
@@ -65,7 +65,7 @@ class IsType extends Filter implements T.IsType {
     return new IsNumber(this)
   }
 
-  get string(): IsString {
+  get string(): T.IsString {
     this.type = T.TYPE.STRING
 
     return new IsString(this)
@@ -75,7 +75,11 @@ class IsType extends Filter implements T.IsType {
 class IsBoolean extends Filter implements T.IsBoolean {}
 
 class IsNumber extends Filter implements T.IsNumber {
-  public between(min: number, max: number, included: boolean = false) {
+  public between(
+    min: number,
+    max: number,
+    included: boolean = false,
+  ): T.IsNumber {
     this.validators.push(included
       ? {
         errorMessage: `must be between ${min} and ${max} (both included).`,
@@ -90,7 +94,7 @@ class IsNumber extends Filter implements T.IsNumber {
     return this
   }
 
-  public greaterThan(min: number, included: boolean = false) {
+  public greaterThan(min: number, included: boolean = false): T.IsNumber {
     this.validators.push(included
       ? {
         errorMessage: `must be greater or equal to ${min}.`,
@@ -105,7 +109,7 @@ class IsNumber extends Filter implements T.IsNumber {
     return this
   }
 
-  public lessThan(max: number, included: boolean = false) {
+  public lessThan(max: number, included: boolean = false): T.IsNumber {
     this.validators.push(included
       ? {
         errorMessage: `must be lesser or equal to ${max}.`,
@@ -122,7 +126,7 @@ class IsNumber extends Filter implements T.IsNumber {
 }
 
 class IsString extends Filter implements T.IsString {
-  public longerThan(min: number, included: boolean = false) {
+  public longerThan(min: number, included: boolean = false): T.IsString {
     this.validators.push(included
       ? {
         errorMessage: `must be greater or equal to ${min}.`,
@@ -137,7 +141,7 @@ class IsString extends Filter implements T.IsString {
     return this
   }
 
-  public shorterThan(max: number, included: boolean = false) {
+  public shorterThan(max: number, included: boolean = false): T.IsString {
     this.validators.push(included
       ? {
         errorMessage: `must be lesser or equal to ${max}.`,
