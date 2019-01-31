@@ -102,7 +102,7 @@ npm link
 
 _In progress..._
 
-## Current Work Progress
+## Current Working Progress
 
 - [x] Initial Climax project config
 - [x] Initial Climax project CI
