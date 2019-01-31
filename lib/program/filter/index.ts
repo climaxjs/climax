@@ -1,4 +1,7 @@
-// tslint:disable-next-line:import-name
+/**
+ * TODO Add paramaters check on all the public methods.
+ */
+
 import * as R from 'ramda'
 
 import * as T from './types'
@@ -6,7 +9,7 @@ import * as T from './types'
 abstract class Filter implements T.Filter {
   public isMandatory: boolean
   public type: T.TYPE
-  public validators: T.FilterValidator[] = []
+  public validators: T.Validator[] = []
 
   constructor(context?: Filter) {
     if (context === undefined) return
@@ -56,7 +59,7 @@ class IsType extends Filter implements T.IsType {
     this.type = T.TYPE.NUMBER
     this.validators.push({
       errorMessage: `.`,
-      test: R.curry(value => value === Math.round(value)),
+      test: (value: number) => value === Math.round(value),
     })
 
     return new IsNumber(this)
@@ -88,25 +91,67 @@ class IsNumber extends Filter implements T.IsNumber {
   }
 
   public greaterThan(min: number, included: boolean = false) {
-    this.validators.push({
-      errorMessage: `must be greater than ${min}.`,
-      test: included ? R.gte(R.__, min) : R.gt(R.__, min),
-    })
+    this.validators.push(included
+      ? {
+        errorMessage: `must be greater or equal to ${min}.`,
+        test: R.gte(R.__, min),
+      }
+      : {
+        errorMessage: `must be greater than ${min}.`,
+        test: R.gt(R.__, min),
+      },
+    )
 
     return this
   }
 
   public lessThan(max: number, included: boolean = false) {
-    this.validators.push({
-      errorMessage: `must be less than ${max}.`,
-      test: included ? R.lte(R.__, max) : R.lt(R.__, max),
-    })
+    this.validators.push(included
+      ? {
+        errorMessage: `must be lesser or equal to ${max}.`,
+        test: R.lte(R.__, max),
+      }
+      : {
+        errorMessage: `must be lesser than ${max}.`,
+        test: R.lt(R.__, max),
+      },
+    )
 
     return this
   }
 }
 
-class IsString extends Filter implements T.IsString {}
+class IsString extends Filter implements T.IsString {
+  public longerThan(min: number, included: boolean = false) {
+    this.validators.push(included
+      ? {
+        errorMessage: `must be greater or equal to ${min}.`,
+        test: R.compose(R.gte(R.__, min), R.prop('length') as () => number),
+      }
+      : {
+        errorMessage: `must be greater than ${min}.`,
+        test: R.compose(R.gt(R.__, min), R.prop('length') as () => number),
+      },
+    )
+
+    return this
+  }
+
+  public shorterThan(max: number, included: boolean = false) {
+    this.validators.push(included
+      ? {
+        errorMessage: `must be lesser or equal to ${max}.`,
+        test: R.compose(R.lte(R.__, max), R.prop('length') as () => number),
+      }
+      : {
+        errorMessage: `must be lesser than ${max}.`,
+        test: R.compose(R.lt(R.__, max), R.prop('length') as () => number),
+      },
+    )
+
+    return this
+  }
+}
 
 /**
  * Program command option filter factory.
