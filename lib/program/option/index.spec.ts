@@ -17,8 +17,8 @@ describe(`Option`, () => {
     it(`should fail with an empty string <description>`, () =>
       expect(() => new Option('-f, --foo', '')).toThrow(errors.dictionary.ERR_OPT_DESC_V_LEN.replace(/%s/, '-f, --foo')))
     it(`should fail with an unprocessable internal <filter>`, () => {
-      expect(() => new Option('-f, --foo', 'bar', is)).toThrow(errors.dictionary.ERR_OPT_FILT_V_TYP.replace(/%s/, '-f, --foo'))
-      expect(() => new Option('-f, --foo', 'bar', is.aMandatory)).toThrow(errors.dictionary.ERR_OPT_FILT_V_TYP.replace(/%s/, '-f, --foo'))
+      expect(() => new Option('-f, --foo', 'bar', is as any)).toThrow(errors.dictionary.ERR_OPT_FILT_V_TYP.replace(/%s/, '-f, --foo'))
+      expect(() => new Option('-f, --foo', 'bar', is.aMandatory as any)).toThrow(errors.dictionary.ERR_OPT_FILT_V_TYP.replace(/%s/, '-f, --foo'))
     })
     it(`should fail with a wrong typed custom <filter>`, () =>
       expect(() => new Option('-f, --foo', 'bar', 1337 as any)).toThrow(errors.dictionary.ERR_OPT_FILT_V_TYP_C.replace(/%s/, '-f, --foo')))
