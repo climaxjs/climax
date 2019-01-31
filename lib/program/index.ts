@@ -117,7 +117,7 @@ class Program extends Command implements T.Program {
       : []
 
     // Solve the raw arguments (raw = not typed yet)
-    const [command/*, _options, _values*/] = utils.parseArgs(args)
+    const [command, options, values] = utils.parseArgs(args)
 
     switch (true) {
       case command !== null && !R.has(command, this._commands):
@@ -126,7 +126,7 @@ class Program extends Command implements T.Program {
     }
 
     // Calls
-    (command === null ? this : this._commands[command]).run()
+    (command === null ? this : this._commands[command]).run(values, options)
   }
 
   /**
