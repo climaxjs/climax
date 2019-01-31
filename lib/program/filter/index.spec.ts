@@ -1,6 +1,6 @@
 import is from '.'
 
-describe(`filter-factory/is`, () => {
+describe(`is`, () => {
   describe(`#aMandatory`, () => {
     const filter = is.aMandatory
 
@@ -106,6 +106,46 @@ describe(`filter-factory/is`, () => {
 
       it(`should return a class instance of IsString`, () => expect(filter.constructor.name).toBe('IsString'))
       it(`should be of type string`, () => expect(filter.type).toBe(3))
+
+      describe(`#longerThan()`, () => {
+        describe(`with 0`, () => {
+          const filter = is.aMandatory.string.longerThan(0)
+
+          it(`should return a class instance of IsString`, () => expect(filter.constructor.name).toBe('IsString'))
+
+          it(`should invalidate ""`, () => expect(filter.validate("")).toBe(false))
+          it(`should validate "a"`, () => expect(filter.validate("a")).toBe(true))
+        })
+
+        describe(`with 0, true`, () => {
+          const filter = is.aMandatory.string.longerThan(0, true)
+
+          it(`should return a class instance of IsString`, () => expect(filter.constructor.name).toBe('IsString'))
+
+          it(`should validate ""`, () => expect(filter.validate("")).toBe(true))
+          it(`should validate "a"`, () => expect(filter.validate("a")).toBe(true))
+        })
+      })
+
+      describe(`#shorterThan()`, () => {
+        describe(`with 2`, () => {
+          const filter = is.aMandatory.string.shorterThan(2)
+
+          it(`should return a class instance of IsString`, () => expect(filter.constructor.name).toBe('IsString'))
+
+          it(`should validate "a"`, () => expect(filter.validate("a")).toBe(true))
+          it(`should invalidate "ab"`, () => expect(filter.validate("ab")).toBe(false))
+        })
+
+        describe(`with 2, true`, () => {
+          const filter = is.aMandatory.string.shorterThan(2, true)
+
+          it(`should return a class instance of IsString`, () => expect(filter.constructor.name).toBe('IsString'))
+
+          it(`should validate "a"`, () => expect(filter.validate("a")).toBe(true))
+          it(`should validate "ab"`, () => expect(filter.validate("ab")).toBe(true))
+        })
+      })
     })
   })
 
