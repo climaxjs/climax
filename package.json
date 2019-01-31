@@ -1,5 +1,5 @@
 {
-  "name": "climax",
+  "name": "core",
   "description": "The \"Electron\" for CLI applications: build and distribute cross-platform CLI clients with NodeJS.",
   "version": "0.0.0",
   "license": "MIT",
