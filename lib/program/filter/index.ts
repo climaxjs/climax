@@ -4,6 +4,8 @@
 
 import * as R from 'ramda'
 
+import { applyMixins } from '../../utils'
+
 import * as T from './types'
 
 abstract class Filter implements T.Filter {
@@ -25,6 +27,15 @@ abstract class Filter implements T.Filter {
     }
 
     return true
+  }
+}
+
+/**
+ * Mixin for final filter class methods.
+ */
+class IsFinal {
+  public else(defaultValue: boolean | number | string): void {
+    console.log(defaultValue)
   }
 }
 
@@ -58,7 +69,7 @@ class IsType extends Filter implements T.IsType {
   get integer(): T.IsNumber {
     this.type = T.TYPE.NUMBER
     this.validators.push({
-      errorMessage: `.`,
+      errorMessage: `must be an integer.`,
       test: (value: number) => value === Math.round(value),
     })
 
@@ -70,11 +81,29 @@ class IsType extends Filter implements T.IsType {
 
     return new IsString(this)
   }
+
+  public list(list: string[]): T.IsList {
+    this.type = T.TYPE.STRING
+    this.validators.push({
+      errorMessage: `must be be one of: ${list.join(`, `)}.`,
+      test: R.includes(R.__, list as any) as any,
+    })
+
+    return new IsList(this)
+  }
 }
 
-class IsBoolean extends Filter implements T.IsBoolean {}
+class IsBoolean extends Filter implements T.IsBoolean {
+  public else: () => void
+}
+
+class IsList extends Filter implements T.IsList {
+  public else: () => void
+}
 
 class IsNumber extends Filter implements T.IsNumber {
+  public else: () => void
+
   public between(
     min: number,
     max: number,
@@ -126,6 +155,8 @@ class IsNumber extends Filter implements T.IsNumber {
 }
 
 class IsString extends Filter implements T.IsString {
+  public else: () => void
+
   public longerThan(min: number, included: boolean = false): T.IsString {
     this.validators.push(included
       ? {
@@ -156,6 +187,8 @@ class IsString extends Filter implements T.IsString {
     return this
   }
 }
+
+applyMixins([IsBoolean, IsList, IsNumber, IsString], [IsFinal])
 
 /**
  * Program command option filter factory.

@@ -40,12 +40,16 @@ export default class Option implements T.Option {
     }
   }
 
+  /**
+   * Is this filter the instance of a usable internal filter?
+   */
   private isInternalFilter(filter: any): boolean {
-    return typeof filter === 'object' && (
-      ['IsBoolean', 'IsNumber', 'IsString'].includes(filter.constructor.name)
-    )
+    return typeof filter === 'object' && filter.constructor.name === 'IsFinal'
   }
 
+  /**
+   * Is this filter the instance of an unusable (= not final) internal filter?
+   */
   private isUnusableInternalFilter(filter: any): boolean {
     return typeof filter === 'object' && (
       ['Is', 'IsObligation', 'IsType'].includes(filter.constructor.name)
