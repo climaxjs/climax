@@ -1,4 +1,4 @@
-import * as Command from '../command/types'
+import * as Command from './command/types'
 
 export type ProgramCommands = {
   [slug: string]: Command.Command
