@@ -6,7 +6,9 @@
     "emitDecoratorMetadata": false,
     "experimentalDecorators": false,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["es7"],
+    "lib": [
+      "esnext"
+    ],
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
@@ -18,7 +20,7 @@
     "rootDir": "lib",
     "sourceMap": true,
     "strictNullChecks": true,
-    "target": "es6"
+    "target": "es2018"
   },
   "exclude": [
     "./build",
