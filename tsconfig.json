@@ -3,8 +3,8 @@
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "declarationDir": "build",
-    "emitDecoratorMetadata": false,
-    "experimentalDecorators": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "lib": [
       "esnext"
