@@ -4,30 +4,32 @@
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "devDependencies": {
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "dependencies": {
     "@inspired-beings/log": "^1.2.0",
-    "@types/jest": "^23.3.13",
-    "@types/node": "^10.12.18",
+    "chalk": "^2.4.2",
+    "ramda": "^0.26.1",
+    "rorre": "^1.1.0",
+    "sprintf-js": "^1.1.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.0",
+    "@types/node": "^10.12.21",
     "@types/ramda": "^0.25.47",
     "@types/sprintf-js": "^1.1.1",
-    "chalk": "^2.4.2",
     "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
     "jest": "^24.0.0",
-    "ramda": "^0.26.1",
     "rimraf": "^2.6.3",
     "rollup": "^1.1.2",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-typescript": "^1.0.0",
-    "rorre": "^1.1.0",
-    "sprintf-js": "^1.1.2",
     "ts-jest": "^23.10.5",
     "tslint": "^5.12.1",
     "tslint-config-airbnb": "^5.11.1",
-    "typescript": "^3.2.4"
+    "typescript": "^3.3.1"
   },
   "scripts": {
     "build": "rimraf build && tsc",
