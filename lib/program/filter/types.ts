@@ -10,10 +10,6 @@ export type Validator = {
 }
 
 export interface Filter {
-  isMandatory: boolean
-  type: number
-  validators: Validator[]
-
   validate(value: any): boolean
 }
 
@@ -33,8 +29,8 @@ export interface IsType extends Filter {
   string: IsString
 }
 
-export interface IsBoolean extends Filter, IsFinal {}
-export interface IsList extends Filter, IsFinal {}
+export interface IsBoolean extends Filter, IsFinal { }
+export interface IsList extends Filter, IsFinal { }
 export interface IsNumber extends Filter, IsFinal {
   between(min: number, max: number, included?: boolean): IsNumber
   greaterThan(min: number, included?: boolean): IsNumber
