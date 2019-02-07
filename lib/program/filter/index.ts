@@ -9,22 +9,22 @@ import { applyMixins } from '../../utils'
 import * as T from './types'
 
 abstract class Filter implements T.Filter {
-  public isMandatory: boolean
-  public type: T.TYPE
-  public validators: T.Validator[] = []
   protected _defaultValue: boolean | number | string | null = null
+  protected _isMandatory: boolean
+  protected _type: T.TYPE
+  protected _validators: T.Validator[] = []
 
   constructor(context?: Filter) {
     if (context === undefined) return
 
-    this.isMandatory = context.isMandatory
-    this.type = context.type
-    this.validators = [...context.validators]
+    this._isMandatory = context._isMandatory
+    this._type = context._type
+    this._validators = [...context._validators]
   }
 
   public validate(value: any): boolean {
-    for (let i = 0; i < this.validators.length; i += 1) {
-      if (!this.validators[i].test(value)) return false
+    for (let i = 0; i < this._validators.length; i += 1) {
+      if (!this._validators[i].test(value)) return false
     }
 
     return true
@@ -42,13 +42,13 @@ class IsFinal extends Filter {
 
 class IsObligation extends Filter implements T.IsObligation {
   get aMandatory(): T.IsType {
-    this.isMandatory = true
+    this._isMandatory = true
 
     return new IsType(this)
   }
 
   get anOptional(): T.IsType {
-    this.isMandatory = false
+    this._isMandatory = false
 
     return new IsType(this)
   }
@@ -56,21 +56,21 @@ class IsObligation extends Filter implements T.IsObligation {
 
 class IsType extends Filter implements T.IsType {
   get boolean(): T.IsBoolean {
-    this.type = T.TYPE.BOOLEAN
+    this._type = T.TYPE.BOOLEAN
     this._defaultValue = false
 
     return new IsBoolean(this)
   }
 
   get float(): T.IsNumber {
-    this.type = T.TYPE.NUMBER
+    this._type = T.TYPE.NUMBER
 
     return new IsNumber(this)
   }
 
   get integer(): T.IsNumber {
-    this.type = T.TYPE.NUMBER
-    this.validators.push({
+    this._type = T.TYPE.NUMBER
+    this._validators.push({
       errorMessage: `must be an integer.`,
       test: (value: number) => value === Math.round(value),
     })
@@ -79,14 +79,14 @@ class IsType extends Filter implements T.IsType {
   }
 
   get string(): T.IsString {
-    this.type = T.TYPE.STRING
+    this._type = T.TYPE.STRING
 
     return new IsString(this)
   }
 
   public list(list: string[]): T.IsList {
-    this.type = T.TYPE.STRING
-    this.validators.push({
+    this._type = T.TYPE.STRING
+    this._validators.push({
       errorMessage: `must be be one of: ${list.join(`, `)}.`,
       test: R.includes(R.__, list as any) as any,
     })
@@ -111,7 +111,7 @@ class IsNumber extends Filter implements T.IsNumber {
     max: number,
     included: boolean = false,
   ): T.IsNumber {
-    this.validators.push(included
+    this._validators.push(included
       ? {
         errorMessage: `must be between ${min} and ${max} (both included).`,
         test: R.both(R.gte(R.__, min), R.lte(R.__, max)),
@@ -126,7 +126,7 @@ class IsNumber extends Filter implements T.IsNumber {
   }
 
   public greaterThan(min: number, included: boolean = false): T.IsNumber {
-    this.validators.push(included
+    this._validators.push(included
       ? {
         errorMessage: `must be greater or equal to ${min}.`,
         test: R.gte(R.__, min),
@@ -141,7 +141,7 @@ class IsNumber extends Filter implements T.IsNumber {
   }
 
   public lessThan(max: number, included: boolean = false): T.IsNumber {
-    this.validators.push(included
+    this._validators.push(included
       ? {
         errorMessage: `must be lesser or equal to ${max}.`,
         test: R.lte(R.__, max),
@@ -160,7 +160,7 @@ class IsString extends Filter implements T.IsString {
   public else: () => void
 
   public longerThan(min: number, included: boolean = false): T.IsString {
-    this.validators.push(included
+    this._validators.push(included
       ? {
         errorMessage: `must be greater or equal to ${min}.`,
         test: R.compose(R.gte(R.__, min), R.prop('length') as () => number),
@@ -175,7 +175,7 @@ class IsString extends Filter implements T.IsString {
   }
 
   public shorterThan(max: number, included: boolean = false): T.IsString {
-    this.validators.push(included
+    this._validators.push(included
       ? {
         errorMessage: `must be lesser or equal to ${max}.`,
         test: R.compose(R.lte(R.__, max), R.prop('length') as () => number),
