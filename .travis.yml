@@ -14,11 +14,13 @@ cache:
     - node_modules
 
 script:
-  - npm test
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+      npm run test:lint
       # Run the coverage test
       bash scripts/ci/test_coverage.sh
+    else
+      npm test
     fi
 
 after_success:
