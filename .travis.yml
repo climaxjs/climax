@@ -17,5 +17,11 @@ script:
   - npm test
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+      # Run the coverage test
       bash scripts/ci/test_coverage.sh
+
+      if [ -n "$TRAVIS_TAG" ]; then
+        # Publish the package on npm
+        bash scripts/ci/deploy.sh
+      fi
     fi
