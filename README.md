@@ -1,4 +1,4 @@
-# [Climax][link-website] &middot; [![License][img-license]][link-license] <!-- [![npm version][img-npm]][link-npm] --> [![Build Status][img-travis]][link-travis] [![Coverage Status][img-coveralls]][link-coveralls] [![JavaScript Style Guide][img-styleguide]][link-styleguide]
+# [Climax][link-website] &middot; [![License][img-license]][link-license] <!-- [![npm version][img-npm]][link-npm] --> [![Build Status][img-travis]][link-travis] [![Coverage Status][img-coveralls]][link-coveralls] [![JavaScript Style Guide][img-styleguide]][link-styleguide] [![Gitter Climax Community][img-gitter]][link-gitter]
 
 You can think Climax as the "Electron for CLI applications". But in fact it does
 even a bit more than that:
@@ -108,20 +108,20 @@ _In progress..._
 - [x] Initial Climax project CI
 - [x] Basic Program bootstrap with commands, options and values
 - [ ] Basic options and values filters
-- [ ] 1st alpha release
+- [ ] 0.1.0 release
 - [ ] [CLI][link-cli]: Basic scaffold generation
 - [ ] [CLI][link-cli]: 1st alpha release
 - [ ] Cross-platform binaries
 - [ ] Auto-update via (Travis + Github)
-- [ ] 2nd alpha release
+- [ ] 0.2.0 release
 - [ ] [CLI][link-cli]: Binaries scripts generation (Travis + Github)
 - [ ] [CLI][link-cli]: Auto-update config generation (Travis + Github)
 - [ ] [CLI][link-cli]: 2nd alpha release
 - [ ] Help integration
-- [ ] 3rd alpha release
+- [ ] 0.3.0 release
 - [ ] Single prompt
 - [ ] List prompt
-- [ ] 4th alpha release
+- [ ] 0.4.0 release
 
 ## Documentation
 
@@ -151,6 +151,7 @@ npm run test:watch
 Climax is [MIT licensed](./LICENSE).
 
 [img-coveralls]: https://img.shields.io/coveralls/github/climax/core/master.svg?style=flat-square
+[img-gitter]: https://img.shields.io/gitter/room/climax/community.svg?style=flat-square
 [img-license]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
 [img-npm]: https://img.shields.io/npm/v/climax.svg?style=flat-square
 [img-styleguide]: https://img.shields.io/badge/code_style-airbnb-brightgreen.svg?style=flat-square
@@ -162,3 +163,4 @@ Climax is [MIT licensed](./LICENSE).
 [link-styleguide]: https://github.com/airbnb/javascript#airbnb-javascript-style-guide-
 [link-travis]: https://travis-ci.org/climax/core
 [link-website]: https://climaxjs.com
+[link-gitter]: https://gitter.im/climax/community
