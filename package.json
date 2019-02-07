@@ -4,8 +4,6 @@
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
   "dependencies": {
     "@inspired-beings/log": "^1.2.0",
     "chalk": "^2.4.2",
@@ -32,8 +30,7 @@
     "typescript": "^3.3.1"
   },
   "scripts": {
-    "build": "rimraf build && tsc",
-    "build:dist": "rimraf dist && tsc -p ./tsconfig.dist.json",
+    "build": "node ./scripts/rollup/build.js",
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "tslint -p tsconfig.json",
     "test:unit": "jest",
