@@ -34,6 +34,7 @@
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "tslint -p tsconfig.json",
     "test:unit": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "preversion": "npm test"
   }
 }
