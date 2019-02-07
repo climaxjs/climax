@@ -2,7 +2,8 @@
   "extends": "tslint-config-airbnb",
   "linterOptions": {
     "exclude": [
-      "./lib/**/types.ts"
+      "./lib/**/types.ts",
+      "./lib/**/*.spec.ts"
     ]
   },
   "rules": {
