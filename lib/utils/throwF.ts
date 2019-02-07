@@ -2,7 +2,7 @@
  * Throw an error with its message custom variables/format specifiers filled.
  */
 
-import sprintfJs from 'sprintf-js'
+import * as sprintfJs from 'sprintf-js'
 // https://github.com/rollup/rollup-plugin-commonjs/issues/137
 const { sprintf } = sprintfJs
 
