@@ -5,27 +5,23 @@ describe(`is`, () => {
     const filter = is.aMandatory
 
     it(`should return a class instance of IsType`, () => expect(filter.constructor.name).toBe('IsType'))
-    it(`should be mandatory`, () => expect(filter.isMandatory).toBe(true))
 
     describe(`#boolean`, () => {
       const filter = is.aMandatory.boolean
 
       it(`should return a class instance of IsFinal`, () => expect(filter.constructor.name).toBe('IsFinal'))
-      it(`should be of type boolean`, () => expect(filter.type).toBe(1))
     })
 
     describe(`#float`, () => {
       const filter = is.aMandatory.float
 
       it(`should return a class instance of IsFinal`, () => expect(filter.constructor.name).toBe('IsFinal'))
-      it(`should be of type number`, () => expect(filter.type).toBe(2))
     })
 
     describe(`#integer`, () => {
       const filter = is.aMandatory.integer
 
       it(`should return a class instance of IsFinal`, () => expect(filter.constructor.name).toBe('IsFinal'))
-      it(`should be of type number`, () => expect(filter.type).toBe(2))
 
       it(`should invalidate a float`, () => expect(filter.validate(1.2)).toBe(false))
       it(`should validate an integer`, () => expect(filter.validate(1)).toBe(true))
@@ -105,7 +101,6 @@ describe(`is`, () => {
       const filter = is.aMandatory.string
 
       it(`should return a class instance of IsFinal`, () => expect(filter.constructor.name).toBe('IsFinal'))
-      it(`should be of type string`, () => expect(filter.type).toBe(3))
 
       describe(`#longerThan()`, () => {
         describe(`with 0`, () => {
@@ -153,6 +148,5 @@ describe(`is`, () => {
     const filter = is.anOptional
 
     it(`should return a class instance of IsType`, () => expect(filter.constructor.name).toBe('IsType'))
-    it(`should be optional`, () => expect(filter.isMandatory).toBe(false))
   })
 })
