@@ -3,9 +3,10 @@
  * publication.
  */
 
-const path = require('path')
 const { promisify } = require('util')
 
+const copyFile = promisify(require('fs').copyFile)
+const path = require('path')
 const rimraf = promisify(require('rimraf'))
 const { rollup } = require('rollup')
 const commonjs = require('rollup-plugin-commonjs')
@@ -14,9 +15,10 @@ const typescript = require('rollup-plugin-typescript')
 
 const configure = require('./configure')
 
-const BUILD_PATH = path.resolve(__dirname, '../../build')
-const DIST_PATH = path.resolve(__dirname, '../../dist')
-const SRC_PATH = path.resolve(__dirname, '../../lib')
+const ROOT_PATH = path.resolve(__dirname, '../..')
+const BUILD_PATH = path.resolve(ROOT_PATH, 'build')
+const DIST_PATH = path.resolve(ROOT_PATH, 'dist')
+const SRC_PATH = path.resolve(ROOT_PATH, 'lib')
 
 const inputOptions = {
   input: SRC_PATH + '/index.ts',
@@ -52,6 +54,9 @@ async function build() {
 
     console.log(`Generating meta files in ${BUILD_PATH}...`)
     await configure(BUILD_PATH)
+
+    console.log(`Copying README.md to ${BUILD_PATH}...`)
+    await copyFile(ROOT_PATH + '/README.md', BUILD_PATH + '/README.md')
   } catch(err) {
     console.error(err)
     process.exit(1)
