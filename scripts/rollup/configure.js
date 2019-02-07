@@ -3,17 +3,13 @@
  * new publication.
  */
 
-const path = require('path')
 const { omit } = require('ramda')
 const { promisify } = require('util')
 
 const { copyFile: _copyFile, writeFile: _writeFile } = require('fs')
-const copyFile = promisify(_copyFile)
 const writeFile = promisify(_writeFile)
 
 const package = require('../../package.json')
-
-const ROOT_PATH = path.resolve(__dirname, '../..')
 
 module.exports = async function configure(outputPath) {
   console.log(`Generating package.json for distribution...`)
@@ -21,5 +17,13 @@ module.exports = async function configure(outputPath) {
     ...omit(['devDependencies', 'private', 'scripts'], package),
     main: 'index.js',
     types: 'index.d.ts',
+    repository: {
+      type: 'git',
+      url: 'git+https://github.com/climax/core.git',
+    },
+    bugs: {
+      url: 'https://github.com/climax/core/issues',
+    },
+    homepage: 'https://climaxjs.com/',
   }, null, 2))
 }
