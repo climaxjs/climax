@@ -24,7 +24,6 @@
   },
   "exclude": [
     "./build",
-    "./dist",
     "./lib/**/*.spec.ts",
     "./node_modules"
   ]
