@@ -81,10 +81,26 @@ class Program extends Command implements T.Program {
   }
 
   /**
+   * Validate this program mandatory properties.
+   */
+  public validate(): void {
+    super.validate()
+
+    switch (true) {
+      case this._name === undefined:
+        utils.throwWith(E.ERR_PRG_NAME_V_UND, `[Program] `)
+
+      case this._version === undefined:
+        utils.throwWith(E.ERR_PRG_VERS_V_UND, `[Program] `)
+    }
+  }
+
+  /**
    * Initiate the program once all the commands and options has been set.
    */
   public init(): void {
-    this.validateCommandsProps()
+    this.validate()
+    this.validateCommands()
 
     // Check for any inconsistent structure for the process arguments
     switch (true) {
@@ -115,10 +131,10 @@ class Program extends Command implements T.Program {
   /**
    * Validate the commands required properties.
    */
-  private validateCommandsProps(): void {
-    // for (const command in this._commands) {
-    //   this._commands[command].description()
-    // }
+  private validateCommands(): void {
+    for (const command in this._commands) {
+      this._commands[command].validate()
+    }
   }
 }
 

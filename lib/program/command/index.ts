@@ -14,12 +14,17 @@ export default class Command implements T.Command {
   protected _options: OptionT.Option[] = []
   protected _values: ValueT.Value[] = []
 
+  /** Errors message prefix */
+  protected _e: string
+
   /**
    * TODO Validate the slug.
    */
   constructor(
-    private readonly _slug: string,
-  ) {}
+    protected readonly _slug: string,
+  ) {
+    this._e = this._slug === '_' ? `[Program] ` : `[Command: "${this._slug}"] `
+  }
 
   /**
    * Set for the command (or program) description.
@@ -67,10 +72,7 @@ export default class Command implements T.Command {
     try {
       this._options.push(new Option(slug, description, filter))
     } catch (err) {
-      throwWith(
-        err,
-        this._slug === '_' ? `[Program]` : `[Command: "${this._slug}"]`,
-      )
+      throwWith(err, this._e)
     }
 
     return this
@@ -87,13 +89,20 @@ export default class Command implements T.Command {
     try {
       this._values.push(new Value(name, description))
     } catch (err) {
-      throwWith(
-        err,
-        this._slug === '_' ? `[Program]` : `[Command: "${this._slug}"]`,
-      )
+      throwWith(err, this._e)
     }
 
     return this
+  }
+
+  /**
+   * Validate this command mandatory properties.
+   */
+  public validate(): void {
+    switch (true) {
+      case this._description === undefined:
+        throwWith(E.ERR_CMD_DESC_V_UND, this._e)
+    }
   }
 
   /**

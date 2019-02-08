@@ -21,9 +21,6 @@ export default rorre.declare({
 
   ERR_PRG_ARGS_V_LEN: `Something went wrong during the arguments validation (length < 2).`,
   ERR_PRG_ARGS_V_TYP: `Something went wrong during the arguments validation (not an array).`,
-  ERR_PRG_DESC_V_UND: `The program description has not been set and can't be found in your package.json.`,
-  ERR_PRG_DESC_V_LEN: `The program description can't be empty.`,
-  ERR_PRG_DESC_V_TYP: `The program description must be a string..`,
   ERR_PRG_NAME_V_UND: `The program name has not been set and can't be found in your package.json.`,
   ERR_PRG_NAME_V_LEN: `The program name can't be empty.`,
   ERR_PRG_NAME_V_TYP: `The program name must be a string.`,
