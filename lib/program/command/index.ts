@@ -21,18 +21,9 @@ export default class Command implements T.Command {
   ) {}
 
   /**
-   * Getter/Setter for the command (or program) description.
+   * Set for the command (or program) description.
    */
-  public description(description?: string): string | this {
-    if (typeof description === 'undefined') {
-      switch (true) {
-        case this._description === undefined:
-          throw errors.error.ERR_CMD_DESC_V_UND
-      }
-
-      return this._description
-    }
-
+  public description(description: string): this {
     switch (true) {
       case typeof description !== 'string':
         throw errors.error.ERR_CMD_DESC_V_TYP

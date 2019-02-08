@@ -1,7 +1,7 @@
 import * as Option from '../option/types'
 
 export interface Command {
-  description(value?: string): string | this
+  description(description: string): this
 
   action(callback: CommandAction): this
   option(slug: string, description: string, filter?: Option.Filter): this
