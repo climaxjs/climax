@@ -20,21 +20,12 @@ class Program extends Command implements T.Program {
   }
 
   /**
-   * Get/Set the program name.
+   * Set the program name.
    *
    * @description
    * Unless explicitly set, the package.json name is the default value.
    */
-  public name(name?: string): string | this {
-    if (typeof name === 'undefined') {
-      switch (true) {
-        case this._name === undefined:
-          throw errors.error.ERR_PRG_NAME_V_UND
-      }
-
-      return this._name
-    }
-
+  public name(name: string): this {
     switch (true) {
       case typeof name !== 'string':
         throw errors.error.ERR_PRG_NAME_V_TYP
@@ -49,21 +40,12 @@ class Program extends Command implements T.Program {
   }
 
   /**
-   * Get/Set the program version.
+   * Set the program version.
    *
    * @description
-   * Unless explicitly set, the package.json version is the default value.
+   * Unless explicitly set, the package.json version will be the default value.
    */
-  public version(version?: string): string | this {
-    if (typeof version === 'undefined') {
-      switch (true) {
-        case this._version === undefined:
-          throw errors.error.ERR_PRG_VERS_V_UND
-      }
-
-      return this._version
-    }
-
+  public version(version: string): this {
     switch (true) {
       case typeof version !== 'string':
         throw errors.error.ERR_PRG_VERS_V_TYP
@@ -133,9 +115,9 @@ class Program extends Command implements T.Program {
    * Validate the commands required properties.
    */
   private validateCommandsProps(): void {
-    for (const command in this._commands) {
-      this._commands[command].description()
-    }
+    // for (const command in this._commands) {
+    //   this._commands[command].description()
+    // }
   }
 }
 
