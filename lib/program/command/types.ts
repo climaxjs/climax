@@ -6,6 +6,7 @@ export interface Command {
   action(callback: CommandAction): this
   option(slug: string, description: string, filter?: Option.Filter): this
   run(values: {}, options: {}): void
+  validate(): void
   value(name: string, description: string): this
 }
 
