@@ -16,7 +16,7 @@ module.exports = async function configure(outputPath) {
   await writeFile(outputPath + '/package.json', JSON.stringify({
     ...omit(['devDependencies', 'private', 'scripts'], package),
     main: 'index.js',
-    types: 'index.d.ts',
+    types: 'types/index.d.ts',
     repository: {
       type: 'git',
       url: 'git+https://github.com/climax/core.git',
