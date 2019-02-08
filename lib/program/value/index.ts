@@ -2,6 +2,7 @@ import errors from '../../errors'
 import { throwF } from '../../utils'
 
 import * as T from './types'
+const { error: E } = errors
 
 /**
  * TODO Validate the name format.
@@ -13,16 +14,16 @@ export default class Value implements T.Value {
   ) {
     switch (true) {
       case typeof name !== 'string':
-        throw errors.error.ERR_VAL_NAME_V_TYP
+        throw E.ERR_VAL_NAME_V_TYP
 
       case name.length === 0:
-        throw errors.error.ERR_VAL_NAME_V_LEN
+        throw E.ERR_VAL_NAME_V_LEN
 
       case typeof description !== 'string':
-        throwF(errors.error.ERR_VAL_DESC_V_TYP, name)
+        throwF(E.ERR_VAL_DESC_V_TYP, name)
 
       case description.length === 0:
-        throwF(errors.error.ERR_VAL_DESC_V_LEN, name)
+        throwF(E.ERR_VAL_DESC_V_LEN, name)
     }
   }
 }
