@@ -5,8 +5,8 @@ export type ProgramCommands = {
 }
 
 export interface Program extends Command.Command {
-  name(value?: string): string | this
-  version(version?: string): string | this
+  name(name: string): this
+  version(version: string): this
 
   command(slug: string): Command.Command
 
