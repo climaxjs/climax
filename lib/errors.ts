@@ -3,13 +3,11 @@
 import rorre from 'rorre'
 
 export default rorre.declare({
-  ERR_CMD_ACTN_V_UND: `The command action has not been set.`,
-  ERR_CMD_ACTN_V_TYP: `The command action is mandatory and must be a function.`,
-  ERR_CMD_DESC_V_UND: `The command description has not been set.`,
-  ERR_CMD_DESC_V_LEN: `The command description can't be empty.`,
-  ERR_CMD_DESC_V_TYP: `The command description is mandatory and must be a string.`,
-
-  ERR_FILTS_IS_CONFLICT_MANDATORY_BOOLEAN: `TODO`,
+  ERR_CMD_ACTN_V_UND: `The command action is mandatory and must be set.`,
+  ERR_CMD_ACTN_V_TYP: `The command (or program) action must be a function.`,
+  ERR_CMD_DESC_V_UND: `The command (or program) description is mandatory and must be set.`,
+  ERR_CMD_DESC_V_LEN: `The command (or program) description can't be empty.`,
+  ERR_CMD_DESC_V_TYP: `The command (or program) description is mandatory and must be a string.`,
 
   ERR_OPT_DESC_V_LEN: `[Option: "%s"] The option description can't be empty.`,
   ERR_OPT_DESC_V_TYP: `[Option: "%s"] The option description is mandatory and must be a string.`,
@@ -23,11 +21,11 @@ export default rorre.declare({
   ERR_PRG_ARGS_V_TYP: `Something went wrong during the arguments validation (not an array).`,
   ERR_PRG_NAME_V_UND: `The program name has not been set and can't be found in your package.json.`,
   ERR_PRG_NAME_V_LEN: `The program name can't be empty.`,
-  ERR_PRG_NAME_V_TYP: `The program name must be a string.`,
+  ERR_PRG_NAME_V_TYP: `The program is mandatory and name must be a string.`,
   ERR_PRG_VERS_V_UND: `The version has not been set and can't be found in your package.json.`,
-  ERR_PRG_VERS_V_SEMVER: `The program version is not a valid SemVer string. Please check https://semver.org to get more info.`,
+  ERR_PRG_VERS_V_SEM: `The program version is not a valid SemVer string. Please check https://semver.org to get more info.`,
   ERR_PRG_VERS_V_TYP: `The program version must be a string.`,
-  ERR_PRG_VERS_V_V: `The version you set can't start with a "v" or a "V". If you want to declare "vX.Y.Z", just declare "X.Y.Z".`,
+  ERR_PRG_VERS_V_NOV: `The version you set can't start with a "v" or a "V". If you want to declare "vX.Y.Z", just declare "X.Y.Z".`,
 
   ERR_VAL_DESC_V_LEN: `[Value: "%s"] The value description can't be empty.`,
   ERR_VAL_DESC_V_TYP: `[Value: "%s"] The value description is mandatory and must be a string.`,
