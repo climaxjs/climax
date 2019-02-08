@@ -30,7 +30,8 @@
     "typescript": "^3.3.1"
   },
   "scripts": {
-    "build": "node ./scripts/rollup/build.js",
+    "build": "node ./scripts/rollup/build.js && npm run build:typescript",
+    "build:typescript": "tsc -p ./tsconfig.json --emitDeclarationOnly",
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "tslint -p tsconfig.json",
     "test:unit": "jest",
