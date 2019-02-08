@@ -1,12 +1,13 @@
 import log from '@inspired-beings/log'
 import * as R from 'ramda'
 
-import Command from './command'
 import errors from '../errors'
 import * as utils from '../utils'
+import Command from './command'
 
 import * as T from './types'
 import * as CommandT from './command/types'
+const { error: E } = errors
 
 class Program extends Command implements T.Program {
   private _commands: T.ProgramCommands = {}
@@ -28,10 +29,10 @@ class Program extends Command implements T.Program {
   public name(name: string): this {
     switch (true) {
       case typeof name !== 'string':
-        throw errors.error.ERR_PRG_NAME_V_TYP
+        throw E.ERR_PRG_NAME_V_TYP
 
       case name.length === 0:
-        throw errors.error.ERR_PRG_NAME_V_LEN
+        throw E.ERR_PRG_NAME_V_LEN
     }
 
     this._name = name
@@ -48,13 +49,13 @@ class Program extends Command implements T.Program {
   public version(version: string): this {
     switch (true) {
       case typeof version !== 'string':
-        throw errors.error.ERR_PRG_VERS_V_TYP
+        throw E.ERR_PRG_VERS_V_TYP
 
       case version.length !== 0 && version[0].toLocaleLowerCase() === 'v':
-        throw errors.error.ERR_PRG_VERS_V_V
+        throw E.ERR_PRG_VERS_V_V
 
       case !utils.validateSemVer(version):
-        throw errors.error.ERR_PRG_VERS_V_SEMVER
+        throw E.ERR_PRG_VERS_V_SEMVER
     }
 
     this._version = version
@@ -68,10 +69,10 @@ class Program extends Command implements T.Program {
   public command(slug: string): CommandT.Command {
     switch (true) {
       case typeof slug !== 'string':
-        throw errors.error.ERR_PRG_VERS_V_TYP
+        throw E.ERR_PRG_VERS_V_TYP
 
       case slug.length === 0:
-        throw errors.error.ERR_PRG_VERS_V_V
+        throw E.ERR_PRG_VERS_V_V
     }
 
     this._commands = R.assoc(slug, new Command(slug), this._commands)
@@ -88,10 +89,10 @@ class Program extends Command implements T.Program {
     // Check for any inconsistent structure for the process arguments
     switch (true) {
       case !Array.isArray(process.argv):
-        throw errors.error.ERR_PRG_ARGS_V_TYP
+        throw E.ERR_PRG_ARGS_V_TYP
 
       case process.argv.length < 2:
-        throw errors.error.ERR_PRG_ARGS_V_LEN
+        throw E.ERR_PRG_ARGS_V_LEN
     }
 
     const args = process.argv.length > 2

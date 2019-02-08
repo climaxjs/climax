@@ -6,6 +6,7 @@ import Value from '../value'
 import * as T from './types'
 import * as OptionT from '../option/types'
 import * as ValueT from '../value/types'
+const { error: E } = errors
 
 export default class Command implements T.Command {
   protected _action: T.CommandAction
@@ -26,10 +27,10 @@ export default class Command implements T.Command {
   public description(description: string): this {
     switch (true) {
       case typeof description !== 'string':
-        throw errors.error.ERR_CMD_DESC_V_TYP
+        throw E.ERR_CMD_DESC_V_TYP
 
       case description.length === 0:
-        throw errors.error.ERR_CMD_DESC_V_LEN
+        throw E.ERR_CMD_DESC_V_LEN
     }
 
     this._description = description
@@ -43,7 +44,7 @@ export default class Command implements T.Command {
   public action(callback: T.CommandAction): this {
     switch (true) {
       case typeof callback !== 'function':
-        throw errors.error.ERR_CMD_ACTN_V_TYP
+        throw E.ERR_CMD_ACTN_V_TYP
     }
 
     this._action = callback
