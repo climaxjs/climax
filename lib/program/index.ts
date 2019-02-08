@@ -52,10 +52,10 @@ class Program extends Command implements T.Program {
         throw E.ERR_PRG_VERS_V_TYP
 
       case version.length !== 0 && version[0].toLocaleLowerCase() === 'v':
-        throw E.ERR_PRG_VERS_V_V
+        throw E.ERR_PRG_VERS_V_NOV
 
       case !utils.validateSemVer(version):
-        throw E.ERR_PRG_VERS_V_SEMVER
+        throw E.ERR_PRG_VERS_V_SEM
     }
 
     this._version = version
@@ -72,7 +72,7 @@ class Program extends Command implements T.Program {
         throw E.ERR_PRG_VERS_V_TYP
 
       case slug.length === 0:
-        throw E.ERR_PRG_VERS_V_V
+        throw E.ERR_PRG_VERS_V_NOV
     }
 
     this._commands = R.assoc(slug, new Command(slug), this._commands)

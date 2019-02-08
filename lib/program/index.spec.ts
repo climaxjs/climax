@@ -29,16 +29,16 @@ describe(`Program`, () => {
     it(`should fail with a wrong type`, () =>
       expect(() => program.version(123 as any)).toThrow(errors.dictionary.ERR_PRG_VERS_V_TYP))
     it(`should fail with an empty string`, () =>
-      expect(() => program.version('')).toThrow(errors.dictionary.ERR_PRG_VERS_V_SEMVER))
+      expect(() => program.version('')).toThrow(errors.dictionary.ERR_PRG_VERS_V_SEM))
     it(`should fail with a valid version starting with a "v"`, () =>
-      expect(() => program.version('v1.2.3')).toThrow(errors.dictionary.ERR_PRG_VERS_V_V))
+      expect(() => program.version('v1.2.3')).toThrow(errors.dictionary.ERR_PRG_VERS_V_NOV))
     it(`should fail with a valid version starting with a "V"`, () =>
-      expect(() => program.version('V1.2.3')).toThrow(errors.dictionary.ERR_PRG_VERS_V_V))
+      expect(() => program.version('V1.2.3')).toThrow(errors.dictionary.ERR_PRG_VERS_V_NOV))
     it(`should fail with a some invalid versions`, () => {
-      expect(() => program.version('0')).toThrow(errors.dictionary.ERR_PRG_VERS_V_SEMVER)
-      expect(() => program.version('1')).toThrow(errors.dictionary.ERR_PRG_VERS_V_SEMVER)
-      expect(() => program.version('0.0')).toThrow(errors.dictionary.ERR_PRG_VERS_V_SEMVER)
-      expect(() => program.version('1.2')).toThrow(errors.dictionary.ERR_PRG_VERS_V_SEMVER)
+      expect(() => program.version('0')).toThrow(errors.dictionary.ERR_PRG_VERS_V_SEM)
+      expect(() => program.version('1')).toThrow(errors.dictionary.ERR_PRG_VERS_V_SEM)
+      expect(() => program.version('0.0')).toThrow(errors.dictionary.ERR_PRG_VERS_V_SEM)
+      expect(() => program.version('1.2')).toThrow(errors.dictionary.ERR_PRG_VERS_V_SEM)
     })
 
     it(`should pass with a valid version`, () => expect(() => program.version('0.0.0')).not.toThrow())
