@@ -6,16 +6,14 @@
 import * as R from 'ramda'
 import * as yargs from 'yargs'
 
-export type ParsedArgs = [
-  string | null,
-  { [option: string]: string | true } | {},
-  string[]
-]
+import { BNS, BNSObject } from '../types'
+
+export type ParsedArgs = [string | null, BNSObject, BNS[]]
 
 export default function (commands: string[], args: string[]): ParsedArgs {
   const parsedArgs = yargs.parse(args)
 
-  const options = { ...R.omit(['_', '$0'], parsedArgs) }
+  const options = { ...R.omit(['_', '$0'], parsedArgs) } as BNSObject
 
   // If there is at least one value (that could be a command)
   // and the first value matches the first argument, it may be a command
