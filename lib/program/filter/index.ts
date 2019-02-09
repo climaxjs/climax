@@ -4,7 +4,9 @@
 
 import * as R from 'ramda'
 
+import errors from '../../errors'
 import { applyMixins } from '../../utils'
+const { error: E } = errors
 
 import * as T from './types'
 
@@ -28,6 +30,23 @@ abstract class Filter implements T.Filter {
     }
 
     return true
+  }
+
+  /**
+   * This is a helper method to quick-check if this filter forces expect its
+   * related option to be a boolean.
+   *
+   * @ignore
+   * This method should not appear in any documentation or types declaration
+   * since it's only useful for internal checkings.
+   */
+  public isBoolean(): boolean {
+    switch (true) {
+      case this._type === undefined:
+        throw E.ERR_FLT_TYPE_I_UND
+    }
+
+    return typeof this._type === 'boolean'
   }
 }
 
