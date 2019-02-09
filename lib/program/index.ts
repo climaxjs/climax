@@ -1,4 +1,4 @@
-import log from '@inspired-beings/log'
+// import log from '@inspired-beings/log'
 import * as R from 'ramda'
 
 import errors from '../errors'
@@ -7,6 +7,7 @@ import Command from './command'
 
 import * as T from './types'
 import * as CommandT from './command/types'
+import { ParsedArgs } from '../utils/parseArgs'
 const { error: E } = errors
 
 class Program extends Command implements T.Program {
@@ -96,36 +97,16 @@ class Program extends Command implements T.Program {
   }
 
   /**
-   * Initiate the program once all the commands and options has been set.
+   * Initiate the program once all the commands, options and values has been set.
    */
   public init(): void {
     this.validate()
     this.validateCommands()
 
-    // Check for any inconsistent structure for the process arguments
-    switch (true) {
-      case !Array.isArray(process.argv):
-        throw E.ERR_PRG_ARGS_V_TYP
+    const [command, options, values] = this.parseArgs();
 
-      case process.argv.length < 2:
-        throw E.ERR_PRG_ARGS_V_LEN
-    }
-
-    const args = process.argv.length > 2
-      ? process.argv.slice(2, process.argv.length)
-      : []
-
-    // Solve the raw arguments (raw = not typed yet)
-    const [command, options, values] = utils.parseArgs(args)
-
-    switch (true) {
-      case command !== null && !R.has(command, this._commands):
-        log.err(`The command %s doesn't exists.`, command as string)
-        process.exit()
-    }
-
-    // Calls
-    (command === null ? this : this._commands[command]).run(values, options)
+    // Run the command
+    (command === null ? this : this._commands[command]).run(options, values)
   }
 
   /**
@@ -135,6 +116,31 @@ class Program extends Command implements T.Program {
     for (const command in this._commands) {
       this._commands[command].validate()
     }
+  }
+
+  /**
+   * Parse the CLI arguments and attempt to extract the potential command.
+   *
+   * @description
+   * This parsing operation only splits the command, options and values. It
+   * doesn't match them with options, values and their related filters.
+   */
+  private parseArgs(): ParsedArgs {
+    // Check for any inconsistent structure in the process arguments
+    switch (true) {
+      case !Array.isArray(process.argv):
+        throw E.ERR_PRG_ARGS_V_TYP
+
+      case process.argv.length < 2:
+        throw E.ERR_PRG_ARGS_V_LEN
+    }
+
+    if (process.argv.length === 2) return [null, {}, []]
+
+    const commands = R.keys(this._commands) as string[]
+    const rawArgs = R.slice(2, Infinity, process.argv)
+
+    return utils.parseArgs(commands, rawArgs)
   }
 }
 
