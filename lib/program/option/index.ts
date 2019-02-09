@@ -45,7 +45,10 @@ export default class Option implements T.Option {
 
     const slugs = slug
       .split(', ')
-      .map(slug => slug.replace(/\-+/, ''))
+      .map(slug =>
+        slug
+          .replace(/-+/, '')
+          .replace(/-([a-z])/g, match => match[1].toUpperCase()))
 
     this.slug = slugs.length === 2 ? slugs[1] : slugs[0]
     this.slugLetter = slugs.length === 2 ? slugs[0] : null
