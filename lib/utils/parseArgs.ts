@@ -1,44 +1,31 @@
 /**
- * Transform a list of raw CLI arguments into a pair of command string and its
- * option/value pairs as a key/value object.
- *
- * TODO Handle unprocessable args lists.
+ * Transform a list of raw CLI arguments into a trio of:
+ * command, option/value pairs and values list.
  */
 
 import * as R from 'ramda'
+import * as yargs from 'yargs'
 
-export type RawArgs = [
+export type ParsedArgs = [
   string | null,
   { [option: string]: string | true } | {},
   string[]
 ]
 
-const filterOptions = R.filter<string>(R.startsWith('-'))
-const filterValues = R.filter<string>(R.complement(R.startsWith('-')))
-const maybeRemoveCommand = (command: string | null) =>
-  command !== null ? R.drop(1) : R.identity
-const pairizeOption = R.ifElse(
-  R.test(/.+=/),
-  R.split('='),
-  arg => R.pair(arg, true),
-)
-const pairizeOptions = R.reduce<string, [string, string | true][]>(
-  (acc, arg) => R.append(R.pipe(removeDashes, pairizeOption)(arg), acc),
-  [],
-)
-const removeDashes = R.replace(/^-{1,2}/, '')
+export default function (commands: string[], args: string[]): ParsedArgs {
+  const parsedArgs = yargs.parse(args)
 
-export default function parseArgs(args: string[]): RawArgs {
-  if (args.length === 0) return [null, {}, []]
+  const options = { ...R.omit(['_', '$0'], parsedArgs) }
 
-  const command = args[0].startsWith('-') ? null : args[0]
-  const argsWithoutCommand = maybeRemoveCommand(command)(args)
-  const options = R.pipe(
-    filterOptions,
-    pairizeOptions,
-    R.fromPairs,
-  )(argsWithoutCommand)
-  const values = filterValues(argsWithoutCommand)
+  // If there is at least one value (that could be a command)
+  // and the first value matches the first argument, it may be a command
+  if (
+    parsedArgs._.length > 0 &&
+    parsedArgs._[0] === args[0] &&
+    commands.includes(args[0])
+  ) {
+    return [args[0], options, R.slice(1, Infinity, parsedArgs._)]
+  }
 
-  return [command, options, values]
+  return [null, options, parsedArgs._]
 }
