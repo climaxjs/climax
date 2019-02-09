@@ -1,2 +1,2 @@
 export type BNS = boolean | number | string
-export type BNSObject = { [key: string]: BNS }
+export type BNSObject = { [key: string]: BNS } | {}
