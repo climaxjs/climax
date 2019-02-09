@@ -9,6 +9,8 @@ export default rorre.declare({
   ERR_CMD_DESC_V_LEN: `The command (or program) description can't be empty.`,
   ERR_CMD_DESC_V_TYP: `The command (or program) description is mandatory and must be a string.`,
 
+  ERR_FLT_TYPE_I_UND: `The filter type is undefined. Did you attempt to call #isBoolean() from an unset filter?`,
+
   ERR_OPT_DESC_V_LEN: `[Option: "%s"] The option description can't be empty.`,
   ERR_OPT_DESC_V_TYP: `[Option: "%s"] The option description is mandatory and must be a string.`,
   ERR_OPT_FILT_V_TYP: `[Option: "%s"] The option filter is not processable as is. Specify, at least, both the obligation and type.`,
