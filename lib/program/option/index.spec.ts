@@ -23,7 +23,10 @@ describe(`Option`, () => {
     it(`should fail with a wrong typed custom <filter>`, () =>
       expect(() => new Option('-f, --foo', 'bar', 1337 as any)).toThrow(errors.dictionary.ERR_OPT_FILT_V_TYP_C.replace(/%s/, '-f, --foo')))
 
-    it(`should return the expected instance`, () =>
-      expect({ ...new Option('-f, --foo', 'bar') }).toEqual({ slug: '-f, --foo', description: 'bar', filter: undefined }))
+    it(`should return the expected instance with a slugs pair`, () =>
+      expect({ ...new Option('-f, --foo', 'bar') }).toEqual({ slug: 'foo', slugLetter: 'f', description: 'bar', filter: undefined }))
+
+    it(`should return the expected instance with a lone slug`, () =>
+      expect({ ...new Option('--foo', 'bar') }).toEqual({ slug: 'foo', slugLetter: null, description: 'bar', filter: undefined }))
   })
 })

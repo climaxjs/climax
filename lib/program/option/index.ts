@@ -9,8 +9,11 @@ import * as T from './types'
 const { error: E } = errors
 
 export default class Option implements T.Option {
+  public readonly slug: string
+  public readonly slugLetter: string | null
+
   constructor(
-    public readonly slug: string,
+    slug: string,
     public readonly description: string,
     public readonly filter?: T.Filter,
   ) {
@@ -39,6 +42,13 @@ export default class Option implements T.Option {
             throwF(E.ERR_OPT_FILT_V_TYP_C, slug)
         }
     }
+
+    const slugs = slug
+      .split(', ')
+      .map(slug => slug.replace(/\-+/, ''))
+
+    this.slug = slugs.length === 2 ? slugs[1] : slugs[0]
+    this.slugLetter = slugs.length === 2 ? slugs[0] : null
   }
 
   /**
