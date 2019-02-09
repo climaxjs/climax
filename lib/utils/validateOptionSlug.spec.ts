@@ -20,6 +20,7 @@ const INVALID_SLUGS = [
   ' --foo',
   '--foo=',
   '--foo, -f',
+  '-f, -Foo',
 ]
 const VALID_SLUGS = [
   '--foo',
