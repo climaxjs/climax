@@ -19,6 +19,7 @@ const INVALID_SLUGS = [
   '-f, --foo-bar-lambda-',
   ' --foo',
   '--foo=',
+  '--foo, -f',
 ]
 const VALID_SLUGS = [
   '--foo',
