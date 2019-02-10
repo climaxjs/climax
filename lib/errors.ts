@@ -8,6 +8,7 @@ export default rorre.declare({
   ERR_CMD_DESC_V_UND: `The command (or program) description is mandatory and must be set.`,
   ERR_CMD_DESC_V_LEN: `The command (or program) description can't be empty.`,
   ERR_CMD_DESC_V_TYP: `The command (or program) description is mandatory and must be a string.`,
+  ERR_CMD_PROC_X_FLT_C: `The provided custom filter threw an error.`,
 
   ERR_FLT_TYPE_I_UND: `The filter type is undefined. Did you attempt to call #isBoolean() from an unset filter?`,
 
