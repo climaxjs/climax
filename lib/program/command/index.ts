@@ -71,7 +71,7 @@ export default class Command implements T.Command {
   public option(
     slug: string,
     description: string,
-    filter?: OptionT.Filter,
+    filter?: ValueT.Filter,
   ): this {
     try {
       this._options.push(new Option(slug, description, filter))
@@ -89,9 +89,13 @@ export default class Command implements T.Command {
    * The <name> parameter MUST be in camelCase and will be used as a placeholder
    * for the help description of this command (or program).
    */
-  public value(name: string, description: string): this {
+  public value(
+    name: string,
+    description: string,
+    filter?: ValueT.Filter,
+  ): this {
     try {
-      this._values.push(new Value(name, description))
+      this._values.push(new Value(name, description, filter))
     } catch (err) {
       throwWith(err, this._e)
     }
@@ -122,8 +126,9 @@ export default class Command implements T.Command {
     // TODO Add the pre-options cleaning.
 
     const options = this.processOptions(preOptions)
+    const values = this.processValues(preValues)
 
-    this._action({ options, values: preValues })
+    this._action({ options, values })
   }
 
   /**
@@ -209,6 +214,59 @@ export default class Command implements T.Command {
             isInPreOptions
               ? option.filter.process(preOptions[option.slug])
               : option.filter.process(),
+            acc,
+          )
+        } catch (e) {
+          log.err(e)
+          process.exit(1)
+        }
+      },
+      {},
+    ) as U.BNSObject
+  }
+
+  /**
+   * Coerce, validate and resolve values' value.
+   *
+   * TODO Dry that with processOptions().
+   */
+  protected processValues(preValues: U.BNSObject): U.BNSObject {
+    return this._values.reduce(
+      (acc, value) => {
+        // Has this option been passed as one of the CLI args?
+        const isInPreValues = R.has(value.name, preValues)
+
+        // If this option doesn't have any filter
+        if (value.filter === undefined) {
+          return R.assoc(
+            value.name,
+            isInPreValues ? preValues[value.name] : null,
+            acc,
+          )
+        }
+
+        // If this option has a custom filter
+        if (typeof value.filter === 'function') {
+          try {
+            return R.assoc(
+              value.name,
+              value.filter(preValues[value.name]),
+              acc,
+            )
+          } catch (e) {
+            logT(`${this._e}${E.ERR_CMD_PROC_X_FLT_C.message}`, e)
+            // We add a return here to allow TS to infer the last Filter type.
+            return process.exit(1)
+          }
+        }
+
+        // If the option has an internal filter
+        try {
+          return R.assoc(
+            value.name,
+            isInPreValues
+              ? value.filter.process(preValues[value.name])
+              : value.filter.process(),
             acc,
           )
         } catch (e) {
