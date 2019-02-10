@@ -22,6 +22,23 @@ class Program extends Command implements T.Program {
   }
 
   /**
+   * Parse the content of the `package.json` file to extract the program's:
+   * - name,
+   * - description,
+   * - version,
+   * - binary name (deduced through the "bin" object first key).
+   *
+   * TODO Handle the binary name.
+   */
+  public info(npmInfo: T.NpmInfo): this {
+    this.name(npmInfo.name)
+    this.description(npmInfo.description)
+    this.version(npmInfo.version)
+
+    return this
+  }
+
+  /**
    * Set the program name.
    *
    * @description
