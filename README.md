@@ -1,4 +1,4 @@
-# [Climax][link-website] &middot; [![License][img-license]][link-license] [![npm version][img-npm]][link-npm] [![Build Status][img-travis]][link-travis] [![Coverage Status][img-coveralls]][link-coveralls] [![JavaScript Style Guide][img-styleguide]][link-styleguide] [![Gitter Climax Community][img-gitter]][link-gitter]
+# [Climax][link-website] &middot; [![npm version][img-npm]][link-npm] [![Build Status][img-travis]][link-travis] [![Coverage Status][img-coveralls]][link-coveralls] [![JavaScript Style Guide][img-styleguide]][link-styleguide] [![Gitter Climax Community][img-gitter]][link-gitter]
 
 You can think Climax as the "Electron for CLI applications". But in fact it does
 even a bit more than that:
@@ -165,11 +165,10 @@ npm run test:watch
 
 ### License
 
-Climax is [MIT licensed](./LICENSE).
+Climax is [MIT licensed][link-license].
 
 [img-coveralls]: https://img.shields.io/coveralls/github/climax/core/master.svg?style=flat-square
 [img-gitter]: https://img.shields.io/gitter/room/climax/community.svg?style=flat-square
-[img-license]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
 [img-npm]: https://img.shields.io/npm/v/@climax/core.svg?style=flat-square
 [img-styleguide]: https://img.shields.io/badge/code_style-airbnb-brightgreen.svg?style=flat-square
 [img-travis]: https://img.shields.io/travis/climax/core/master.svg?style=flat-square
