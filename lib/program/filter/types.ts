@@ -1,3 +1,5 @@
+import { BNS } from '../../types'
+
 export enum TYPE {
   BOOLEAN = 1,
   NUMBER = 2,
@@ -9,13 +11,7 @@ export type Validator = {
   test: (value: boolean | number | string) => boolean
 }
 
-export interface Filter {
-  validate(value: any): boolean
-}
-
-export interface IsFinal {
-  else: () => void
-}
+export interface Filter {}
 
 export interface IsObligation extends Filter {
   aMandatory: IsType
@@ -29,16 +25,22 @@ export interface IsType extends Filter {
   string: IsString
 }
 
-export interface IsBoolean extends Filter, IsFinal { }
-export interface IsList extends Filter, IsFinal { }
-export interface IsNumber extends Filter, IsFinal {
+export interface IsFinal extends Filter {
+  else(value: BNS): void
+
+  // coerce(value: BNS): BNS
+  // process(value: BNS): BNS
+  validate(value: BNS): boolean
+}
+
+export interface IsBoolean extends IsFinal { }
+export interface IsList extends IsFinal { }
+export interface IsNumber extends IsFinal {
   between(min: number, max: number, included?: boolean): IsNumber
   greaterThan(min: number, included?: boolean): IsNumber
   lessThan(max: number, included?: boolean): IsNumber
 }
-export interface IsString extends Filter, IsFinal {
+export interface IsString extends IsFinal {
   longerThan(min: number, included?: boolean): IsString
   shorterThan(max: number, included?: boolean): IsString
 }
-
-export type IsUsable = IsBoolean | IsNumber | IsString

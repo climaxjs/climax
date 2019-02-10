@@ -5,13 +5,13 @@
 import * as R from 'ramda'
 
 import errors from '../../errors'
-import { applyMixins } from '../../utils'
 const { error: E } = errors
 
 import * as T from './types'
+import * as U from '../../types'
 
 abstract class Filter implements T.Filter {
-  protected _defaultValue: boolean | number | string | null = null
+  protected _defaultValue: U.BNS | null = null
   protected _isMandatory: boolean
   protected _type: T.TYPE
   protected _validators: T.Validator[] = []
@@ -23,8 +23,32 @@ abstract class Filter implements T.Filter {
     this._type = context._type
     this._validators = [...context._validators]
   }
+}
 
-  public validate(value: any): boolean {
+/**
+ * Mixin for final filter class methods.
+ */
+class IsFinal extends Filter {
+  public else(defaultValue: boolean | number | string): void {
+    this._defaultValue = defaultValue
+  }
+
+  /**
+   * Validate and coerce the related value.
+   */
+  // public process(value: U.BNS): boolean {
+  // }
+
+  /**
+   * Coerce the related value.
+   */
+  // public coerce(value: U.BNS): U.BNS {
+  // }
+
+  /**
+   * Validate the related value.
+   */
+  public validate(value: U.BNS): boolean {
     for (let i = 0; i < this._validators.length; i += 1) {
       if (!this._validators[i].test(value)) return false
     }
@@ -47,15 +71,6 @@ abstract class Filter implements T.Filter {
     }
 
     return typeof this._type === 'boolean'
-  }
-}
-
-/**
- * Mixin for final filter class methods.
- */
-class IsFinal extends Filter {
-  public else(defaultValue: boolean | number | string): void {
-    this._defaultValue = defaultValue
   }
 }
 
@@ -114,17 +129,11 @@ class IsType extends Filter implements T.IsType {
   }
 }
 
-class IsBoolean extends Filter implements T.IsBoolean {
-  public else: () => void
-}
+class IsBoolean extends IsFinal implements T.IsBoolean {}
 
-class IsList extends Filter implements T.IsList {
-  public else: () => void
-}
+class IsList extends IsFinal implements T.IsList {}
 
-class IsNumber extends Filter implements T.IsNumber {
-  public else: () => void
-
+class IsNumber extends IsFinal implements T.IsNumber {
   public between(
     min: number,
     max: number,
@@ -175,9 +184,7 @@ class IsNumber extends Filter implements T.IsNumber {
   }
 }
 
-class IsString extends Filter implements T.IsString {
-  public else: () => void
-
+class IsString extends IsFinal implements T.IsString {
   public longerThan(min: number, included: boolean = false): T.IsString {
     this._validators.push(included
       ? {
@@ -208,8 +215,6 @@ class IsString extends Filter implements T.IsString {
     return this
   }
 }
-
-applyMixins([IsBoolean, IsList, IsNumber, IsString], [IsFinal])
 
 /**
  * Program command option filter factory.
