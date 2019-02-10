@@ -129,7 +129,7 @@ export default class Command implements T.Command {
   /**
    * Translate short slug names and remove undeclared options.
    */
-  private matchOptionsName(rawOptions: U.BNSObject): U.BNSObject {
+  protected matchOptionsName(rawOptions: U.BNSObject): U.BNSObject {
     return R.compose(
       R.reduce(
         (acc, [slug, value]) => {
@@ -154,7 +154,7 @@ export default class Command implements T.Command {
   /**
    * Match values with their declared names and remove undeclared values.
    */
-  private matchValuesName(rawValues: U.BNS[]): U.BNSObject {
+  protected matchValuesName(rawValues: U.BNS[]): U.BNSObject {
     return rawValues.reduce(
       (acc, value, index) => {
         if (this._values[index]) {
@@ -172,7 +172,7 @@ export default class Command implements T.Command {
   /**
    * Coerce, validate and resolve options' value.
    */
-  private processOptions(preOptions: U.BNSObject): U.BNSObject {
+  protected processOptions(preOptions: U.BNSObject): U.BNSObject {
     return this._options.reduce(
       (acc, option) => {
         // Has this option been passed as one of the CLI args?
