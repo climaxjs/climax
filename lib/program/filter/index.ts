@@ -5,9 +5,6 @@
 
 import * as R from 'ramda'
 
-import errors from '../../errors'
-const { error: E } = errors
-
 import * as T from './types'
 import * as U from '../../types'
 
@@ -60,12 +57,7 @@ class IsFinal extends Filter {
    * since it's only useful for internal checkings.
    */
   public isBoolean(): boolean {
-    switch (true) {
-      case this._type === undefined:
-        throw E.ERR_FLT_TYPE_I_UND
-    }
-
-    return typeof this._type === 'boolean'
+    return this._type === T.TYPE.BOOLEAN
   }
 
   /**
@@ -154,6 +146,8 @@ class IsType extends Filter implements T.IsType {
   /**
    * Coerce the related option or value into a string and validate the result
    * against the provided list.
+   *
+   * TODO Handle empty lists.
    */
   public list(list: string[]): T.IsList {
     this._type = T.TYPE.STRING
