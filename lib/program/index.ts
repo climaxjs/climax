@@ -83,14 +83,16 @@ class Program extends Command implements T.Program {
 
   /**
    * Add a new command.
+   *
+   * TODO Validate command slug format.
    */
   public command(slug: string): CommandT.Command {
     switch (true) {
       case typeof slug !== 'string':
-        throw E.ERR_PRG_VERS_V_TYP
+        throw E.ERR_CMD_SLUG_V_TYP
 
       case slug.length === 0:
-        throw E.ERR_PRG_VERS_V_NOV
+        throw E.ERR_CMD_SLUG_V_LEN
     }
 
     this._commands = R.assoc(slug, new Command(slug), this._commands)
