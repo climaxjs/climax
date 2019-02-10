@@ -6,6 +6,7 @@ const { error: E } = errors
 
 /**
  * TODO Validate the name format.
+ * TODO Find a proper way to distinguish the value name and the option slug.
  */
 export default class Value implements T.Value {
   /** Errors message prefix for developers. */
