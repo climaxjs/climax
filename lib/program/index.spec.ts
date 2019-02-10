@@ -11,13 +11,16 @@ describe(`Program`, () => {
     })
   })
 
-  describe(`#name`, () => {
+  describe(`#name()`, () => {
     it(`should fail with a wrong type`, () =>
       expect(() => program.name(123 as any)).toThrow(errors.dictionary.ERR_PRG_NAME_V_TYP))
     it(`should fail with an empty string`, () =>
       expect(() => program.name('')).toThrow(errors.dictionary.ERR_PRG_NAME_V_LEN))
 
-    it(`should pass with a valid name`, () => expect(() => program.name('test')).not.toThrow())
+    it(`should pass with a valid name`, () =>
+      expect(() => program.name('foo')).not.toThrow())
+    it(`should return a class instance of Program`, () =>
+      expect(program.name('foo').constructor.name).toBe('Program'))
   })
 
   describe(`#validate()`, () => {
@@ -25,7 +28,7 @@ describe(`Program`, () => {
       expect(() => program.validate()).toThrow(errors.dictionary.ERR_PRG_VERS_V_UND))
   })
 
-  describe(`#version`, () => {
+  describe(`#version()`, () => {
     it(`should fail with a wrong type`, () =>
       expect(() => program.version(123 as any)).toThrow(errors.dictionary.ERR_PRG_VERS_V_TYP))
     it(`should fail with an empty string`, () =>
@@ -41,10 +44,26 @@ describe(`Program`, () => {
       expect(() => program.version('1.2')).toThrow(errors.dictionary.ERR_PRG_VERS_V_SEM)
     })
 
-    it(`should pass with a valid version`, () => expect(() => program.version('0.0.0')).not.toThrow())
+    it(`should pass with a valid version`, () =>
+      expect(() => program.version('0.0.0')).not.toThrow())
+    it(`should return a class instance of Program`, () =>
+      expect(program.version('0.0.0').constructor.name).toBe('Program'))
   })
 
   describe(`#validate()`, () => {
     it(`should pass`, () => expect(() => program.validate()).not.toThrow())
+  })
+
+  describe(`#command()`, () => {
+    it(`should fail with an undefined slug`, () =>
+      expect(() => (program as any).command()).toThrow(errors.dictionary.ERR_CMD_SLUG_V_TYP))
+    it(`should fail with a wrong typed slug`, () =>
+      expect(() => program.command(123 as any)).toThrow(errors.dictionary.ERR_CMD_SLUG_V_TYP))
+    it(`should fail with an empty slug`, () =>
+      expect(() => program.command('')).toThrow(errors.dictionary.ERR_CMD_SLUG_V_LEN))
+
+    it(`should pass with a valid slug`, () => expect(() => program.command('foo')).not.toThrow())
+    it(`should return a class instance of Command`, () =>
+      expect(program.command('foo').constructor.name).toBe('Command'))
   })
 })
