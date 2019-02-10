@@ -12,18 +12,12 @@ import * as T from './types'
 import * as U from '../../types'
 
 abstract class Filter implements T.Filter {
-  protected _defaultValue: U.BNS | null = null
-  protected _isMandatory: boolean
-  protected _type: T.TYPE
-  protected _validators: T.Validator[] = []
-
-  constructor(context?: Filter) {
-    if (context === undefined) return
-
-    this._isMandatory = context._isMandatory
-    this._type = context._type
-    this._validators = [...context._validators]
-  }
+  constructor(
+    protected _defaultValue: U.BNS | null = null,
+    protected _isMandatory: boolean = false,
+    protected _type: T.TYPE = T.TYPE.STRING,
+    protected _validators: T.Validator[] = [],
+  ) {}
 }
 
 /**
@@ -98,46 +92,37 @@ class IsFinal extends Filter {
 
 class IsObligation extends Filter implements T.IsObligation {
   get aMandatory(): T.IsType {
-    this._isMandatory = true
-
-    return new IsType(this)
+    return new IsType(this._defaultValue, false, this._type)
   }
 
   get anOptional(): T.IsType {
-    this._isMandatory = false
-
-    return new IsType(this)
+    return new IsType(this._defaultValue, false, this._type)
   }
 }
 
 class IsType extends Filter implements T.IsType {
   get boolean(): T.IsBoolean {
-    this._type = T.TYPE.BOOLEAN
-    this._defaultValue = false
-
-    return new IsBoolean(this)
+    return new IsBoolean(false, this._isMandatory, T.TYPE.BOOLEAN)
   }
 
   get float(): T.IsNumber {
-    this._type = T.TYPE.NUMBER
-
-    return new IsNumber(this)
+    return new IsNumber(this._defaultValue, this._isMandatory, T.TYPE.NUMBER)
   }
 
   get integer(): T.IsNumber {
-    this._type = T.TYPE.NUMBER
-    this._validators.push({
-      errorMessage: `must be an integer.`,
-      test: (value: number) => value === Math.round(value),
-    })
-
-    return new IsNumber(this)
+    return new IsNumber(
+      this._defaultValue,
+      this._isMandatory,
+      T.TYPE.NUMBER,
+      [{
+        errorMessage: `must be an integer.`,
+        test: (value: number) => value === Math.round(value),
+      }],
+    )
   }
 
   get string(): T.IsString {
-    this._type = T.TYPE.STRING
-
-    return new IsString(this)
+    return new IsString(this._defaultValue, this._isMandatory, T.TYPE.STRING)
   }
 
   public list(list: string[]): T.IsList {
@@ -147,7 +132,12 @@ class IsType extends Filter implements T.IsType {
       test: R.includes(R.__, list as any) as any,
     })
 
-    return new IsList(this)
+    return new IsList(
+      this._defaultValue,
+      this._isMandatory,
+      this._type,
+      this._validators,
+    )
   }
 }
 
