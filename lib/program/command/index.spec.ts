@@ -1,6 +1,9 @@
 import Command from '.'
 import { is } from '../..'
 import errors from '../../errors'
+import { parseArgs } from '../../utils'
+
+import { BNSObject, BNS } from '../../types';
 
 const _ = undefined as any
 
@@ -82,7 +85,7 @@ describe(`Command`, () => {
         .toThrow(`[Command: "foo"] [Value: "bar"] ` + errors.dictionary.ERR_VAL_FILT_V_TYP_C))
 
     it(`should return a class instance of Command`, () =>
-      expect(command.value('-f, --foo', 'bar').constructor.name).toBe('Command'))
+      expect(command.value('bar', 'lamda').constructor.name).toBe('Command'))
   })
 
   describe(`#action()`, () => {
@@ -91,6 +94,42 @@ describe(`Command`, () => {
         .toThrow(errors.dictionary.ERR_CMD_ACTN_V_TYP))
 
     it(`should return a class instance of Command`, () =>
-      expect(command.value('-f, --foo', 'bar').constructor.name).toBe('Command'))
+      expect(command.value('foo', 'bar').constructor.name).toBe('Command'))
+  })
+})
+
+describe(`Command#run()`, () => {
+  const g = (args: string[]) => parseArgs([], args).slice(1) as [BNSObject, BNS[]]
+  const λ = jest.fn(r => r);
+
+  const command = new Command('foo')
+    .option('-a, --alpha', 'Alpha option description.', is.aMandatory.boolean)
+    .option('-B, --beta', 'Beta option description.', is.aMandatory.integer)
+    .option('-g, --gamma', 'Gamma option description.', is.anOptional.float.else(0))
+    .option('-D, --delta', 'Delta option description.', is.anOptional.boolean)
+    .option('--lamda', 'Lambda option description.', is.anOptional.list(['leet', 'l33t', '1337']).else('l33t'))
+    .value('omega', 'Omega value description', is.aMandatory.string)
+    .value('epsilon', 'Epsilon value description', is.anOptional.string.else('Who knows?'))
+    .value('iota', 'Iota value description', is.anOptional.string)
+    .action(λ)
+
+  it(`should return the expected options and values`, () => {
+    const [rawOptions, rawValues] = g(['-aB', '123', '--lamda', 'leet', 'A value.'])
+
+    command.run(rawOptions, rawValues)
+    expect(λ.mock.results[0].value).toEqual({
+      options: {
+        alpha: true,
+        beta: 123,
+        delta: false,
+        gamma: 0,
+        lamda: 'leet',
+      },
+      values: {
+        omega: 'A value.',
+        epsilon: 'Who knows?',
+        iota: null,
+      }
+    })
   })
 })
