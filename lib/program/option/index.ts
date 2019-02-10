@@ -58,7 +58,16 @@ export default class Option implements T.Option {
    * Is this filter the instance of a usable internal filter?
    */
   private isInternalFilter(filter: any): boolean {
-    return typeof filter === 'object' && filter.constructor.name === 'IsFinal'
+    return typeof filter === 'object' && (
+      [
+        'Is',
+        'IsObligation',
+        'IsType',
+        'IsBoolean',
+        'IsNumber',
+        'IsString',
+      ].includes(filter.constructor.name)
+    )
   }
 
   /**
