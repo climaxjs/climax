@@ -1,12 +1,6 @@
-import { BNS } from '../../types'
-import * as Filter from '../filter/types'
+import * as Value from '../value/types'
 
-export type Filter = Filter.IsFinal | FilterCustom
-export type FilterCustom = (value: BNS) => BNS | null
-
-export interface Option {
-  readonly description: string
+export interface Option extends Value.Value {
   readonly slug: string
   readonly slugLetter: string | null
-  readonly filter?: Filter
 }
