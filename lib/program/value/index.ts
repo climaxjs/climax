@@ -57,6 +57,7 @@ export default class Value implements T.Value {
         'IsObligation',
         'IsType',
         'IsBoolean',
+        'IsList',
         'IsNumber',
         'IsString',
       ].includes(filter.constructor.name)
