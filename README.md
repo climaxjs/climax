@@ -112,10 +112,11 @@ npm link
 ### Let's try it
 
 ```bash
-$ say Bazinga
-Bazinga
+$ say Bazinga!
+Bazinga!
 
-$ say
+$ say hello E.T -L fr
+Bonjour E.T!
 ```
 
 ## Current Working Progress
