@@ -18,7 +18,10 @@ describe(`Command`, () => {
     it(`should fail with an empty string`, () =>
       expect(() => command.description('')).toThrow(errors.dictionary.ERR_CMD_DESC_V_LEN))
 
-    it(`should pass with a valid description`, () => expect(() => command.description('test')).not.toThrow())
+    it(`should pass with a valid description`, () => expect(() => command.description('foo')).not.toThrow())
+
+    it(`should return a class instance of Command`, () =>
+      expect(command.description('foo').constructor.name).toBe('Command'))
   })
 
   describe(`#validate()`, () => {
@@ -50,6 +53,9 @@ describe(`Command`, () => {
     it(`should fail with a wrong typed custom <filter>`, () =>
       expect(() => command.option('-f, --foo', 'bar', 1337 as any))
         .toThrow(`[Command: "foo"] ` + errors.dictionary.ERR_OPT_FILT_V_TYP_C.replace(/%s/, '-f, --foo')))
+
+    it(`should return a class instance of Command`, () =>
+      expect(command.option('-f, --foo', 'bar').constructor.name).toBe('Command'))
   })
 
   describe(`#value()`, () => {
@@ -65,5 +71,17 @@ describe(`Command`, () => {
     it(`should fail with an empty string <description>`, () =>
       expect(() => command.value('-f, --foo', ''))
         .toThrow(`[Command: "foo"] ` + errors.dictionary.ERR_VAL_DESC_V_LEN.replace(/%s/, '-f, --foo')))
+
+    it(`should return a class instance of Command`, () =>
+      expect(command.value('-f, --foo', 'bar').constructor.name).toBe('Command'))
+  })
+
+  describe(`#action()`, () => {
+    it(`should fail with a wrong typed <callback>`, () =>
+      expect(() => command.action(1337 as any))
+        .toThrow(errors.dictionary.ERR_CMD_ACTN_V_TYP))
+
+    it(`should return a class instance of Command`, () =>
+      expect(command.value('-f, --foo', 'bar').constructor.name).toBe('Command'))
   })
 })
