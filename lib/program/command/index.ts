@@ -131,22 +131,16 @@ export default class Command implements T.Command {
     return R.compose(
       R.reduce(
         (acc, [slug, value]) => {
-          if (slug.length > 1) {
-            if (R.contains({ slug }, this._options)) {
-              return R.assoc(slug, value, acc)
-            }
+          const found = R.find(
+            R.propEq(slug.length > 1 ? 'slug' : 'slugLetter', slug),
+            this._options,
+          )
+          if (found !== undefined) return R.assoc(found.slug, value, acc)
 
-            log.warn(`Unknow option %s. Please run --help.`, `--${slug}`)
-
-            return { ...acc }
-          }
-
-          const found = R.find(R.propEq('slugLetter', slug), this._options)
-          if (found !== undefined) {
-            return R.assoc(found.slug, value, acc)
-          }
-
-          log.warn(`Unknow option %s. Please run --help.`, `-${slug}`)
+          log.warn(
+            `Unknow option %s. Please run --help.`,
+            `${slug.length > 1 ? '--' : '-'}${slug}`,
+          )
 
           return { ...acc }
         },
