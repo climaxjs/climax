@@ -52,9 +52,26 @@ class IsFinal extends Filter {
   }
 
   /**
+   * This is a helper method to quick-check if this filter forces expect its
+   * related option to be a boolean.
+   *
+   * @ignore
+   * This method should not appear in any documentation or types declaration
+   * since it's only useful for internal checkings.
+   */
+  public isBoolean(): boolean {
+    switch (true) {
+      case this._type === undefined:
+        throw E.ERR_FLT_TYPE_I_UND
+    }
+
+    return typeof this._type === 'boolean'
+  }
+
+  /**
    * Coerce the value.
    */
-  public coerce(value: U.BNS): U.BNS {
+  protected coerce(value: U.BNS): U.BNS {
     switch (this._type) {
       case T.TYPE.BOOLEAN:
         return Boolean(value)
@@ -71,29 +88,12 @@ class IsFinal extends Filter {
   /**
    * Validate the value, throwing a string error in case of invalidation.
    */
-  public validate(value: U.BNS): void {
+  protected validate(value: U.BNS): void {
     for (let i = 0; i < this._validators.length; i += 1) {
       if (!this._validators[i].test(value)) {
         throw this._validators[i].errorMessage
       }
     }
-  }
-
-  /**
-   * This is a helper method to quick-check if this filter forces expect its
-   * related option to be a boolean.
-   *
-   * @ignore
-   * This method should not appear in any documentation or types declaration
-   * since it's only useful for internal checkings.
-   */
-  public isBoolean(): boolean {
-    switch (true) {
-      case this._type === undefined:
-        throw E.ERR_FLT_TYPE_I_UND
-    }
-
-    return typeof this._type === 'boolean'
   }
 }
 
