@@ -106,29 +106,35 @@ describe(`Command#run()`, () => {
     .option('-a, --alpha', 'Alpha option description.', is.aMandatory.boolean)
     .option('-B, --beta', 'Beta option description.', is.aMandatory.integer)
     .option('-g, --gamma', 'Gamma option description.', is.anOptional.float.else(0))
-    .option('-D, --delta', 'Delta option description.', is.anOptional.boolean)
-    .option('--lamda', 'Lambda option description.', is.anOptional.list(['leet', 'l33t', '1337']).else('l33t'))
+    .option('-d, --delta', 'Delta option description.')
+    .option('-z, --zeta', 'Zeta option description.', () => 'A custom filter.')
+    .option('-k, --kappa', 'Kappa option description.', is.anOptional.float)
+    .option('-t, --theta', 'Theta option description.', is.anOptional.boolean)
+    .option('-T, --tau', 'Tau option description.', is.anOptional.boolean)
+    .option('--lamda', 'Lambda option description.', is.anOptional.list(['leet', 'l33t', '1337']))
     .value('omega', 'Omega value description', is.aMandatory.string)
     .value('epsilon', 'Epsilon value description', is.anOptional.string.else('Who knows?'))
-    .value('iota', 'Iota value description', is.anOptional.string)
     .action(λ)
 
   it(`should return the expected options and values`, () => {
-    const [rawOptions, rawValues] = g(['-aB', '123', '--lamda', 'leet', 'A value.'])
+    const [rawOptions, rawValues] = g(['-TaB', '123', '--lamda', 'leet', 'A value.'])
 
     command.run(rawOptions, rawValues)
     expect(λ.mock.results[0].value).toEqual({
       options: {
         alpha: true,
         beta: 123,
-        delta: false,
         gamma: 0,
+        delta: null,
+        zeta: 'A custom filter.',
+        kappa: null,
+        theta: false,
+        tau: true,
         lamda: 'leet',
       },
       values: {
         omega: 'A value.',
         epsilon: 'Who knows?',
-        iota: null,
       }
     })
   })
