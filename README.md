@@ -44,7 +44,7 @@ npm i @climax/core
 
 ### Hello World
 
-First, let's declare the binary path:
+First, let's fill the meta info and declare the binary path:
 
 _package.json_
 
@@ -52,6 +52,9 @@ _package.json_
 {
   // ...
 
+  "name": "say.js",
+  "description": "A dummy program repeating what you type.",
+  "version": "1.0.0",
   "bin": {
     "say": "./bin/say.js"
   },
@@ -60,6 +63,11 @@ _package.json_
 }
 ```
 
+> ### :zap: Info
+> The name, description and version specified whithin your package.json are the
+ones used by default by Climax once you pass its source to `program#info()`. The
+`bin` key is also used to show help, warning and error messages.
+
 Then let's write our first piece of code:
 
 _bin/say.js_
@@ -67,7 +75,10 @@ _bin/say.js_
 ```js
 #!/usr/bin/env node
 
-program
+const { is, program } = require('@climax/core')
+const info = require('../package.json')
+
+program.info(info)
   .value('message', 'What do you want to say?', is.aMandatory.string.longerThan(0))
   .option('-t, --twice', 'Say it twice.', is.anOptional.boolean)
   .action(({ options, values }) => {
@@ -77,11 +88,11 @@ program
   })
 
 program.command('hello')
-  .description('Generate a new Climax project.')
+  .description('Say hi to whoever you want.')
   .value('name', 'Whom do you want to say hello to?', is.aMandatory.string.longerThan(0))
-  .option('-l, --language', 'In which language?', is.aMandatory.list(['en', 'fr']).else('en'))
+  .option('-L, --in-language', 'In which language?', is.aMandatory.list(['en', 'fr']).else('en'))
   .action(({ options, values }) => {
-    const greeting = options.language === 'en'
+    const greeting = options.inLanguage === 'en'
       ? `Hello ${values.name}!`
       : `Bonjour ${values.name}!`
 
@@ -100,7 +111,12 @@ npm link
 
 ### Let's try it
 
-_In progress..._
+```bash
+$ say Bazinga
+Bazinga
+
+$ say
+```
 
 ## Current Working Progress
 
