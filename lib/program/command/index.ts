@@ -2,7 +2,7 @@ import log from '@inspired-beings/log'
 import * as R from 'ramda'
 
 import errors from '../../errors'
-import { throwWith } from '../../utils'
+import { logT, throwWith } from '../../utils'
 import Option from '../option'
 import Value from '../value'
 
@@ -18,7 +18,7 @@ export default class Command implements T.Command {
   protected _options: OptionT.Option[] = []
   protected _values: ValueT.Value[] = []
 
-  /** Errors message prefix */
+  /** Errors message prefix for developers. */
   protected _e: string
 
   /**
@@ -121,7 +121,9 @@ export default class Command implements T.Command {
     // switching back their values to the lone values list.
     // TODO Add the pre-options cleaning.
 
-    this._action({ options: preOptions, values: preValues })
+    const options = this.processOptions(preOptions)
+
+    this._action({ options, values: preValues })
   }
 
   /**
@@ -165,5 +167,56 @@ export default class Command implements T.Command {
       },
       {},
     )
+  }
+
+  /**
+   * Coerce, validate and resolve options' value.
+   */
+  private processOptions(preOptions: U.BNSObject): U.BNSObject {
+    return this._options.reduce(
+      (acc, option) => {
+        // Has this option been passed as one of the CLI args?
+        const isInPreOptions = R.has(option.slug, preOptions)
+
+        // If this option doesn't have any filter
+        if (option.filter === undefined) {
+          return R.assoc(
+            option.slug,
+            isInPreOptions ? preOptions[option.slug] : null,
+            acc,
+          )
+        }
+
+        // If this option has a custom filter
+        if (typeof option.filter === 'function') {
+          try {
+            return R.assoc(
+              option.slug,
+              option.filter(preOptions[option.slug]),
+              acc,
+            )
+          } catch (e) {
+            logT(`${this._e}${E.ERR_CMD_PROC_X_FLT_C.message}`, e)
+            // We add a return here to allow TS to infer the last Filter type.
+            return process.exit(1)
+          }
+        }
+
+        // If the option has an internal filter
+        try {
+          return R.assoc(
+            option.slug,
+            isInPreOptions
+              ? option.filter.process(preOptions[option.slug])
+              : option.filter.process(),
+            acc,
+          )
+        } catch (e) {
+          log.err(e)
+          process.exit(1)
+        }
+      },
+      {},
+    ) as U.BNSObject
   }
 }
