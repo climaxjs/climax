@@ -1,6 +1,6 @@
 /**
  * TODO Add paramaters check on all the public methods.
- * TODO Add methods comments.
+ * TODO Add mandatory validation.
  */
 
 import * as R from 'ramda'
@@ -24,8 +24,15 @@ abstract class Filter implements T.Filter {
  * Mixin for final filter class methods.
  */
 class IsFinal extends Filter {
-  public else(defaultValue: boolean | number | string): void {
+  /**
+   * Set the default value for the related option or value.
+   *
+   * TODO Handle wrong-typed default value cases.
+   */
+  public else(defaultValue: U.BNS): this {
     this._defaultValue = defaultValue
+
+    return this
   }
 
   /**
@@ -91,24 +98,40 @@ class IsFinal extends Filter {
 }
 
 class IsObligation extends Filter implements T.IsObligation {
+  /**
+   * Make the related option or value mandatory.
+   */
   get aMandatory(): T.IsType {
     return new IsType(this._defaultValue, false, this._type)
   }
 
+  /**
+   * Make the related option or value optional.
+   */
   get anOptional(): T.IsType {
     return new IsType(this._defaultValue, false, this._type)
   }
 }
 
 class IsType extends Filter implements T.IsType {
+  /**
+   * Coerce the related option or value into a boolean.
+   */
   get boolean(): T.IsBoolean {
     return new IsBoolean(false, this._isMandatory, T.TYPE.BOOLEAN)
   }
 
+  /**
+   * Coerce the related option or value into a number and invalidate NaN cases.
+   */
   get float(): T.IsNumber {
     return new IsNumber(this._defaultValue, this._isMandatory, T.TYPE.NUMBER)
   }
 
+  /**
+   * Coerce the related option or value into a number and invalidate NaN cases
+   * as well as floating numbers.
+   */
   get integer(): T.IsNumber {
     return new IsNumber(
       this._defaultValue,
@@ -121,10 +144,17 @@ class IsType extends Filter implements T.IsType {
     )
   }
 
+  /**
+   * Coerce the related option or value into a string.
+   */
   get string(): T.IsString {
     return new IsString(this._defaultValue, this._isMandatory, T.TYPE.STRING)
   }
 
+  /**
+   * Coerce the related option or value into a string and validate the result
+   * against the provided list.
+   */
   public list(list: string[]): T.IsList {
     this._type = T.TYPE.STRING
     this._validators.push({
@@ -146,6 +176,9 @@ class IsBoolean extends IsFinal implements T.IsBoolean {}
 class IsList extends IsFinal implements T.IsList {}
 
 class IsNumber extends IsFinal implements T.IsNumber {
+  /**
+   * Expect the coerced number to be between <min> and <max>.
+   */
   public between(
     min: number,
     max: number,
@@ -165,6 +198,9 @@ class IsNumber extends IsFinal implements T.IsNumber {
     return this
   }
 
+  /**
+   * Expect the coerced number to be greater than <min>.
+   */
   public greaterThan(min: number, included: boolean = false): T.IsNumber {
     this._validators.push(included
       ? {
@@ -180,6 +216,9 @@ class IsNumber extends IsFinal implements T.IsNumber {
     return this
   }
 
+  /**
+   * Expect the coerced number to be lesser than <max>.
+   */
   public lessThan(max: number, included: boolean = false): T.IsNumber {
     this._validators.push(included
       ? {
@@ -197,6 +236,9 @@ class IsNumber extends IsFinal implements T.IsNumber {
 }
 
 class IsString extends IsFinal implements T.IsString {
+  /**
+   * Expect the coerced string to be longer than <min>.
+   */
   public longerThan(min: number, included: boolean = false): T.IsString {
     this._validators.push(included
       ? {
@@ -212,6 +254,9 @@ class IsString extends IsFinal implements T.IsString {
     return this
   }
 
+  /**
+   * Expect the coerced string to be shorter than <max>.
+   */
   public shorterThan(max: number, included: boolean = false): T.IsString {
     this._validators.push(included
       ? {
