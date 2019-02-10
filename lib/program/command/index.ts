@@ -48,20 +48,6 @@ export default class Command implements T.Command {
   }
 
   /**
-   * Declare the callback to run for this command (or program).
-   */
-  public action(callback: T.CommandAction): this {
-    switch (true) {
-      case typeof callback !== 'function':
-        throw E.ERR_CMD_ACTN_V_TYP
-    }
-
-    this._action = callback
-
-    return this
-  }
-
-  /**
    * Declare a new command (or program) option.
    *
    * @description
@@ -99,6 +85,20 @@ export default class Command implements T.Command {
     } catch (err) {
       throwWith(err, this._e)
     }
+
+    return this
+  }
+
+  /**
+   * Declare the callback to run for this command (or program).
+   */
+  public action(callback: T.CommandAction): this {
+    switch (true) {
+      case typeof callback !== 'function':
+        throw E.ERR_CMD_ACTN_V_TYP
+    }
+
+    this._action = callback
 
     return this
   }
