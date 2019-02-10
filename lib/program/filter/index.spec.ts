@@ -142,6 +142,27 @@ describe(`is`, () => {
         })
       })
     })
+
+    describe(`#list()`, () => {
+      describe(`with ['foo', 'bar']`, () => {
+        const filter = is.aMandatory.list(['foo', 'bar'])
+
+        it(`should return a class instance of IsList`, () => expect(filter.constructor.name).toBe('IsList'))
+
+        it(`should invalidate "Foo"`, () => expect(() => filter.validate("Foo")).toThrow())
+        it(`should validate "foo"`, () => expect(() => filter.validate("foo")).not.toThrow())
+      })
+
+      describe(`#process()`, () => {
+        describe(`with is.aMandatory.list(['foo', 'bar']).else('bar')`, () => {
+          const filter = is.aMandatory.list(['foo', 'bar']).else('bar')
+
+          it(`should return a class instance of IsList`, () => expect(filter.constructor.name).toBe('IsList'))
+
+          it(`should return "bar" when no value is provided`, () => expect(filter.process()).toBe('bar'))
+        })
+      })
+    })
   })
 
   describe(`#anOptional`, () => {
