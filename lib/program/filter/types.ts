@@ -8,7 +8,7 @@ export enum TYPE {
 
 export type Validator = {
   errorMessage: string
-  test: (value: boolean | number | string) => boolean
+  test: (value: BNS) => boolean
 }
 
 export interface Filter {}
@@ -29,7 +29,7 @@ export interface IsFinal extends Filter {
   else(value: BNS): void
 
   coerce(value: BNS): BNS
-  process(value: BNS): BNS | null
+  process(value?: BNS): BNS | null
   validate(value: BNS): void
 }
 
