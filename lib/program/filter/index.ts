@@ -1,5 +1,6 @@
 /**
  * TODO Add paramaters check on all the public methods.
+ * TODO Add methods comments.
  */
 
 import * as R from 'ramda'
@@ -34,26 +35,47 @@ class IsFinal extends Filter {
   }
 
   /**
-   * Validate and coerce the related value.
+   * Validate and coerce the value.
    */
-  // public process(value: U.BNS): boolean {
-  // }
+  public process(value?: U.BNS): U.BNS | null {
+    if (value !== undefined) {
+      try {
+        const typedValue = this.coerce(value)
+        this.validate(typedValue)
 
-  /**
-   * Coerce the related value.
-   */
-  // public coerce(value: U.BNS): U.BNS {
-  // }
-
-  /**
-   * Validate the related value.
-   */
-  public validate(value: U.BNS): boolean {
-    for (let i = 0; i < this._validators.length; i += 1) {
-      if (!this._validators[i].test(value)) return false
+        return typedValue
+      } catch (e) { throw e }
     }
 
-    return true
+    return this._defaultValue
+  }
+
+  /**
+   * Coerce the value.
+   */
+  public coerce(value: U.BNS): U.BNS {
+    switch (this._type) {
+      case T.TYPE.BOOLEAN:
+        return Boolean(value)
+
+      case T.TYPE.NUMBER:
+        if (isNaN(Number(value))) throw `must be a processable number.`
+        return Number(value)
+
+      case T.TYPE.STRING:
+        return String(value)
+    }
+  }
+
+  /**
+   * Validate the value, throwing a string error in case of invalidation.
+   */
+  public validate(value: U.BNS): void {
+    for (let i = 0; i < this._validators.length; i += 1) {
+      if (!this._validators[i].test(value)) {
+        throw this._validators[i].errorMessage
+      }
+    }
   }
 
   /**

@@ -28,9 +28,9 @@ export interface IsType extends Filter {
 export interface IsFinal extends Filter {
   else(value: BNS): void
 
-  // coerce(value: BNS): BNS
-  // process(value: BNS): BNS
-  validate(value: BNS): boolean
+  coerce(value: BNS): BNS
+  process(value: BNS): BNS | null
+  validate(value: BNS): void
 }
 
 export interface IsBoolean extends IsFinal { }
