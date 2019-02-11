@@ -52,6 +52,8 @@ export default class Command implements T.Command {
    *
    * @description
    * The <slug> parameter must be a valid slug, i.e.: "-s, --sluggy-slug" or "--sluggy-slug".
+   *
+   * TODO Handle existing option slug, including help & version reserved kewwords.
    */
   public option(
     slug: string,
@@ -73,6 +75,8 @@ export default class Command implements T.Command {
    * @description
    * The <name> parameter MUST be in camelCase and will be used as a placeholder for the help
    * description of this command (or program).
+   *
+   * TODO Handle existing value name.
    */
   public value(
     name: string,
