@@ -196,9 +196,8 @@ export default class Command implements T.Command {
               acc,
             )
           } catch (e) {
-            logT(`${this._e}${E.ERR_CMD_PROC_X_FLT_C.message}`, e)
             // We add a return here to allow TS to infer the last Filter type.
-            return process.exit(1)
+            return logT(`${this._e}${E.ERR_CMD_PROC_X_FLT_C.message}`, e)
           }
         }
 
@@ -241,9 +240,8 @@ export default class Command implements T.Command {
           try {
             return R.assoc(value.name, value.filter(preValues[value.name]), acc)
           } catch (e) {
-            logT(`${this._e}${E.ERR_CMD_PROC_X_FLT_C.message}`, e)
             // We add a return here in order for TS to infer the last Filter type.
-            return process.exit(1)
+            return logT(`${this._e}${E.ERR_CMD_PROC_X_FLT_C.message}`, e)
           }
         }
 
