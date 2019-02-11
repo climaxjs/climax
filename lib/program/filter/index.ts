@@ -103,7 +103,7 @@ class IsObligation extends Filter implements T.IsObligation {
    * Make the related value mandatory.
    */
   get aMandatory(): T.IsType {
-    return new IsType(this._defaultValue, false, this._type)
+    return new IsType(this._defaultValue, true, this._type)
   }
 
   /**
