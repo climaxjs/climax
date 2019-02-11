@@ -1,12 +1,14 @@
 /**
  * TODO Add paramaters check on all the public methods.
- * TODO Add mandatory validation.
  */
 
 import * as R from 'ramda'
 
+import errors from '../../errors'
+
 import * as T from './types'
 import * as U from '../../types'
+const { error: E } = errors
 
 abstract class Filter implements T.Filter {
   constructor(
@@ -28,6 +30,10 @@ class IsFinal extends Filter {
    */
   public else(defaultValue: U.BNS): this {
     this._defaultValue = defaultValue
+
+    if (this._isMandatory) {
+      throw E.ERR_FLT_ELSE_C_OBL
+    }
 
     return this
   }
