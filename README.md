@@ -90,7 +90,7 @@ program.info(info)
 program.command('hello')
   .description('Say hi to whoever you want.')
   .value('name', 'Whom do you want to say hello to?', is.aMandatory.string.longerThan(0))
-  .option('-L, --in-language', 'In which language?', is.aMandatory.list(['en', 'fr']).else('en'))
+  .option('-L, --in-language', 'In which language?', is.anOptional.list(['en', 'fr']).else('en'))
   .action(({ options, values }) => {
     const greeting = options.inLanguage === 'en'
       ? `Hello ${values.name}!`
