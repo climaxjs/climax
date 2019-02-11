@@ -1,4 +1,5 @@
 import is from '.'
+import errors from '../../errors'
 
 describe(`is`, () => {
   describe(`#aMandatory`, () => {
@@ -10,9 +11,15 @@ describe(`is`, () => {
       const filter = is.aMandatory.boolean
 
       it(`should return a class instance of IsBoolean`, () => expect(filter.constructor.name).toBe('IsBoolean'))
+      it(`should invalidate an unprovided value`, () => expect(() => filter.process()).toThrow())
 
       describe(`#isBoolean()`, () => {
         it(`should be TRUE`, () => expect((filter as any).isBoolean()).toBe(true))
+      })
+
+      describe(`#else()`, () => {
+        it(`should throw the expected error`, () => expect(() => filter.else(true))
+          .toThrowError(errors.dictionary.ERR_FLT_ELSE_C_OBL))
       })
     })
 
@@ -20,9 +27,15 @@ describe(`is`, () => {
       const filter = is.aMandatory.float
 
       it(`should return a class instance of IsNumber`, () => expect(filter.constructor.name).toBe('IsNumber'))
+      it(`should invalidate an unprovided value`, () => expect(() => filter.process()).toThrow())
 
       describe(`#isBoolean()`, () => {
         it(`should be FALSE`, () => expect((filter as any).isBoolean()).toBe(false))
+      })
+
+      describe(`#else()`, () => {
+        it(`should throw the expected error`, () => expect(() => filter.else(0.123))
+          .toThrowError(errors.dictionary.ERR_FLT_ELSE_C_OBL))
       })
     })
 
@@ -30,12 +43,18 @@ describe(`is`, () => {
       const filter = is.aMandatory.integer
 
       it(`should return a class instance of IsNumber`, () => expect(filter.constructor.name).toBe('IsNumber'))
+      it(`should invalidate an unprovided value`, () => expect(() => filter.process()).toThrow())
       it(`should invalidate a float string`, () => expect(() => filter.process('1.2')).toThrow())
       it(`should invalidate a letters string`, () => expect(() => filter.process('foo')).toThrow())
       it(`should return the expected result`, () => expect(filter.process('1')).toBe(1))
 
       describe(`#isBoolean()`, () => {
         it(`should be FALSE`, () => expect((filter as any).isBoolean()).toBe(false))
+      })
+
+      describe(`#else()`, () => {
+        it(`should throw the expected error`, () => expect(() => filter.else(123))
+          .toThrowError(errors.dictionary.ERR_FLT_ELSE_C_OBL))
       })
 
       describe(`#between()`, () => {
@@ -107,9 +126,15 @@ describe(`is`, () => {
       const filter = is.aMandatory.string
 
       it(`should return a class instance of IsString`, () => expect(filter.constructor.name).toBe('IsString'))
+      it(`should invalidate an unprovided value`, () => expect(() => filter.process()).toThrow())
 
       describe(`#isBoolean()`, () => {
         it(`should be FALSE`, () => expect((filter as any).isBoolean()).toBe(false))
+      })
+
+      describe(`#else()`, () => {
+        it(`should throw the expected error`, () => expect(() => filter.else('foo'))
+          .toThrowError(errors.dictionary.ERR_FLT_ELSE_C_OBL))
       })
 
       describe(`#longerThan()`, () => {
@@ -152,6 +177,7 @@ describe(`is`, () => {
     describe(`#list()`, () => {
       const filter = is.aMandatory.list(['foo', 'bar'])
 
+      it(`should invalidate an unprovided value`, () => expect(() => filter.process()).toThrow())
       it(`should return a class instance of IsList`, () => expect(filter.constructor.name).toBe('IsList'))
       it(`should invalidate "Foo"`, () => expect(() => filter.process("Foo")).toThrow())
       it(`should validate "foo"`, () => expect(() => filter.process("foo")).not.toThrow())
@@ -161,12 +187,8 @@ describe(`is`, () => {
       })
 
       describe(`#else()`, () => {
-        describe(`with is.aMandatory.list(['foo', 'bar']).else('bar')`, () => {
-          const filter = is.aMandatory.list(['foo', 'bar']).else('bar')
-
-          it(`should return a class instance of IsList`, () => expect(filter.constructor.name).toBe('IsList'))
-          it(`should return "bar" when no value is provided`, () => expect(filter.process()).toBe('bar'))
-        })
+        it(`should throw the expected error`, () => expect(() => filter.else('foo'))
+          .toThrowError(errors.dictionary.ERR_FLT_ELSE_C_OBL))
       })
     })
   })
@@ -175,5 +197,25 @@ describe(`is`, () => {
     const filter = is.anOptional
 
     it(`should return a class instance of IsType`, () => expect(filter.constructor.name).toBe('IsType'))
+
+    describe(`#list()`, () => {
+      const filter = is.anOptional.list(['foo', 'bar'])
+
+      it(`should return a class instance of IsList`, () => expect(filter.constructor.name).toBe('IsList'))
+      it(`should return null when no value is provided`, () => expect(filter.process()).toBe(null))
+
+      describe(`#isBoolean()`, () => {
+        it(`should be FALSE`, () => expect((filter as any).isBoolean()).toBe(false))
+      })
+
+      describe(`#else()`, () => {
+        describe(`with "bar"`, () => {
+          const filter = is.anOptional.list(['foo', 'bar']).else('bar')
+
+          it(`should return a class instance of IsList`, () => expect(filter.constructor.name).toBe('IsList'))
+          it(`should return "bar" when no value is provided`, () => expect(filter.process()).toBe('bar'))
+        })
+      })
+    })
   })
 })
