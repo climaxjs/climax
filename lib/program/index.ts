@@ -85,6 +85,7 @@ class Program extends Command implements T.Program {
    * Add a new command.
    *
    * TODO Validate command slug format.
+   * TODO Handle existing command slug.
    */
   public command(slug: string): CommandT.Command {
     switch (true) {
