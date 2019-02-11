@@ -16,8 +16,8 @@ class Program extends Command implements T.Program {
   private _version: string
 
   constructor() {
-    // Since Program is also a Command, we arbitrary assign an underscore as its
-    // command slug in order to better customize error messages.
+    // Since Program is also a Command, we arbitrary assign an underscore as its command slug in
+    // order to better customize error messages.
     super('_')
   }
 
@@ -141,8 +141,8 @@ class Program extends Command implements T.Program {
    * Parse the CLI arguments and attempt to extract the potential command.
    *
    * @description
-   * This parsing operation only splits the command, options and values. It
-   * doesn't match them with options, values and their related filters.
+   * This parsing operation only splits the command, options and values. It doesn't match them with
+   * options, values and their related filters.
    */
   private parseArgs(): ParsedArgs {
     // Check for any inconsistent structure in the process arguments

@@ -52,15 +52,8 @@ export default class Value implements T.Value {
    */
   private isInternalFilter(filter: any): boolean {
     return typeof filter === 'object' && (
-      [
-        'Is',
-        'IsObligation',
-        'IsType',
-        'IsBoolean',
-        'IsList',
-        'IsNumber',
-        'IsString',
-      ].includes(filter.constructor.name)
+      ['Is', 'IsObligation', 'IsType', 'IsBoolean', 'IsList', 'IsNumber', 'IsString']
+        .includes(filter.constructor.name)
     )
   }
 

@@ -22,7 +22,7 @@ abstract class Filter implements T.Filter {
  */
 class IsFinal extends Filter {
   /**
-   * Set the default value for the related option or value.
+   * Set the default value for the related value.
    *
    * TODO Handle wrong-typed default value cases.
    */
@@ -49,12 +49,11 @@ class IsFinal extends Filter {
   }
 
   /**
-   * This is a helper method to quick-check if this filter forces expect its
-   * related option to be a boolean.
+   * Helper method to quick-check if this filter forces expect its related option to be a boolean.
    *
    * @ignore
-   * This method should not appear in any documentation or types declaration
-   * since it's only useful for internal checkings.
+   * This method should not appear in any documentation or types declaration since it's only useful
+   * for internal checkings.
    */
   public isBoolean(): boolean {
     return this._type === T.TYPE.BOOLEAN
@@ -91,14 +90,14 @@ class IsFinal extends Filter {
 
 class IsObligation extends Filter implements T.IsObligation {
   /**
-   * Make the related option or value mandatory.
+   * Make the related value mandatory.
    */
   get aMandatory(): T.IsType {
     return new IsType(this._defaultValue, false, this._type)
   }
 
   /**
-   * Make the related option or value optional.
+   * Make the related value optional.
    */
   get anOptional(): T.IsType {
     return new IsType(this._defaultValue, false, this._type)
@@ -107,22 +106,21 @@ class IsObligation extends Filter implements T.IsObligation {
 
 class IsType extends Filter implements T.IsType {
   /**
-   * Coerce the related option or value into a boolean.
+   * Coerce the related value into a boolean.
    */
   get boolean(): T.IsBoolean {
     return new IsBoolean(false, this._isMandatory, T.TYPE.BOOLEAN)
   }
 
   /**
-   * Coerce the related option or value into a number and invalidate NaN cases.
+   * Coerce the related value into a number and invalidate NaN cases.
    */
   get float(): T.IsNumber {
     return new IsNumber(this._defaultValue, this._isMandatory, T.TYPE.NUMBER)
   }
 
   /**
-   * Coerce the related option or value into a number and invalidate NaN cases
-   * as well as floating numbers.
+   * Coerce the related value into a number and invalidate NaN cases as well as floats.
    */
   get integer(): T.IsNumber {
     return new IsNumber(
@@ -137,15 +135,14 @@ class IsType extends Filter implements T.IsType {
   }
 
   /**
-   * Coerce the related option or value into a string.
+   * Coerce the related value into a string.
    */
   get string(): T.IsString {
     return new IsString(this._defaultValue, this._isMandatory, T.TYPE.STRING)
   }
 
   /**
-   * Coerce the related option or value into a string and validate the result
-   * against the provided list.
+   * Coerce the related value into a string and validate the result against the provided list.
    *
    * TODO Handle empty lists.
    */
@@ -156,12 +153,7 @@ class IsType extends Filter implements T.IsType {
       test: R.includes(R.__, list as any) as any,
     })
 
-    return new IsList(
-      this._defaultValue,
-      this._isMandatory,
-      this._type,
-      this._validators,
-    )
+    return new IsList(this._defaultValue, this._isMandatory, this._type, this._validators)
   }
 }
 
@@ -268,7 +260,7 @@ class IsString extends IsFinal implements T.IsString {
 }
 
 /**
- * Program command option filter factory.
+ * Filter factory for command (or program) options and values.
  */
 const is = new IsObligation()
 export default is
