@@ -1,5 +1,7 @@
 import chalk from 'chalk'
 const red = chalk.red
+const yellow = chalk.yellow
+const yellowBright = chalk.yellowBright
 
 import Command from '.'
 import { is } from '../..'
@@ -105,6 +107,7 @@ describe(`Command#run()`, () => {
   const g = (args: string[]) => parseArgs([], args).slice(1) as [BNSObject, BNS[]]
   const λ = jest.fn(r => r)
   console.log = jest.fn()
+  process.exit = jest.fn() as any
 
   const command = new Command('foo')
     .option('-a, --alpha', 'Alpha option description.', is.aMandatory.boolean)
@@ -129,25 +132,54 @@ describe(`Command#run()`, () => {
     })
     .action(λ)
 
-  it(`should return the expected log and error`, () => {
-    const [rawOptions, rawValues] = g(['-aB', '123', '--lamda', 'leet', 'A value.', '--zeta', '42'])
+  it(`should log the expected message and throw the expected error`, () => {
+    const [rawOptions, rawValues] = g(['-aB', '123', '--lamda', 'leet', 'A.', '--zeta', '42'])
 
     expect(() => command.run(rawOptions, rawValues)).toThrowError(errors.dictionary.ERR_CMD_PROC_X_FLT_C)
     expect((console.log as any).mock.calls[0][0]).toBe(red('Wow!'))
   })
 
-  it(`should return the expected log and error`, () => {
-    const [rawOptions, rawValues] = g(['-aB', '123', '--lamda', 'leet', 'Omega value.', 'Epsilon value.', '42'])
+  it(`should log the expected message and throw the expected error`, () => {
+    const [rawOptions, rawValues] = g(['-aB', '123', '--lamda', 'leet', 'Omega', 'Epsilon', '42'])
 
     expect(() => command.run(rawOptions, rawValues)).toThrowError(errors.dictionary.ERR_CMD_PROC_X_FLT_C)
     expect((console.log as any).mock.calls[1][0]).toBe(red('Wow2!'))
   })
 
+  it(`should log the expected message`, () => {
+    const [rawOptions, rawValues] = g(['-aB', '123', '--lamda', 'leet', 'Omega', '--wth'])
+
+    expect(() => command.run(rawOptions, rawValues)).not.toThrow()
+    expect((console.log as any).mock.calls[2][0]).toBe(yellow(`Unknow option ${yellowBright('--wth')}. Please run --help.`))
+  })
+
+  it(`should log the expected message`, () => {
+    const [rawOptions, rawValues] = g(['-aB', '123', '--lamda', 'leet', 'Omega', '-w'])
+
+    expect(() => command.run(rawOptions, rawValues)).not.toThrow()
+    expect((console.log as any).mock.calls[3][0]).toBe(yellow(`Unknow option ${yellowBright('-w')}. Please run --help.`))
+  })
+
+  it(`should log the expected message`, () => {
+    const [rawOptions, rawValues] = g(['-aB', '123', '--lamda', 'leet', 'Omega', 'Epsilon', 'Sigma', 'WTH?'])
+
+    expect(() => command.run(rawOptions, rawValues)).not.toThrow()
+    expect((console.log as any).mock.calls[4][0]).toBe(yellow(`Too many values ("${yellowBright('WTH?')}"). Please run --help.`))
+  })
+
+  it(`should log the expected message`, () => {
+    const [rawOptions, rawValues] = g(['-aB', 'foo', '--lamda', 'leet', 'Omega'])
+
+    expect(() => command.run(rawOptions, rawValues)).not.toThrow()
+    expect((console.log as any).mock.calls[5][0]).toBe(red(`Error: --beta option must be a processable number.`))
+    expect((process.exit as any).mock.calls[0][0]).toBe(1)
+  })
+
   it(`should return the expected options and values`, () => {
-    const [rawOptions, rawValues] = g(['-TaB', '123', '--lamda', 'leet', 'Omega value.'])
+    const [rawOptions, rawValues] = g(['-TaB', '123', '--lamda', 'leet', 'Omega'])
 
     command.run(rawOptions, rawValues)
-    expect(λ.mock.results[0].value).toEqual({
+    expect(λ.mock.results[4].value).toEqual({
       options: {
         alpha: true,
         beta: 123,
@@ -160,7 +192,7 @@ describe(`Command#run()`, () => {
         lamda: 'leet',
       },
       values: {
-        omega: 'Omega value.',
+        omega: 'Omega',
         epsilon: 'Who knows?',
         sigma: 'A value custom filter.',
       }
