@@ -51,8 +51,7 @@ export default class Command implements T.Command {
    * Declare a new command (or program) option.
    *
    * @description
-   * The <slug> parameter must be a valid slug, i.e.: "-s, --sluggy-slug" or
-   * "--sluggy-slug".
+   * The <slug> parameter must be a valid slug, i.e.: "-s, --sluggy-slug" or "--sluggy-slug".
    */
   public option(
     slug: string,
@@ -72,8 +71,8 @@ export default class Command implements T.Command {
    * Declare a new command (or program) value.
    *
    * @description
-   * The <name> parameter MUST be in camelCase and will be used as a placeholder
-   * for the help description of this command (or program).
+   * The <name> parameter MUST be in camelCase and will be used as a placeholder for the help
+   * description of this command (or program).
    */
   public value(
     name: string,
@@ -120,9 +119,8 @@ export default class Command implements T.Command {
     const preOptions = this.matchOptionsName(rawOptions)
     const preValues = this.matchValuesName(rawValues)
 
-    // Now, we may have some values following boolean options that have been
-    // parsed as being those options values. We thus need to clean them by
-    // switching back their values to the lone values list.
+    // Now, we may have some values following boolean options that have been parsed as being those
+    // options values. We thus need to switch back their values to the lone values list.
     // TODO Add the pre-options cleaning.
 
     const options = this.processOptions(preOptions)
@@ -142,13 +140,11 @@ export default class Command implements T.Command {
             R.propEq(slug.length > 1 ? 'slug' : 'slugLetter', slug),
             this._options,
           )
-          if (found !== undefined) return R.assoc(found.slug, value, acc)
+          if (found !== undefined) {
+            return R.assoc(found.slug, value, acc)
+          }
 
-          log.warn(
-            `Unknow option %s. Please run --help.`,
-            `${slug.length > 1 ? '--' : '-'}${slug}`,
-          )
-
+          log.warn(`Unknow option %s. Please run --help.`, `${slug.length > 1 ? '--' : '-'}${slug}`)
           return { ...acc }
         },
         {}),
@@ -167,7 +163,6 @@ export default class Command implements T.Command {
         }
 
         log.warn(`Too many values ("%s"). Please run --help.`, String(value))
-
         return { ...acc }
       },
       {},
@@ -185,11 +180,7 @@ export default class Command implements T.Command {
 
         // If this option doesn't have any filter
         if (option.filter === undefined) {
-          return R.assoc(
-            option.slug,
-            isInPreOptions ? preOptions[option.slug] : null,
-            acc,
-          )
+          return R.assoc(option.slug, isInPreOptions ? preOptions[option.slug] : null, acc)
         }
 
         // If this option has a custom filter
@@ -207,7 +198,7 @@ export default class Command implements T.Command {
           }
         }
 
-        // If the option has an internal filter
+        // If this option has an internal filter
         try {
           return R.assoc(
             option.slug,
@@ -236,31 +227,23 @@ export default class Command implements T.Command {
         // Has this option been passed as one of the CLI args?
         const isInPreValues = R.has(value.name, preValues)
 
-        // If this option doesn't have any filter
+        // If this value doesn't have any filter
         if (value.filter === undefined) {
-          return R.assoc(
-            value.name,
-            isInPreValues ? preValues[value.name] : null,
-            acc,
-          )
+          return R.assoc(value.name, isInPreValues ? preValues[value.name] : null, acc)
         }
 
-        // If this option has a custom filter
+        // If this value has a custom filter
         if (typeof value.filter === 'function') {
           try {
-            return R.assoc(
-              value.name,
-              value.filter(preValues[value.name]),
-              acc,
-            )
+            return R.assoc(value.name, value.filter(preValues[value.name]), acc)
           } catch (e) {
             logT(`${this._e}${E.ERR_CMD_PROC_X_FLT_C.message}`, e)
-            // We add a return here to allow TS to infer the last Filter type.
+            // We add a return here in order for TS to infer the last Filter type.
             return process.exit(1)
           }
         }
 
-        // If the option has an internal filter
+        // If this value has an internal filter
         try {
           return R.assoc(
             value.name,
