@@ -45,6 +45,10 @@ class IsFinal extends Filter {
       } catch (e) { throw e }
     }
 
+    if (this._isMandatory) {
+      throw `is mandatory.`
+    }
+
     return this._defaultValue
   }
 
