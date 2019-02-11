@@ -12,6 +12,8 @@ export default rorre.declare({
   ERR_CMD_SLUG_V_TYP: `The command slug is mandatory and must be a string.`,
   ERR_CMD_PROC_X_FLT_C: `The provided custom filter threw an error.`,
 
+  ERR_FLT_ELSE_C_OBL: `You can't use #else() in a mandatory filter.`,
+
   ERR_OPT_SLUG_V_FMT: `The option slug format is wrong.`,
 
   ERR_PRG_ARGS_V_LEN: `Something went wrong during the arguments validation (length < 2).`,
