@@ -5,10 +5,34 @@ describe(`Program`, () => {
   describe(`#validate()`, () => {
     it(`should fail because the description is not set`, () =>
       expect(() => program.validate()).toThrow(errors.dictionary.ERR_CMD_DESC_V_UND))
+  })
+
+  describe(`#init()`, () => {
+    it(`should fail because the description is not set`, () =>
+      expect(() => program.init()).toThrow(errors.dictionary.ERR_CMD_DESC_V_UND))
+  })
+
+  describe(`#description()`, () => {
+    it(`should fail with a wrong type`, () =>
+      expect(() => program.description(123 as any)).toThrow(errors.dictionary.ERR_CMD_DESC_V_TYP))
+    it(`should fail with an empty string`, () =>
+      expect(() => program.description('')).toThrow(errors.dictionary.ERR_CMD_DESC_V_LEN))
+
+    it(`should pass with a valid description`, () =>
+      expect(() => program.description('foo')).not.toThrow())
+    it(`should return a class instance of Program`, () =>
+      expect(program.description('foo').constructor.name).toBe('Program'))
+  })
+
+  describe(`#validate()`, () => {
     it(`should fail because the name is not set`, () => {
-      program.description('foo')
       expect(() => program.validate()).toThrow(errors.dictionary.ERR_PRG_NAME_V_UND)
     })
+  })
+
+  describe(`#init()`, () => {
+    it(`should fail because the name is not set`, () =>
+      expect(() => program.init()).toThrow(errors.dictionary.ERR_PRG_NAME_V_UND))
   })
 
   describe(`#name()`, () => {
@@ -26,6 +50,11 @@ describe(`Program`, () => {
   describe(`#validate()`, () => {
     it(`should fail because the version is not set`, () =>
       expect(() => program.validate()).toThrow(errors.dictionary.ERR_PRG_VERS_V_UND))
+  })
+
+  describe(`#init()`, () => {
+    it(`should fail because the version is not set`, () =>
+      expect(() => program.init()).toThrow(errors.dictionary.ERR_PRG_VERS_V_UND))
   })
 
   describe(`#version()`, () => {
