@@ -9,24 +9,24 @@
     "chalk": "^2.4.2",
     "ramda": "^0.26.1",
     "rorre": "^1.1.0",
-    "yargs": "^12.0.5"
+    "yargs": "^13.2.1"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.0",
-    "@types/node": "^10.12.24",
-    "@types/ramda": "^0.25.48",
-    "@types/yargs": "^12.0.8",
-    "coveralls": "^3.0.2",
+    "@types/jest": "^24.0.6",
+    "@types/node": "^11.9.5",
+    "@types/ramda": "^0.25.50",
+    "@types/yargs": "^12.0.9",
+    "coveralls": "^3.0.3",
     "jest": "^24.1.0",
     "rimraf": "^2.6.3",
-    "rollup": "^1.1.2",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup": "^1.2.3",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-node-resolve": "^4.0.1",
     "rollup-plugin-typescript": "^1.0.0",
-    "ts-jest": "^23.10.5",
-    "tslint": "^5.12.1",
+    "ts-jest": "^24.0.0",
+    "tslint": "^5.13.0",
     "tslint-config-airbnb": "^5.11.1",
-    "typescript": "^3.3.3"
+    "typescript": "^3.3.3333"
   },
   "scripts": {
     "build": "node ./scripts/rollup/build.js && npm run build:typescript",
