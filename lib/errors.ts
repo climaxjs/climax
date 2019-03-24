@@ -10,6 +10,8 @@ export default rorre.declare({
   ERR_CMD_DESC_V_TYP: `The command (or program) description is mandatory and must be a string.`,
   ERR_CMD_SLUG_V_LEN: `The command slug can't be empty.`,
   ERR_CMD_SLUG_V_TYP: `The command slug is mandatory and must be a string.`,
+  ERR_CMD_SLUG_V_FMT: `The command slug can only contains letters or single dashes and must start/end with a letter.`,
+  ERR_CMD_SLUG_V_CFT: `This command slug has already been declared.`,
   ERR_CMD_PROC_X_FLT_C: `The provided custom filter threw an error.`,
 
   ERR_FLT_ELSE_C_OBL: `You can't use #else() in a mandatory filter.`,

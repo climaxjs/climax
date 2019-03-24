@@ -2,7 +2,7 @@ import log from '@inspired-beings/log'
 import * as R from 'ramda'
 
 import errors from '../../errors'
-import { logT, throwWith } from '../../utils'
+import { logT, throwWith, validateCommandSlug } from '../../utils'
 import Option from '../option'
 import Value from '../value'
 
@@ -17,16 +17,26 @@ export default class Command implements T.Command {
   protected _description: string
   protected _options: OptionT.Option[] = []
   protected _values: ValueT.Value[] = []
+  private _slug: string
 
   /** Errors message prefix for developers. */
   protected _e: string
 
-  /**
-   * TODO Validate the slug.
-   */
-  constructor(
-    protected readonly _slug: string,
-  ) {
+  constructor(slug: string) {
+    if (slug !== '_') {
+      switch (true) {
+        case typeof slug !== 'string':
+          throw E.ERR_CMD_SLUG_V_TYP
+
+        case slug.length === 0:
+          throw E.ERR_CMD_SLUG_V_LEN
+
+        case !validateCommandSlug(slug):
+          throw E.ERR_CMD_SLUG_V_FMT
+      }
+    }
+
+    this._slug = slug
     this._e = this._slug === '_' ? `[Program] ` : `[Command: "${this._slug}"] `
   }
 

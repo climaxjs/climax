@@ -2,7 +2,7 @@
 import * as R from 'ramda'
 
 import errors from '../errors'
-import * as utils from '../utils'
+import { parseArgs, throwWith, validateSemVer } from '../utils'
 import Command from './command'
 
 import * as T from './types'
@@ -72,7 +72,7 @@ class Program extends Command implements T.Program {
       case version.length !== 0 && version[0].toLocaleLowerCase() === 'v':
         throw E.ERR_PRG_VERS_V_NOV
 
-      case !utils.validateSemVer(version):
+      case !validateSemVer(version):
         throw E.ERR_PRG_VERS_V_SEM
     }
 
@@ -83,20 +83,22 @@ class Program extends Command implements T.Program {
 
   /**
    * Add a new command.
-   *
-   * TODO Validate command slug format.
-   * TODO Handle existing command slug.
    */
   public command(slug: string): CommandT.Command {
     switch (true) {
-      case typeof slug !== 'string':
-        throw E.ERR_CMD_SLUG_V_TYP
+      // Prevent the use of Program reseved underscore character:
+      case slug === '_':
+        throw E.ERR_CMD_SLUG_V_FMT
 
-      case slug.length === 0:
-        throw E.ERR_CMD_SLUG_V_LEN
+      case R.hasPath([String(slug)], this._commands):
+        throwWith(E.ERR_CMD_SLUG_V_CFT, `[Command: "${slug}"] `)
     }
 
-    this._commands = R.assoc(slug, new Command(slug), this._commands)
+    try {
+      this._commands = R.assoc(slug, new Command(slug), this._commands)
+    } catch (error) {
+      throw error
+    }
 
     return R.prop(slug, this._commands)
   }
@@ -109,10 +111,10 @@ class Program extends Command implements T.Program {
 
     switch (true) {
       case this._name === undefined:
-        utils.throwWith(E.ERR_PRG_NAME_V_UND, `[Program] `)
+        throwWith(E.ERR_PRG_NAME_V_UND, `[Program] `)
 
       case this._version === undefined:
-        utils.throwWith(E.ERR_PRG_VERS_V_UND, `[Program] `)
+        throwWith(E.ERR_PRG_VERS_V_UND, `[Program] `)
     }
   }
 
@@ -160,7 +162,7 @@ class Program extends Command implements T.Program {
     const commands = R.keys(this._commands) as string[]
     const rawArgs = R.slice(2, Infinity, process.argv)
 
-    return utils.parseArgs(commands, rawArgs)
+    return parseArgs(commands, rawArgs)
   }
 }
 

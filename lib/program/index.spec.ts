@@ -92,7 +92,9 @@ describe(`Program`, () => {
       expect(() => program.command('')).toThrow(errors.dictionary.ERR_CMD_SLUG_V_LEN))
 
     it(`should pass with a valid slug`, () => expect(() => program.command('foo')).not.toThrow())
+    it(`should fail with an already declared slug`, () =>
+      expect(() => program.command('foo')).toThrow(errors.dictionary.ERR_CMD_SLUG_V_CFT))
     it(`should return a class instance of Command`, () =>
-      expect(program.command('foo').constructor.name).toBe('Command'))
+      expect(program.command('bar').constructor.name).toBe('Command'))
   })
 })
