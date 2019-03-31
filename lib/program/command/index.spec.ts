@@ -13,7 +13,10 @@ import { BNSObject, BNS } from '../../types';
 const _ = undefined as any
 
 describe(`Command`, () => {
-  const command = new Command('foo')
+  const COMMAND_SLUG = 'a-command'
+  const COMMAND_DESCRIPTION = 'A Command Description'
+
+  const command = new Command(COMMAND_SLUG)
 
   describe(`#validate()`, () => {
     it(`should fail because the description is not set`, () =>
@@ -26,41 +29,40 @@ describe(`Command`, () => {
     it(`should fail with an empty string`, () =>
       expect(() => command.description('')).toThrow(errors.dictionary.ERR_CMD_DESC_V_LEN))
 
-    it(`should pass with a valid description`, () => expect(() => command.description('foo')).not.toThrow())
-
     it(`should return a class instance of Command`, () =>
-      expect(command.description('foo').constructor.name).toBe('Command'))
+      expect(command.description(COMMAND_DESCRIPTION).constructor.name).toBe('Command'))
   })
 
   describe(`#validate()`, () => {
-    it(`should pass`, () => expect(() => command.validate()).not.toThrow())
+    it(`should fail because the action is not set`, () =>
+      expect(() => command.validate()).toThrow(errors.dictionary.ERR_CMD_ACTN_V_UND))
   })
 
   describe(`#option()`, () => {
     it(`should fail with a wrong typed <slug>`, () =>
       expect(() => command.option(1337 as any, _))
-        .toThrow(`[Command: "foo"] ` + errors.dictionary.ERR_VAL_NAME_V_TYP))
+        .toThrow(`[Command: "${COMMAND_SLUG}"] ` + errors.dictionary.ERR_VAL_NAME_V_TYP))
     it(`should fail with an empty string <slug>`, () =>
       expect(() => command.option('', _))
-        .toThrow(`[Command: "foo"] ` + errors.dictionary.ERR_VAL_NAME_V_LEN))
+        .toThrow(`[Command: "${COMMAND_SLUG}"] ` + errors.dictionary.ERR_VAL_NAME_V_LEN))
     it(`should fail with a wrong typed <description>`, () =>
       expect(() => command.option('-b, --bar', 1337 as any))
-        .toThrow(`[Command: "foo"] [Option: "-b, --bar"] ` + errors.dictionary.ERR_VAL_DESC_V_TYP))
+        .toThrow(`[Command: "${COMMAND_SLUG}"] [Option: "-b, --bar"] ` + errors.dictionary.ERR_VAL_DESC_V_TYP))
     it(`should fail with an empty string <description>`, () =>
       expect(() => command.option('-b, --bar', ''))
-        .toThrow(`[Command: "foo"] [Option: "-b, --bar"] ` + errors.dictionary.ERR_VAL_DESC_V_LEN))
+        .toThrow(`[Command: "${COMMAND_SLUG}"] [Option: "-b, --bar"] ` + errors.dictionary.ERR_VAL_DESC_V_LEN))
     it(`should fail with an unprocessable internal <filter>`, () => {
       expect(() => command.option('-b, --bar', 'lambda', is as any))
-        .toThrow(`[Command: "foo"] [Option: "-b, --bar"] ` + errors.dictionary.ERR_VAL_FILT_V_TYP)
+        .toThrow(`[Command: "${COMMAND_SLUG}"] [Option: "-b, --bar"] ` + errors.dictionary.ERR_VAL_FILT_V_TYP)
       expect(() => command.option('-b, --bar', 'lambda', is.aMandatory as any))
-        .toThrow(`[Command: "foo"] [Option: "-b, --bar"] ` + errors.dictionary.ERR_VAL_FILT_V_TYP)
+        .toThrow(`[Command: "${COMMAND_SLUG}"] [Option: "-b, --bar"] ` + errors.dictionary.ERR_VAL_FILT_V_TYP)
     })
     it(`should fail with a wrong typed custom <filter>`, () =>
       expect(() => command.option('-b, --bar', 'lambda', 1337 as any))
-        .toThrow(`[Command: "foo"] [Option: "-b, --bar"] ` + errors.dictionary.ERR_VAL_FILT_V_TYP_C))
+        .toThrow(`[Command: "${COMMAND_SLUG}"] [Option: "-b, --bar"] ` + errors.dictionary.ERR_VAL_FILT_V_TYP_C))
     it(`should fail with a malformed <slug>`, () =>
       expect(() => command.option('bar', 'lambda'))
-        .toThrow(`[Command: "foo"] [Option: "bar"] ` + errors.dictionary.ERR_OPT_SLUG_V_FMT))
+        .toThrow(`[Command: "${COMMAND_SLUG}"] [Option: "bar"] ` + errors.dictionary.ERR_OPT_SLUG_V_FMT))
 
     it(`should return a class instance of Command`, () =>
       expect(command.option('-b, --bar', 'lambda').constructor.name).toBe('Command'))
@@ -69,25 +71,25 @@ describe(`Command`, () => {
   describe(`#value()`, () => {
     it(`should fail with a wrong typed <name>`, () =>
       expect(() => command.value(1337 as any, _))
-        .toThrow(`[Command: "foo"] ` + errors.dictionary.ERR_VAL_NAME_V_TYP))
+        .toThrow(`[Command: "${COMMAND_SLUG}"] ` + errors.dictionary.ERR_VAL_NAME_V_TYP))
     it(`should fail with an empty string <name>`, () =>
       expect(() => command.value('', _))
-        .toThrow(`[Command: "foo"] ` + errors.dictionary.ERR_VAL_NAME_V_LEN))
+        .toThrow(`[Command: "${COMMAND_SLUG}"] ` + errors.dictionary.ERR_VAL_NAME_V_LEN))
     it(`should fail with a wrong typed <description>`, () =>
       expect(() => command.value('bar', 1337 as any))
-        .toThrow(`[Command: "foo"] [Value: "bar"] ` + errors.dictionary.ERR_VAL_DESC_V_TYP))
+        .toThrow(`[Command: "${COMMAND_SLUG}"] [Value: "bar"] ` + errors.dictionary.ERR_VAL_DESC_V_TYP))
     it(`should fail with an empty string <description>`, () =>
       expect(() => command.value('bar', ''))
-        .toThrow(`[Command: "foo"] [Value: "bar"] ` + errors.dictionary.ERR_VAL_DESC_V_LEN))
+        .toThrow(`[Command: "${COMMAND_SLUG}"] [Value: "bar"] ` + errors.dictionary.ERR_VAL_DESC_V_LEN))
     it(`should fail with an unprocessable internal <filter>`, () => {
       expect(() => command.value('bar', 'lambda', is as any))
-        .toThrow(`[Command: "foo"] [Value: "bar"] ` + errors.dictionary.ERR_VAL_FILT_V_TYP)
+        .toThrow(`[Command: "${COMMAND_SLUG}"] [Value: "bar"] ` + errors.dictionary.ERR_VAL_FILT_V_TYP)
       expect(() => command.value('bar', 'lambda', is.aMandatory as any))
-        .toThrow(`[Command: "foo"] [Value: "bar"] ` + errors.dictionary.ERR_VAL_FILT_V_TYP)
+        .toThrow(`[Command: "${COMMAND_SLUG}"] [Value: "bar"] ` + errors.dictionary.ERR_VAL_FILT_V_TYP)
     })
     it(`should fail with a wrong typed custom <filter>`, () =>
       expect(() => command.value('bar', 'lambda', 1337 as any))
-        .toThrow(`[Command: "foo"] [Value: "bar"] ` + errors.dictionary.ERR_VAL_FILT_V_TYP_C))
+        .toThrow(`[Command: "${COMMAND_SLUG}"] [Value: "bar"] ` + errors.dictionary.ERR_VAL_FILT_V_TYP_C))
 
     it(`should return a class instance of Command`, () =>
       expect(command.value('bar', 'lamda').constructor.name).toBe('Command'))
