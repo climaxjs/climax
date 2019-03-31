@@ -73,16 +73,16 @@ describe(`Program`, () => {
 
   describe(`#info()`, () => {
     it(`should fail with a wrong type`, () => {
-      class Dummy {};
+      class Dummy {}
 
-      expect(() => program.info(null as any)).toThrow(errors.dictionary.ERR_PRG_INFO_V_TYP);
-      expect(() => program.info(new Dummy() as any)).toThrow(errors.dictionary.ERR_PRG_INFO_V_TYP);
+      expect(() => program.info(null as any)).toThrow(errors.dictionary.ERR_PRG_INFO_V_TYP)
+      expect(() => program.info(new Dummy() as any)).toThrow(errors.dictionary.ERR_PRG_INFO_V_TYP)
     })
     it(`should fail with missing properties`, () => {
-      expect(() => program.info({} as any)).toThrow(errors.dictionary.ERR_PRG_NAME_V_TYP);
-      expect(() => program.info({ name: PROGRAM_NAME } as any)).toThrow(errors.dictionary.ERR_CMD_DESC_V_TYP);
+      expect(() => program.info({} as any)).toThrow(errors.dictionary.ERR_PRG_NAME_V_TYP)
+      expect(() => program.info({ name: PROGRAM_NAME } as any)).toThrow(errors.dictionary.ERR_CMD_DESC_V_TYP)
       expect(() => program.info({ name: PROGRAM_NAME, description: PROGRAM_DESCRIPTION } as any))
-        .toThrow(errors.dictionary.ERR_PRG_VERS_V_TYP);
+        .toThrow(errors.dictionary.ERR_PRG_VERS_V_TYP)
     })
 
     it(`should return a class instance of Program with valid properties`, () =>

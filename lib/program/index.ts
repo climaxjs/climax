@@ -163,15 +163,6 @@ class Program extends Command implements T.Program {
    * doesn't match them with options, values and their related filters.
    */
   private parseArgs(): ParsedArgs {
-    // Check for any inconsistent structure in the process arguments
-    switch (true) {
-      case !Array.isArray(process.argv):
-        throw E.ERR_PRG_ARGS_V_TYP
-
-      case process.argv.length < 2:
-        throw E.ERR_PRG_ARGS_V_LEN
-    }
-
     if (process.argv.length === 2) return [null, {}, []]
 
     const commands = R.keys(this._commands) as string[]
