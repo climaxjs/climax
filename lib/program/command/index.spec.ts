@@ -18,6 +18,15 @@ describe(`Command`, () => {
 
   const command = new Command(COMMAND_SLUG)
 
+  describe(`#constructor()`, () => {
+    it(`should fail with a wrong type slug`, () =>
+      expect(() => new Command(123 as any)).toThrow(errors.dictionary.ERR_CMD_SLUG_V_TYP))
+    it(`should fail with an emprty slug`, () =>
+      expect(() => new Command('')).toThrow(errors.dictionary.ERR_CMD_SLUG_V_LEN))
+    it(`should fail with a malformed slug`, () =>
+      expect(() => new Command('-a')).toThrow(errors.dictionary.ERR_CMD_SLUG_V_FMT))
+  })
+
   describe(`#validate()`, () => {
     it(`should fail because the description is not set`, () =>
       expect(() => command.validate()).toThrow(errors.dictionary.ERR_CMD_DESC_V_UND))
