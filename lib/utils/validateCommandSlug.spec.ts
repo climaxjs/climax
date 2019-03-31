@@ -12,7 +12,15 @@ const INVALID_SLUGS = [
   '-foo-bar-',
   '-foo-bar-gam',
   'foo-bar-gam-',
-  '-foo-bar-gam-',
+  '-a',
+  'a-',
+  '-a-',
+  '-a-b',
+  'a-b-',
+  '-a-b-',
+  '-a-b-c',
+  'a-b-c-',
+  '-a-b-c-',
 ]
 const VALID_SLUGS = [
   'foo',
@@ -20,6 +28,9 @@ const VALID_SLUGS = [
   'foo-bar',
   'fooBarGam',
   'foo-bar-gam',
+  'a',
+  'a-b',
+  'a-b-c',
 ]
 
 INVALID_SLUGS.map(slug => test(`"${slug}" is invalid`, () => expect(validateCommandSlug(slug)).toBe(false)))
