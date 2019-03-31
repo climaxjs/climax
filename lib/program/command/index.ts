@@ -123,6 +123,9 @@ export default class Command implements T.Command {
     switch (true) {
       case this._description === undefined:
         throwWith(E.ERR_CMD_DESC_V_UND, this._e)
+
+      case this._slug !== '_' && this._action === undefined:
+        throwWith(E.ERR_CMD_ACTN_V_UND, this._e)
     }
   }
 
