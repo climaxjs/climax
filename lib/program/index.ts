@@ -16,8 +16,8 @@ class Program extends Command implements T.Program {
   private _version: string
 
   constructor() {
-    // Since Program is also a Command, we arbitrary assign an underscore as its command slug in
-    // order to better customize error messages.
+    // Since Program is also a Command, we arbitrary assign an underscore as its
+    // command slug in order to better customize error messages.
     super('_')
   }
 
@@ -31,18 +31,21 @@ class Program extends Command implements T.Program {
    * TODO Handle the binary name.
    */
   public info(npmInfo: T.NpmInfo): this {
+    switch(true) {
+      case !R.is(Object, npmInfo) || npmInfo.constructor.name !== "Object":
+        throw E.ERR_PRG_INFO_V_TYP
+    }
+
     this.name(npmInfo.name)
     this.description(npmInfo.description)
     this.version(npmInfo.version)
+
 
     return this
   }
 
   /**
    * Set the program name.
-   *
-   * @description
-   * Unless explicitly set, the package.json name is the default value.
    */
   public name(name: string): this {
     switch (true) {
@@ -60,9 +63,6 @@ class Program extends Command implements T.Program {
 
   /**
    * Set the program version.
-   *
-   * @description
-   * Unless explicitly set, the package.json version will be the default value.
    */
   public version(version: string): this {
     switch (true) {
@@ -107,9 +107,10 @@ class Program extends Command implements T.Program {
    * Validate this program mandatory properties.
    */
   public validate(): void {
-    super.validate()
-
     switch (true) {
+      case this._description === undefined:
+        throwWith(E.ERR_PRG_DESC_V_UND, `[Program] `)
+
       case this._name === undefined:
         throwWith(E.ERR_PRG_NAME_V_UND, `[Program] `)
 
@@ -119,7 +120,8 @@ class Program extends Command implements T.Program {
   }
 
   /**
-   * Initiate the program once all the commands, options and values has been set.
+   * Initiate the program once all the commands, options and values has been
+   * set.
    */
   public init(): void {
     this.validate()
@@ -127,8 +129,21 @@ class Program extends Command implements T.Program {
 
     const [command, options, values] = this.parseArgs();
 
-    // Run the command
-    (command === null ? this : this._commands[command]).run(options, values)
+    if (command === null) {
+      if (this._action === undefined) {
+        // TODO Show help
+
+        return
+      }
+
+      // Run the program action
+      this.run(options, values)
+
+      return
+    }
+
+    // Run the command action
+    this._commands[command].run(options, values)
   }
 
   /**
@@ -144,8 +159,8 @@ class Program extends Command implements T.Program {
    * Parse the CLI arguments and attempt to extract the potential command.
    *
    * @description
-   * This parsing operation only splits the command, options and values. It doesn't match them with
-   * options, values and their related filters.
+   * This parsing operation only splits the command, options and values. It
+   * doesn't match them with options, values and their related filters.
    */
   private parseArgs(): ParsedArgs {
     // Check for any inconsistent structure in the process arguments
