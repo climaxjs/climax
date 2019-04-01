@@ -124,21 +124,21 @@ Bonjour E.T!
 - [x] Initial Climax project config
 - [x] Initial Climax project CI
 - [x] Basic Program bootstrap with commands, options and values
-- [ ] Basic options and values filters
-- [ ] 0.1.0 release
-- [ ] [CLI][link-cli]: Basic scaffold generation
-- [ ] [CLI][link-cli]: 1st alpha release
+- [x] Basic options and values filters
+- [x] 0.1.0-beta release
+- [ ] Help integration
+- [ ] 0.2.0-beta release
 - [ ] Cross-platform binaries
 - [ ] Auto-update via (Travis + Github)
-- [ ] 0.2.0 release
 - [ ] [CLI][link-cli]: Binaries scripts generation (Travis + Github)
 - [ ] [CLI][link-cli]: Auto-update config generation (Travis + Github)
-- [ ] [CLI][link-cli]: 2nd alpha release
-- [ ] Help integration
-- [ ] 0.3.0 release
+- [ ] [CLI][link-cli]: Basic scaffold generation
+- [ ] [CLI][link-cli]: 0.1.0-beta release
+- [ ] 0.3.0-beta release
 - [ ] Single prompt
+- [ ] 0.4.0-beta release
 - [ ] List prompt
-- [ ] 0.4.0 release
+- [ ] 0.5.0-beta release
 
 ## Documentation
 
