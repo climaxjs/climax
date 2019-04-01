@@ -16,9 +16,7 @@ class Program extends Command implements T.Program {
   private _version: string
 
   constructor() {
-    // Since Program is also a Command, we arbitrary assign an underscore as its
-    // command slug in order to better customize error messages.
-    super('_')
+    super('', true)
   }
 
   /**
@@ -108,15 +106,14 @@ class Program extends Command implements T.Program {
    */
   public validate(): void {
     switch (true) {
-      case this._description === undefined:
-        throwWith(E.ERR_PRG_DESC_V_UND, `[Program] `)
-
       case this._name === undefined:
-        throwWith(E.ERR_PRG_NAME_V_UND, `[Program] `)
+        throw E.ERR_PRG_NAME_V_UND
 
       case this._version === undefined:
-        throwWith(E.ERR_PRG_VERS_V_UND, `[Program] `)
+        throw E.ERR_PRG_VERS_V_UND
     }
+
+    super.validate()
   }
 
   /**

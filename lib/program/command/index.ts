@@ -13,17 +13,23 @@ import * as ValueT from '../value/types'
 const { error: E } = errors
 
 export default class Command implements T.Command {
+  /** Errors message prefix for developers. */
+  public isProgram: boolean
+  /** Command (or Program) action */
   protected _action: T.CommandAction
+  /** Command (or Program) description. */
   protected _description: string
-  protected _options: OptionT.Option[] = []
-  protected _values: ValueT.Value[] = []
-  private _slug: string
-
   /** Errors message prefix for developers. */
   protected _e: string
+  /** Command (or Program) options. */
+  protected _options: OptionT.Option[] = []
+  /** Command (or Program) values. */
+  protected _values: ValueT.Value[] = []
+  /** Command slug (Program has an undefined slug). */
+  private _slug: string
 
-  constructor(slug: string) {
-    if (slug !== '_') {
+  constructor(slug: string, isProgram: boolean = false) {
+    if (!isProgram) {
       switch (true) {
         case typeof slug !== 'string':
           throw E.ERR_CMD_SLUG_V_TYP
@@ -34,10 +40,12 @@ export default class Command implements T.Command {
         case !validateCommandSlug(slug):
           throw E.ERR_CMD_SLUG_V_FMT
       }
+
+      this._slug = slug
     }
 
-    this._slug = slug
-    this._e = this._slug === '_' ? `[Program] ` : `[Command: "${this._slug}"] `
+    this.isProgram = isProgram
+    this._e = isProgram ? '' : `[Command: "${this._slug}"] `
   }
 
   /**
@@ -46,10 +54,16 @@ export default class Command implements T.Command {
   public description(description: string): this {
     switch (true) {
       case typeof description !== 'string':
-        throw E.ERR_CMD_DESC_V_TYP
+        throwWith(
+          this.isProgram ? E.ERR_PRG_DESC_V_TYP : E.ERR_CMD_DESC_V_TYP,
+          this._e
+        )
 
       case description.length === 0:
-        throw E.ERR_CMD_DESC_V_LEN
+        throwWith(
+          this.isProgram ? E.ERR_PRG_DESC_V_LEN : E.ERR_CMD_DESC_V_LEN,
+          this._e
+        )
     }
 
     this._description = description
@@ -122,9 +136,12 @@ export default class Command implements T.Command {
   public validate(): void {
     switch (true) {
       case this._description === undefined:
-        throwWith(E.ERR_CMD_DESC_V_UND, this._e)
+        throwWith(
+          this.isProgram ? E.ERR_PRG_DESC_V_UND : E.ERR_CMD_DESC_V_UND,
+          this._e
+        )
 
-      case this._slug !== '_' && this._action === undefined:
+      case !this.isProgram && this._action === undefined:
         throwWith(E.ERR_CMD_ACTN_V_UND, this._e)
     }
   }

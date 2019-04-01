@@ -6,8 +6,8 @@ export default rorre.declare({
   ERR_CMD_ACTN_V_UND: `The command action is mandatory and must be set via .action().`,
   ERR_CMD_ACTN_V_TYP: `The command (or program) action must be a function.`,
   ERR_CMD_DESC_V_UND: `The command description is mandatory and must be set via .description().`,
-  ERR_CMD_DESC_V_LEN: `The command (or program) description can't be empty.`,
-  ERR_CMD_DESC_V_TYP: `The command (or program) description is mandatory and must be a string.`,
+  ERR_CMD_DESC_V_LEN: `The command description can't be empty.`,
+  ERR_CMD_DESC_V_TYP: `The command description must be a string.`,
   ERR_CMD_SLUG_V_LEN: `The command slug can't be empty.`,
   ERR_CMD_SLUG_V_TYP: `The command slug must be a string.`,
   ERR_CMD_SLUG_V_FMT: `The command slug can only contains letters or single dashes and must start/end with a letter.`,
@@ -18,6 +18,8 @@ export default rorre.declare({
 
   ERR_OPT_SLUG_V_FMT: `The option slug format is wrong.`,
 
+  ERR_PRG_DESC_V_LEN: `The program description can't be empty.`,
+  ERR_PRG_DESC_V_TYP: `The program description must be a string.`,
   ERR_PRG_DESC_V_UND: `The program description is mandatory and must be set via .description() or .info().`,
   ERR_PRG_INFO_V_TYP: `The <npmInfo> parameter must be a npm package.json object.`,
   ERR_PRG_NAME_V_UND: `The program name is mandatory and must be set via .name() or .info().`,
