@@ -29,15 +29,14 @@ class Program extends Command implements T.Program {
    * TODO Handle the binary name.
    */
   public info(npmInfo: T.NpmInfo): this {
-    switch(true) {
-      case !R.is(Object, npmInfo) || npmInfo.constructor.name !== "Object":
+    switch (true) {
+      case !R.is(Object, npmInfo) || npmInfo.constructor.name !== 'Object':
         throw E.ERR_PRG_INFO_V_TYP
     }
 
     this.name(npmInfo.name)
     this.description(npmInfo.description)
     this.version(npmInfo.version)
-
 
     return this
   }
@@ -124,7 +123,7 @@ class Program extends Command implements T.Program {
     this.validate()
     this.validateCommands()
 
-    const [command, options, values] = this.parseArgs();
+    const [command, options, values] = this.parseArgs()
 
     if (command === null) {
       if (this._action === undefined) {
