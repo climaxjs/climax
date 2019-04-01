@@ -17,21 +17,6 @@ describe(`Program`, () => {
   // const COMMAND_ACTION = args => args
 
   describe(`#init()`, () => {
-    it(`should fail because the description is not set`, () =>
-      expect(() => program.init()).toThrow(errors.dictionary.ERR_PRG_DESC_V_UND))
-  })
-
-  describe(`#description()`, () => {
-    it(`should fail with a wrong type`, () =>
-      expect(() => program.description(123 as any)).toThrow(errors.dictionary.ERR_CMD_DESC_V_TYP))
-    it(`should fail with an empty string`, () =>
-      expect(() => program.description('')).toThrow(errors.dictionary.ERR_CMD_DESC_V_LEN))
-
-    it(`should return a class instance of Program with a valid description`, () =>
-      expect(program.description(PROGRAM_DESCRIPTION).constructor.name).toBe('Program'))
-  })
-
-  describe(`#init()`, () => {
     it(`should fail because the name is not set`, () =>
       expect(() => program.init()).toThrow(errors.dictionary.ERR_PRG_NAME_V_UND))
   })
@@ -71,6 +56,21 @@ describe(`Program`, () => {
       expect(program.version(PROGRAM_VERSION).constructor.name).toBe('Program'))
   })
 
+  describe(`#init()`, () => {
+    it(`should fail because the description is not set`, () =>
+      expect(() => program.init()).toThrow(errors.dictionary.ERR_PRG_DESC_V_UND))
+  })
+
+  describe(`#description()`, () => {
+    it(`should fail with a wrong type`, () =>
+      expect(() => program.description(123 as any)).toThrow(errors.dictionary.ERR_PRG_DESC_V_TYP))
+    it(`should fail with an empty string`, () =>
+      expect(() => program.description('')).toThrow(errors.dictionary.ERR_PRG_DESC_V_LEN))
+
+    it(`should return a class instance of Program with a valid description`, () =>
+      expect(program.description(PROGRAM_DESCRIPTION).constructor.name).toBe('Program'))
+  })
+
   describe(`#info()`, () => {
     it(`should fail with a wrong type`, () => {
       class Dummy {}
@@ -80,7 +80,7 @@ describe(`Program`, () => {
     })
     it(`should fail with missing properties`, () => {
       expect(() => program.info({} as any)).toThrow(errors.dictionary.ERR_PRG_NAME_V_TYP)
-      expect(() => program.info({ name: PROGRAM_NAME } as any)).toThrow(errors.dictionary.ERR_CMD_DESC_V_TYP)
+      expect(() => program.info({ name: PROGRAM_NAME } as any)).toThrow(errors.dictionary.ERR_PRG_DESC_V_TYP)
       expect(() => program.info({ name: PROGRAM_NAME, description: PROGRAM_DESCRIPTION } as any))
         .toThrow(errors.dictionary.ERR_PRG_VERS_V_TYP)
     })
