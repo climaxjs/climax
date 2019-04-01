@@ -56,13 +56,13 @@ export default class Command implements T.Command {
       case typeof description !== 'string':
         throwWith(
           this.isProgram ? E.ERR_PRG_DESC_V_TYP : E.ERR_CMD_DESC_V_TYP,
-          this._e
+          this._e,
         )
 
       case description.length === 0:
         throwWith(
           this.isProgram ? E.ERR_PRG_DESC_V_LEN : E.ERR_CMD_DESC_V_LEN,
-          this._e
+          this._e,
         )
     }
 
@@ -138,7 +138,7 @@ export default class Command implements T.Command {
       case this._description === undefined:
         throwWith(
           this.isProgram ? E.ERR_PRG_DESC_V_UND : E.ERR_CMD_DESC_V_UND,
-          this._e
+          this._e,
         )
 
       case !this.isProgram && this._action === undefined:
