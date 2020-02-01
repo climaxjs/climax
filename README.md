@@ -166,16 +166,16 @@ yarn test:watch
 
 Climax is [MIT licensed][link-license].
 
-[img-coveralls]: https://img.shields.io/coveralls/github/climax/core/master.svg?style=flat-square
-[img-gitter]: https://img.shields.io/gitter/room/climax/community.svg?style=flat-square
-[img-npm]: https://img.shields.io/npm/v/@climax/core.svg?style=flat-square
-[img-styleguide]: https://img.shields.io/badge/code_style-airbnb-brightgreen.svg?style=flat-square
-[img-travis]: https://img.shields.io/travis/climax/core/master.svg?style=flat-square
+[img-coveralls]: https://img.shields.io/coveralls/github/climax/core/master?style=flat-square
+[img-gitter]: https://img.shields.io/gitter/room/climax/community?style=flat-square
+[img-npm]: https://img.shields.io/npm/v/@climax/core?style=flat-square
+[img-styleguide]: https://img.shields.io/badge/code_style-airbnb-brightgreen?style=flat-square
+[img-travis]: https://img.shields.io/travis/com/climax/core/master?style=flat-square
 [link-cli]: https://github.com/climax/cli
 [link-coveralls]: https://coveralls.io/github/climax/core
 [link-license]: https://github.com/climax/climax/blob/master/LICENSE
 [link-npm]: https://www.npmjs.com/package/@climax/core
 [link-styleguide]: https://github.com/airbnb/javascript#airbnb-javascript-style-guide-
-[link-travis]: https://travis-ci.org/climax/core
+[link-travis]: https://travis-ci.com/climax/core
 [link-website]: https://climaxjs.com
 [link-gitter]: https://gitter.im/climax/community
