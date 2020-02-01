@@ -10,18 +10,18 @@ os:
   - windows
 
 cache:
-  npm: true
+  yarn: true
   directories:
     - node_modules
 
 script:
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      npm run test:lint
+      yarn run test:lint
       # Run the coverage test
       bash scripts/ci/test_coverage.sh
     else
-      npm test
+      yarn test
     fi
 
 after_success:

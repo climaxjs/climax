@@ -4,18 +4,17 @@ You can think Climax as the "Electron for CLI applications". But in fact it does
 even a bit more than that:
 
 - **CLI-based Development**<br>
-  We provide a CLI to help you generate (almost) everything. Fun fact: the
-  Climax CLI utilizes Climax. We do eat our own :hamburger:.<br>
+  We provide a CLI to help you generate (almost) everything. Fun fact: the Climax CLI utilizes Climax. We do eat our own
+  :hamburger:.<br>
 - **Cross-Platform Build & Release**<br>
-  Generate and release cross-platform signed binaries in a matter of minutes
-  with just a little bit of config, whether it inludes a npm package or not.<br>
+  Generate and release cross-platform signed binaries in a matter of minutes with just a little bit of config, whether
+  it inludes a npm package or not.<br>
 - **Auto-Update Feature**<br>
-  Adding auto-update capabilities to your CLI clients has never been that easy:
-  it is already implemented to work with your CI. And it's obviously fully
-  secured.<br>
+  Adding auto-update capabilities to your CLI clients has never been that easy: it is already implemented to work with
+  your CI. And it's obviously fully secured.<br>
 - **Conventions**<br>
-  We provide a set of conventions regarding your CLI architecture in order to
-  remove the pain of looking around for some.
+  We provide a set of conventions regarding your CLI architecture in order to remove the pain of looking around for
+  some.
 
 ## Features
 
@@ -29,17 +28,19 @@ even a bit more than that:
 ## Getting started
 
 > ### :warning: Attention
-> **As long as the first beta releases won't be published, the alpha releases
-may be proven highly unstable and WILL include multiple breaking changes.**
+> **As long as the first beta releases won't be published, the alpha releases may be proven highly unstable and WILL
+> include multiple breaking changes.**
 
 > ### :zap: Info
-> This entire process will be automatically generated via [Climax CLI][link-cli]
-as soon as its first alpha version will be released.
+> This entire process will be automatically generated via [Climax CLI][link-cli] as soon as its first alpha version will
+> be released.
 
 ### Installation
 
 ```bash
 npm i @climax/core
+# or:
+yarn add @climax/core
 ```
 
 ### Hello World
@@ -64,9 +65,8 @@ _package.json_
 ```
 
 > ### :zap: Info
-> The name, description and version specified whithin your package.json are the
-ones used by default by Climax once you pass its source to `program#info()`. The
-`bin` key is also used to show help, warning and error messages.
+> The name, description and version specified whithin your package.json are the ones used by default by Climax once you
+> pass its source to `program#info()`. The `bin` key is also used to show help, warning and error messages.
 
 Then let's write our first piece of code:
 
@@ -102,8 +102,8 @@ program.command('hello')
 program.init()
 ```
 
-Finally we can link our local "binary" file (not compiled yet since they are
-interprated by NodeJS thanks to the Sha-Bang):
+Finally we can link our local "binary" file (not compiled yet since they are interprated by NodeJS thanks to the
+Sha-Bang):
 
 ```bash
 npm link
@@ -151,13 +151,12 @@ _In progress..._
 ```
 git clone https://github.com/climax/core.git
 cd core
-npm i
+yarn
 ```
 
 ### Running Tests
 
-It is recommanded to work in TDD mode, including continuously run tests while
-writing your code:
+It is recommanded to work in TDD mode, including continuously running tests while writing your code:
 
 ```
 npm run test:watch
