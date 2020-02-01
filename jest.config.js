@@ -10,6 +10,7 @@ module.exports = {
     'json',
     'node',
   ],
+  preset: 'ts-jest',
   roots: ['<rootDir>/lib'],
   testRegex: `(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$`,
   transform: {

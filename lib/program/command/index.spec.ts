@@ -1,7 +1,5 @@
-import chalk from 'chalk'
-const red = chalk.red
-const yellow = chalk.yellow
-const yellowBright = chalk.yellowBright
+import log from "@inspired-beings/log"
+jest.mock("@inspired-beings/log");
 
 import Command from '.'
 import { is } from '../..'
@@ -117,7 +115,6 @@ describe(`Command`, () => {
 describe(`Command#run()`, () => {
   const g = (args: string[]) => parseArgs([], args).slice(1) as [BNSObject, BNS[]]
   const COMMAND_ACTION = jest.fn()
-  console.log = jest.fn()
   process.exit = jest.fn() as any
 
   const command = new Command('foo')
@@ -143,49 +140,55 @@ describe(`Command#run()`, () => {
     })
     .action(COMMAND_ACTION)
 
+  beforeEach(() => {
+    (log.err as jest.Mock<never>).mockClear();
+    (log.warn as jest.Mock<never>).mockClear();
+    (process.exit as jest.Mock<never>).mockClear();
+  })
+
   it(`should log the expected message and throw the expected error`, () => {
     const [rawOptions, rawValues] = g(['-aB', '123', '--lamda', 'leet', 'A.', '--zeta', '42'])
 
     expect(() => command.run(rawOptions, rawValues)).toThrowError(errors.dictionary.ERR_CMD_PROC_X_FLT_C)
-    expect((console.log as any)).toHaveBeenCalledWith(red('Wow!'))
+    expect(log.err).toHaveBeenLastCalledWith('Wow!')
   })
 
   it(`should log the expected message and throw the expected error`, () => {
     const [rawOptions, rawValues] = g(['-aB', '123', '--lamda', 'leet', 'Omega', 'Epsilon', '42'])
 
     expect(() => command.run(rawOptions, rawValues)).toThrowError(errors.dictionary.ERR_CMD_PROC_X_FLT_C)
-    expect((console.log as any)).toHaveBeenCalledWith(red('Wow2!'))
+    expect(log.err).toHaveBeenLastCalledWith('Wow2!')
   })
 
   it(`should log the expected message`, () => {
     const [rawOptions, rawValues] = g(['-aB', '123', '--lamda', 'leet', 'Omega', '--wth'])
 
     expect(() => command.run(rawOptions, rawValues)).not.toThrow()
-    expect((console.log as any))
-      .toHaveBeenCalledWith(yellow(`Unknow option ${yellowBright('--wth')}. Please run --help.`))
+    expect(log.warn)
+      .toHaveBeenCalledWith('Unknow option %s. Please run --help.', '--wth')
   })
 
   it(`should log the expected message`, () => {
     const [rawOptions, rawValues] = g(['-aB', '123', '--lamda', 'leet', 'Omega', '-w'])
 
     expect(() => command.run(rawOptions, rawValues)).not.toThrow()
-    expect((console.log as any))
-      .toHaveBeenCalledWith(yellow(`Unknow option ${yellowBright('-w')}. Please run --help.`))
+    expect(log.warn)
+      .toHaveBeenCalledWith('Unknow option %s. Please run --help.', '-w')
   })
 
   it(`should log the expected message`, () => {
     const [rawOptions, rawValues] = g(['-aB', '123', '--lamda', 'leet', 'Omega', 'Epsilon', 'Sigma', 'WTH?'])
 
     expect(() => command.run(rawOptions, rawValues)).not.toThrow()
-    expect((console.log as any))
-      .toHaveBeenCalledWith(yellow(`Too many values ("${yellowBright('WTH?')}"). Please run --help.`))
+    expect(log.warn)
+      .toHaveBeenCalledWith('Too many values ("%s"). Please run --help.', 'WTH?')
   })
 
   it(`should log the expected message`, () => {
     const [rawOptions, rawValues] = g(['-aB', 'foo', '--lamda', 'leet', 'Omega'])
 
     expect(() => command.run(rawOptions, rawValues)).not.toThrow()
-    expect((console.log as any)).toHaveBeenCalledWith(red(`Error: --beta option must be a processable number.`))
+    expect(log.err).toHaveBeenCalledWith('Error: %s option must be a processable number.', '--beta')
     expect((process.exit as any)).toHaveBeenCalledWith(1)
   })
 

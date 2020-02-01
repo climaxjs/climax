@@ -4,30 +4,6 @@
   "version": "0.1.0-beta.0",
   "license": "MIT",
   "private": true,
-  "dependencies": {
-    "@inspired-beings/log": "^1.2.0",
-    "chalk": "^2.4.2",
-    "ramda": "^0.26.1",
-    "rorre": "^1.1.0",
-    "yargs": "^13.2.2"
-  },
-  "devDependencies": {
-    "@types/jest": "^24.0.11",
-    "@types/node": "^11.12.2",
-    "@types/ramda": "^0.26.5",
-    "@types/yargs": "^12.0.10",
-    "coveralls": "^3.0.3",
-    "jest": "^24.5.0",
-    "rimraf": "^2.6.3",
-    "rollup": "^1.7.4",
-    "rollup-plugin-commonjs": "^9.2.2",
-    "rollup-plugin-node-resolve": "^4.0.1",
-    "rollup-plugin-typescript": "^1.0.1",
-    "ts-jest": "^24.0.1",
-    "tslint": "^5.14.0",
-    "tslint-config-airbnb": "^5.11.1",
-    "typescript": "^3.4.1"
-  },
   "scripts": {
     "build": "node ./scripts/rollup/build.js && npm run build:typescript",
     "build:typescript": "tsc -p ./tsconfig.json --emitDeclarationOnly",
@@ -36,5 +12,28 @@
     "test:unit": "jest",
     "test:watch": "jest --watch",
     "preversion": "npm test"
+  },
+  "dependencies": {
+    "@inspired-beings/log": "1.2.0",
+    "ramda": "0.26.1",
+    "rorre": "1.2.0",
+    "yargs": "15.1.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "11.0.1",
+    "@rollup/plugin-node-resolve": "7.0.0",
+    "@rollup/plugin-typescript": "3.0.0",
+    "@types/jest": "25.1.1",
+    "@types/node": "13.7.0",
+    "@types/ramda": "0.26.40",
+    "@types/yargs": "^15.0.3",
+    "coveralls": "3.0.9",
+    "jest": "25.1.0",
+    "rimraf": "3.0.1",
+    "rollup": "1.31.0",
+    "ts-jest": "25.1.0",
+    "tslint": "6.0.0",
+    "tslint-config-airbnb": "5.11.2",
+    "typescript": "3.7.5"
   }
 }

@@ -241,7 +241,7 @@ export default class Command implements T.Command {
             acc,
           )
         } catch (e) {
-          log.err(`Error: --${option.slug} option ${e}`)
+          log.err(`Error: %s option ${e}`, `--${option.slug}`)
           process.exit(1)
         }
       },
@@ -285,7 +285,7 @@ export default class Command implements T.Command {
             acc,
           )
         } catch (e) {
-          log.err(`Error: [${value.name}] value ${e}`)
+          log.err(`Error: [%s] value ${e}`, value.name)
           process.exit(1)
         }
       },
