@@ -159,7 +159,7 @@ yarn
 It is recommanded to work in TDD mode, including continuously running tests while writing your code:
 
 ```
-npm run test:watch
+yarn test:watch
 ```
 
 ### License
