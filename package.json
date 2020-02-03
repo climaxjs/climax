@@ -15,13 +15,13 @@
   },
   "dependencies": {
     "@inspired-beings/log": "1.2.0",
-    "ramda": "0.26.1",
+    "ramda": "0.27.0",
     "rorre": "1.2.0",
     "yargs": "15.1.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "11.0.1",
-    "@rollup/plugin-node-resolve": "7.0.0",
+    "@rollup/plugin-commonjs": "11.0.2",
+    "@rollup/plugin-node-resolve": "7.1.0",
     "@rollup/plugin-typescript": "3.0.0",
     "@types/jest": "25.1.1",
     "@types/node": "13.7.0",
