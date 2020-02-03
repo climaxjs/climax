@@ -1,18 +1,32 @@
 language: node_js
 
 node_js:
-  - "10"
-  - "12"
+  - "v10.18.1"
+  - "v12.14.1"
+  - "v13.7.0"
 
 os:
   - linux
   - osx
-  - windows
 
 cache:
   yarn: true
   directories:
     - node_modules
+
+jobs:
+  include:
+    # Fix hanging Windows tests (because of yarn):
+    # https://travis-ci.community/t/build-doesnt-finish-after-completing-tests/288
+    - node_js: "v10.18.1"
+      os: windows
+      env: YARN_GPG=no
+    - node_js: "v12.14.1"
+      os: windows
+      env: YARN_GPG=no
+    - node_js: "v13.7.0"
+      os: windows
+      env: YARN_GPG=no
 
 script:
   - |
