@@ -45,6 +45,11 @@ after_success:
       bash scripts/ci/deploy.sh
     fi
 
+branches:
+  only:
+  - develop
+  - master
+
 notifications:
   webhooks:
     urls:
