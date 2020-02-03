@@ -29,13 +29,14 @@ jobs:
       env: YARN_GPG=no
 
 script:
+  - yarn test --coverage --silent
+after_script:
   - |
-    if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      yarn run test:lint
-      # Run the coverage test
-      bash scripts/ci/test_coverage.sh
-    else
-      yarn test
+    if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+      # Push tests coverage data to Coveralls:
+      - ./node_modules/.bin/coveralls < ./coverage/lcov.info
+      # Push tests coverage data to Codecov:
+      - npx codecov
     fi
 
 after_success:
