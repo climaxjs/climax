@@ -31,7 +31,7 @@
     "jest": "26.0.1",
     "rimraf": "3.0.2",
     "rollup": "2.10.2",
-    "ts-jest": "25.5.1",
+    "ts-jest": "26.0.0",
     "tslint": "6.1.2",
     "tslint-config-airbnb": "5.11.2",
     "typescript": "3.9.2"
