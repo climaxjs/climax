@@ -231,12 +231,12 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@inspired-beings/log@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@inspired-beings/log/-/log-1.2.0.tgz#e45a9548db39004c3a0fc097649930fe27af7e44"
-  integrity sha512-r5cuy3c3qShNt+PScypBX1ZPthDuDcaVpoqWzyBk2t3nCqr5oo9LZZZ1VqrfbPGH7akl86s49pvY3cozzAglIA==
+"@inspired-beings/log@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@inspired-beings/log/-/log-2.0.0.tgz#9546a27fa74e88ae40e13c29d84a6f4e8a69a434"
+  integrity sha512-AosgUvdSPiGH4K1TfBMLfOIv/mSChSUgxkrgVwmqo8lgsmlsrzNwjqpH+w3aGM9hyNfCc+bb47EzydXcAG06YQ==
   dependencies:
-    chalk "^2.4.1"
+    chalk "4.0.0"
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.0.0"
@@ -940,7 +940,15 @@ caseless@~0.12.0:
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
-chalk@^2.0.0, chalk@^2.3.0, chalk@^2.4.1:
+chalk@4.0.0, chalk@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.0.0.tgz#6e98081ed2d17faab615eb52ac66ec1fe6209e72"
+  integrity sha512-N9oWFcegS0sFr9oh1oz2d7Npos6vNoWW9HvtCg5N1KRFpUhaAhvTv5Y58g880fZaEYSNm3qDz8SU1UrGvp+n7A==
+  dependencies:
+    ansi-styles "^4.1.0"
+    supports-color "^7.1.0"
+
+chalk@^2.0.0, chalk@^2.3.0:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
   integrity sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
@@ -953,14 +961,6 @@ chalk@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-3.0.0.tgz#3f73c2bf526591f574cc492c51e2456349f844e4"
   integrity sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==
-  dependencies:
-    ansi-styles "^4.1.0"
-    supports-color "^7.1.0"
-
-chalk@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.0.0.tgz#6e98081ed2d17faab615eb52ac66ec1fe6209e72"
-  integrity sha512-N9oWFcegS0sFr9oh1oz2d7Npos6vNoWW9HvtCg5N1KRFpUhaAhvTv5Y58g880fZaEYSNm3qDz8SU1UrGvp+n7A==
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"

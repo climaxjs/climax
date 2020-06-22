@@ -14,7 +14,7 @@
     "preversion": "npm test"
   },
   "dependencies": {
-    "@inspired-beings/log": "1.2.0",
+    "@inspired-beings/log": "2.0.0",
     "ramda": "0.27.0",
     "rorre": "1.2.0",
     "yargs": "15.3.1"
