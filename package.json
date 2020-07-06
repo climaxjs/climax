@@ -17,7 +17,7 @@
     "@inspired-beings/log": "2.0.0",
     "ramda": "0.27.0",
     "rorre": "1.2.0",
-    "yargs": "15.3.1"
+    "yargs": "15.4.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "13.0.0",
@@ -25,15 +25,15 @@
     "@rollup/plugin-typescript": "5.0.1",
     "@types/jest": "26.0.3",
     "@types/node": "13.13.5",
-    "@types/ramda": "0.27.6",
+    "@types/ramda": "0.27.7",
     "@types/yargs": "15.0.5",
     "coveralls": "3.1.0",
     "jest": "26.1.0",
     "rimraf": "3.0.2",
-    "rollup": "2.18.1",
+    "rollup": "2.19.0",
     "ts-jest": "26.1.1",
     "tslint": "6.1.2",
     "tslint-config-airbnb": "5.11.2",
-    "typescript": "3.9.5"
+    "typescript": "3.9.6"
   }
 }
