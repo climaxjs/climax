@@ -8,7 +8,7 @@ even a bit more than that:
   :hamburger:.<br>
 - **Cross-Platform Build & Release**<br>
   Generate and release cross-platform signed binaries in a matter of minutes with just a little bit of config, whether
-  it inludes a npm package or not.<br>
+  it includes a npm package or not.<br>
 - **Auto-Update Feature**<br>
   Adding auto-update capabilities to your CLI clients has never been that easy: it is already implemented to work with
   your CI. And it's obviously fully secured.<br>
@@ -65,7 +65,7 @@ _package.json_
 ```
 
 > ### :zap: Info
-> The name, description and version specified whithin your package.json are the ones used by default by Climax once you
+> The name, description and version specified within your package.json are the ones used by default by Climax once you
 > pass its source to `program#info()`. The `bin` key is also used to show help, warning and error messages.
 
 Then let's write our first piece of code:
@@ -102,7 +102,7 @@ program.command('hello')
 program.init()
 ```
 
-Finally we can link our local "binary" file (not compiled yet since they are interprated by NodeJS thanks to the
+Finally we can link our local "binary" file (not compiled yet since they are interpreted by NodeJS thanks to the
 Sha-Bang):
 
 ```bash
@@ -156,7 +156,7 @@ yarn
 
 ### Running Tests
 
-It is recommanded to work in TDD mode, including continuously running tests while writing your code:
+It is recommended to work in TDD mode, including continuously running tests while writing your code:
 
 ```
 yarn test:watch
