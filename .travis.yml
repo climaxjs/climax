@@ -2,7 +2,7 @@ language: node_js
 
 node_js:
   - "v12.19.0"
-  - "v14.13.1"
+  - "v14.14.0"
 
 os:
   - linux
