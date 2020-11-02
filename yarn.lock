@@ -461,10 +461,10 @@
     is-module "^1.0.0"
     resolve "^1.17.0"
 
-"@rollup/plugin-typescript@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-typescript/-/plugin-typescript-6.0.0.tgz#08635d9d04dc3a099ef0150c289ba5735200bc63"
-  integrity sha512-Y5U2L4eaF3wUSgCZRMdvNmuzWkKMyN3OwvhAdbzAi5sUqedaBk/XbzO4T7RlViDJ78MOPhwAIv2FtId/jhMtbg==
+"@rollup/plugin-typescript@6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-typescript/-/plugin-typescript-6.1.0.tgz#289e7f0ea12fd659bd13ad59dda73b9055538b83"
+  integrity sha512-hJxaiE6WyNOsK+fZpbFh9CUijZYqPQuAOWO5khaGTUkM8DYNNyA2TDlgamecE+qLOG1G1+CwbWMAx3rbqpp6xQ==
   dependencies:
     "@rollup/pluginutils" "^3.1.0"
     resolve "^1.17.0"
@@ -589,10 +589,10 @@
   resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.0.0.tgz#dc85454b953178cc6043df5208b9e949b54a3bc4"
   integrity sha512-/rM+sWiuOZ5dvuVzV37sUuklsbg+JPOP8d+nNFlo2ZtfpzPiPvh1/gc8liWOLBqe+sR+ZM7guPaIcTt6UZTo7Q==
 
-"@types/ramda@0.27.30":
-  version "0.27.30"
-  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.27.30.tgz#6e08d2bd1559a0ffac07cfcf84ab006f0f54de8b"
-  integrity sha512-CexJeZyC7mydoquNThx1gHWltgZV8+pBX0JDKbNEET0TduqxS+iSecwLS+poFrknonD24xr9C0NY+0PpG4/+GQ==
+"@types/ramda@0.27.32":
+  version "0.27.32"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.27.32.tgz#4f62ff4fc3a41dc32dd9df3cde53861b6ee69e6f"
+  integrity sha512-vdwZcWC+hlTxB//LZQLS1+VEdArImGI4yVKUpeqB8b9mBXgDFXCuQoOt8spQbi8fTyNLOdqRv6liSm2ckxWLog==
   dependencies:
     ts-toolbelt "^6.15.1"
 
@@ -3084,10 +3084,10 @@ rimraf@3.0.2, rimraf@^3.0.0:
   dependencies:
     glob "^7.1.3"
 
-rollup@2.32.1:
-  version "2.32.1"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.32.1.tgz#625a92c54f5b4d28ada12d618641491d4dbb548c"
-  integrity sha512-Op2vWTpvK7t6/Qnm1TTh7VjEZZkN8RWgf0DHbkKzQBwNf748YhXbozHVefqpPp/Fuyk/PQPAnYsBxAEtlMvpUw==
+rollup@2.33.0:
+  version "2.33.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.33.0.tgz#dc105b312e2817f996d0b6a192b7033f607ef08d"
+  integrity sha512-7jFrmKgQj1GOWlC8rExHaPcv2SQnWMv1BFUyH/xWS5w80h6132wBUWp/qTvQkAbnlqGvi13T6iP2kHo9Sb2HxA==
   optionalDependencies:
     fsevents "~2.1.2"
 
@@ -3520,10 +3520,10 @@ tr46@^2.0.2:
   dependencies:
     punycode "^2.1.1"
 
-ts-jest@26.4.2:
-  version "26.4.2"
-  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-26.4.2.tgz#00b6c970bee202ceef7c6e6e9805c4837b22dab8"
-  integrity sha512-0+MynTTzzbuy5rGjzsCKjxHJk5gY906c/FSaqQ3081+G7dp2Yygfa9hVlbrtNNcztffh1mC6Rs9jb/yHpcjsoQ==
+ts-jest@26.4.3:
+  version "26.4.3"
+  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-26.4.3.tgz#d153a616033e7ec8544b97ddbe2638cbe38d53db"
+  integrity sha512-pFDkOKFGY+nL9v5pkhm+BIFpoAuno96ff7GMnIYr/3L6slFOS365SI0fGEVYx2RKGji5M2elxhWjDMPVcOCdSw==
   dependencies:
     "@jest/create-cache-key-function" "^26.5.0"
     "@types/jest" "26.x"
@@ -3668,10 +3668,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.3.tgz#153bbd468ef07725c1df9c77e8b453f8d36abba5"
-  integrity sha512-tEu6DGxGgRJPb/mVPIZ48e69xCn2yRmCgYmDugAVwmJ6o+0u1RI18eO7E7WBTLYLaEVVOhwQmcdhQHweux/WPg==
+typescript@4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.5.tgz#ae9dddfd1069f1cb5beb3ef3b2170dd7c1332389"
+  integrity sha512-ywmr/VrTVCmNTJ6iV2LwIrfG1P+lv6luD8sUJs+2eI9NLGigaN+nUQc13iHqisq7bra9lnmUSYqbJvegraBOPQ==
 
 union-value@^1.0.0:
   version "1.0.1"
