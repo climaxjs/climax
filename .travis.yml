@@ -1,9 +1,8 @@
 language: node_js
 
 node_js:
-  - "v12.19.1"
   - "v14.15.1"
-  - "v15.2.1"
+  - "v15.3.0"
 
 os:
   - linux
